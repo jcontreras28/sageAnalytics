@@ -16,8 +16,9 @@ class CreatePublicationsTable extends Migration
         Schema::create('publications', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('domain');
+            $table->string('domain')->unique();
             $table->integer('GAProfileId');  
+            $table->softDeletes();
             $table->timestamps();
         });
     }
