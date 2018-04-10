@@ -4,26 +4,34 @@ namespace App\Http\Controllers;
 
 use App\Publication;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use App\Traits\GoogAnalyticsInterface;
+use App\User;
+use App\Role;
+use File;
+use Auth;
 
 class PublicationController extends Controller
 {
     use GoogAnalyticsInterface;
 
     public function index($id) {
-        $pub = Publication::findOrFail($id);
+        $pubData = Publication::findOrFail($id);
 
-        $path = __DIR__ . '/CredentialJson/'.str_replace(' ', '', $pub->name).'Sage.json';
-        //$GAConn = $this->connect(__DIR__.'/CredentialJson/BendBulletinSage.json', 'BendBulletin');
-        $GAConn = $this->connect($path, $pub->name);
+        $path = __DIR__ . '/CredentialJson/'.str_replace(' ', '', $pubData->name).'Sage.json';
+        
+        if(file_exists($path)){
+            $GAConn = $this->connect($path, $pubData->name);
 
-        $profId = $pub->GAProfileId;
-        $resultsTotalPages = $this->getAllPageViews($GAConn, $profId, '0daysAgo', 'today'); 
+            $profId = $pubData->GAProfileId;
+            $resultsTotalPages = $this->getAllPageViews($GAConn, $profId, '0daysAgo', 'today'); 
 
-        $returnArray = ['pubData' => $pub, 'viewData' => $resultsTotalPages];
+            $returnArray = $resultsTotalPages;
+        } else {
+            $returnArray = ['errors' => ['JSON credentials file has not been uploaded.', 'Another error just to test']];
+        }
 
-
-        return view('publications.stats', compact('returnArray'));
+        return view('publications.stats', compact('returnArray', 'pubData'));
 
     }
 
@@ -33,4 +41,5 @@ class PublicationController extends Controller
 
         return view('admin.pubAdmin', compact('pub'));
     }
+
 }

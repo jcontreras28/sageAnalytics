@@ -47,9 +47,15 @@
 <body>
     <div id="app"><!-- add my nav here.... -->
         <nav class="navbar navbar-expand-md navbar-light navbar-sage">
-                <a class="navbar-brand navbar-brand-sage" href="{{ url('/') }}">
+            @guest
+                <a class="navbar-brand navbar-brand-sage" href="{{ url('/login') }}">
                     <img src="{{ asset('images/sage-logo.png') }} " alt="Sage Analytics" title="Sage Analytics" width="185" height="60">
                 </a>
+            @else
+                <a class="navbar-brand navbar-brand-sage" href="{{ url('/pub/'.Auth::user()->publication->id) }}">
+                    <img src="{{ asset('images/sage-logo.png') }} " alt="Sage Analytics" title="Sage Analytics" width="185" height="60">
+                </a>
+            @endguest
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -73,13 +79,17 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    @if (Auth::user()->role->name == 'Super Admin')
-                                        <a class="dropdown-item" href="{{ route('admin.superAdmin') }}">Super Admin Page</a>
+                                    @if (Auth::user() and Auth::user()->role->name == 'Super Admin')
+                                        <a class="dropdown-item" href="{{ route('admin.superAdmin') }}">Manage Publications</a>
+                                        <a class="dropdown-item" href="{{ route('admin.users') }}">Manage Users</a>
                                     @endif
                                     
                                     @if (Auth::user()->role->name == 'Publication Admin')
-                                        <a class="dropdown-item" href="{{ route('admin.pubAdmin') }}">Admin Page</a>
+                                        <a class="dropdown-item" href="{{ route('admin.pubAdmin', Auth::user()->publication->id) }}">Publication settings</a>
+                                        <a class="dropdown-item" href="{{ route('admin.users') }}">Manage Users</a>
                                     @endif
+
+                                    <a class="dropdown-item" href="{{ route('auth.changePassword') }}">Change Password</a>
                                     
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -108,5 +118,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <script type="text/javascript" src="{{ asset('/js/thisapp.js') }}"></script>
 </body>
 </html>

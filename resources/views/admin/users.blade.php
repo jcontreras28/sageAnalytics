@@ -20,11 +20,11 @@
                 
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        Super Admin Page
+                        All Users
                         <div class="pull-right action-buttons">
                             <div class="btn-group pull-right">
-                                <form method="get" action="{{ route('admin.newPub') }}">
-                                    <button type="submit" class="btn btn-default btn-xs" title="Create new publication">
+                                <form method="get" action="{{ route('admin.newUser') }}">
+                                    <button type="submit" class="btn btn-default btn-xs" title="Create new user">
                                         <span class="glyphicon glyphicon-plus" style="margin-right: 0px;"></span>
                                     </button>
                                 </form>
@@ -34,18 +34,15 @@
                     <div class="panel-body">
                         <ul class="list-group">
 
-                            @foreach($pubs as $pub) 
-                                @if ($pub->name != "none")
+                            @foreach($users as $user) 
                                 <li class="list-group-item">
-                                    {{ $pub->name }}
+                                    {{ $user->name }}
 
                                     <div class="pull-right action-buttons">
-                                        <a href="{{ route('pub.index', $pub->id) }}" title="View stats"><span class="glyphicon glyphicon-eye-open sage-green-font"></span></a>
-                                        <a href="{{ route('admin.editPub', $pub->id) }}" class="extra-margin-left" title="Edit publication"><span class="glyphicon glyphicon-pencil sage-green-font"></span></a>
-                                        <a href="{{ route('admin.deletePub', $pub->id) }}" class="trash extra-margin-left" title="Delete publication"><span class="glyphicon glyphicon-trash sage-green-font"></span></a>
+                                        <a href="{{ route('admin.editUser', $user->id, $user) }}" class="extra-margin-left" title="Edit user"><span class="glyphicon glyphicon-pencil sage-green-font"></span></a>
+                                        <a href="{{ route('admin.deleteUser', $user->id, $user) }}" class="trash extra-margin-left" title="Delete user"><span class="glyphicon glyphicon-trash sage-green-font"></span></a>
                                     </div>
                                 </li>
-                                @endif
 
                             @endforeach
                         </ul>
@@ -56,7 +53,7 @@
                             <a class="btn btn-primary pull-left" href="{{ route('admin.userTrash') }} ">View trash</a>
                         </div>
                         <div class="btn-group" role="group">
-                            <a class="btn btn-primary pull-right" href="{{ route('admin.users') }} ">Manage Users</a>
+                            <a class="btn btn-primary pull-right" href="{{ route('admin.superAdmin') }} ">Manage Publications</a>
                         </div>
                     </div>
 

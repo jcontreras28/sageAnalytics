@@ -11,33 +11,60 @@
                     </div>
 
                     <div class="panel-body">
-                        <form method="POST" action="{{ route('admin.store') }}">
+                        <!--<form method="POST" action="{{ route('admin.store') }}" enctype="multipart/form-data">-->
+                        {!! Form::open(['method'=>'POST', 'action'=>'AdminController@store', 'files'=>true]) !!}
                             @csrf
 
                             <div class="form-group row">
-                                <label for="name" class="col-sm-4 col-form-label text-md-right">Publication Name</label>
-
+                                {!! Form::label('name', 'Publication Name', ['class'=>'col-md-4 col-form-label text-md-right']) !!}
                                 <div class="col-md-6">
-                                    <input id="name" type="name" class="form-control" name="email" value="" required autofocus>
+                                    {!! Form::text('name', null, ['class'=>'form-control']) !!}
                                 </div>
                             </div>
                    
                             <div class="form-group row">
-                                <label for="domain" class="col-md-4 col-form-label text-md-right">Publication Domain</label>
-
+                                {!! Form::label('domain', 'Publication Domain', ['class'=>'col-md-4 col-form-label text-md-right']) !!}
                                 <div class="col-md-6">
-                                    <input id="domain" type="domain" class="form-control{{ $errors->has('domain') ? ' is-invalid' : '' }}" name="domain" required>
-
-
+                                     {!! Form::text('domain', null, ['class'=>'form-control']) !!}
                                 </div>
                             </div>
+
                             <div class="form-group row">
-                                <label for="GAProfileId" class="col-md-4 col-form-label text-md-right">Google Analytics Profile Id</label>
-
+                                {!! Form::label('email', 'Contact email', ['class'=>'col-md-4 col-form-label text-md-right']) !!}
                                 <div class="col-md-6">
-                                    <input id="GAProfileId" type="number" min="0" class="form-control" name="domain">
+                                     {!! Form::text('email', null, ['class'=>'form-control']) !!}
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                {!! Form::label('phone', 'Contact phone number', ['class'=>'col-md-4 col-form-label text-md-right']) !!}
+                                <div class="col-md-6">
+                                     {!! Form::tel('phone', null, ['class'=>'form-control']) !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                {!! Form::label('GAProfileId', 'Google Analytics Profile Id', ['class'=>'col-md-4 col-form-label text-md-right']) !!}
+
+                                <div class="col-md-6">
+                                    {!! Form::number('GAProfileId', null, ['class'=>'form-control']) !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                {!! Form::label('filelogo', 'Upload logo file', ['class'=>'col-md-4 col-form-label text-md-right']) !!}
+                                <div class="col-md-6">
+                                    {!! Form::file('filelogo') !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                {!! Form::label('file', 'Google Analytics Credential JSON file', ['class'=>'col-md-4 col-form-label text-md-right']) !!}
+                                <div class="col-md-6">
+                                    {!! Form::file('file') !!}
+                                </div>
+                            </div>
+
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
@@ -46,9 +73,21 @@
                                     </button>
                                 </div>
                             </div>
-                        
-                        </form>
+                        {!! Form::close() !!}
+                        <!--</form>-->
                     </div>
+
+                    @if(count($errors) > 0)
+
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        
+                    @endif
                 </div>
             </div>
         </div>

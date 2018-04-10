@@ -16,6 +16,11 @@ html {
 	border-color: #5CC186;
 }
 
+.btn-primary {
+	border-color: #5CC186;
+	background-color: #5CC186;
+}
+
 .sage-green-font {
 	color: #5CC186;
 }
@@ -247,6 +252,18 @@ body > div.container {
 
 #dateRangePicker {
 	padding-right: 10px;
+}
+
+.extra-margin-top {
+	margin-top: 20px;
+}
+
+.no-bullet-list {
+	list-style-type: none;
+}
+
+.display-hidden-start {
+	display: none;
 }
 
 

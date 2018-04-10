@@ -17,7 +17,11 @@ class CreatePublicationsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('domain')->unique();
-            $table->integer('GAProfileId');  
+            $table->string('email');
+            $table->string('phone');
+            $table->string('logo')->nullable();
+            $table->integer('GAProfileId')->unsigned()->nullable();  
+            $table->boolean('ignore_all_params');
             $table->softDeletes();
             $table->timestamps();
         });

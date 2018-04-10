@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -27,7 +28,20 @@ class LoginController extends Controller
      * @var string
      */
 
-    protected $redirectTo = '/pub';
+    
+//protected $redirectTo = '/pub';
+
+    public function redirectPath()
+    {
+        if (\Auth::user()->publication_id == 0) {
+            return "/admin";
+            // or return route('routename');
+        }
+
+        $pubId = \Auth::user()->publication_id;
+        return "/pub/".$pubId;
+        // or return route('routename');
+    }
 
     /**
      * Create a new controller instance.

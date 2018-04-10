@@ -9,5 +9,9 @@ class Publication extends Model
 {
     use SoftDeletes;
     protected $dates = ['deleted_at'];
-    protected $fillable = ['name', 'domain'];
+    protected $fillable = ['name', 'domain', 'phone', 'email'];
+
+    public function actions() {
+        return $this->hasMany(Action::Class);
+    }
 }

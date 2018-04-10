@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-    <h2>Stats for {{$returnArray['pubData']->name}}  {{$returnArray['pubData']->GAProfileId }}</h2>
+    <h2>Stats for {{$pubData->name}}  {{$pubData->GAProfileId }}</h2>
 
     <div class="row" style="margin-top: 20px">
         <div class="col-xs-12">
@@ -37,6 +37,19 @@
 		</li>
 
 	</ul>
+	
+
+	@if (array_key_exists('errors', $returnArray)) 
+		<ul class="extra-margin-top no-bullet-list">
+
+			@foreach($returnArray['errors'] as $error) 
+				<li class="alert alert-danger" role="alert">{{ $error }}</li>
+			@endforeach
+
+		</ul>
+	@endif
+
+	{{ print_r($returnArray) }}
 </div>
 
 @endsection
