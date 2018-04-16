@@ -8,6 +8,7 @@ use Illuminate\Http\UploadedFile;
 use App\User;
 use App\Role;
 use App\ActionType;
+use App\Action;
 use File;
 use Auth;
 
@@ -31,7 +32,8 @@ class AdminController extends Controller
     public function editPub($id) {
         $publication = Publication::findOrFail($id);
         $actions = $publication->Actions()->get();
-        $types = ActionType::all();
+        //$types = ActionType::all();
+        $types = ActionType::pluck('name', 'id');
         return view('admin.editPub', compact('publication', 'actions', 'types'));
     }
 
@@ -87,9 +89,11 @@ class AdminController extends Controller
         $domain = str_replace("https://", "", $domain);
         $input['domain'] = $domain;
 
-        $name = str_replace(".", "_", $domain);
+        //$name = str_replace(".", "_", $domain);
 
         $results = [];
+
+        $unique = date('ymdhms');
         
         try {
 
@@ -97,7 +101,8 @@ class AdminController extends Controller
 
             if ($filelogo = $request->file('filelogo')) {
 
-                $nameImg = $name.".".$filelogo->getClientOriginalExtension();
+                // move the file to images/pubLogos folder
+                $nameImg = $unique."_".$filelogo->getClientOriginalName();
                 $filelogo->move('images/pubLogos', $nameImg);
     
                 // add logo file name to database
@@ -106,8 +111,14 @@ class AdminController extends Controller
             } 
             if ($file = $request->file('file')) {
 
+                // move file to folder
                 $destination = app_path() . "/Http/Controllers/CredentialJson/";
-                $file->move($destination, $name.".json");
+                $name = $unique."_".$file->getClientOriginalName();
+                $file->move($destination, $name);
+
+                // add json file name to database
+                $pub->GAJsonFile = $name;
+                $pub->save();
             } 
 
             $results['success'] = ["Publication created successfully."];
@@ -121,15 +132,111 @@ class AdminController extends Controller
         //return redirect('/admin', $resString);
     }
 
-    public function updatePub($id) {
+    public function updatePub(Request $request, $id) {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'domain' => 'required'
+        ]);
 
-    }
+        $input = $request->all();
 
-    public function updateAction($id) {
-
-    }
-
-    public function storeAction($id) {
         
+        //strip http and https out if pressent
+        $domain = str_replace("http://", "", $request->domain);
+        $domain = str_replace("https://", "", $domain);
+        $input['domain'] = $domain;
+
+        $results = [];
+        
+        try {
+            $unique = date('ymdhms');
+            $pub = Publication::findOrFail($id);
+            $oldLogo = $pub->logo;
+            $oldJson = $pub->GAJsonFile;
+
+            $pub->update($input);
+
+            if ($filelogo = $request->file('filelogo')) {
+                
+                if (File::exists(public_path() . '/images/pubLogos/'.$oldLogo)) {
+                    File::delete(public_path() . '/images/pubLogos/'.$oldLogo);
+                }
+
+                // move the file to images/pubLogos folder
+                $nameImg = $unique."_".$filelogo->getClientOriginalName();
+                $filelogo->move('images/pubLogos', $nameImg);
+    
+                // add logo file name to database
+                $pub->logo = $nameImg;
+                $pub->save();
+            } 
+            if ($file = $request->file('file')) {
+
+                $jsonFile = app_path() . "/Http/Controllers/CredentialJson/".$oldJson;
+                if(File::exists($jsonFile)) {
+                    File::delete($jsonFile);
+                }
+
+                // move file to folder
+                $destination = app_path() . "/Http/Controllers/CredentialJson/";
+                $name = $unique."_".$file->getClientOriginalName();
+                $file->move($destination, $name);
+
+                // add json file name to database
+                $pub->GAJsonFile = $name;
+                $pub->save();
+            } 
+
+            $results['success'] = ["Publication updated successfully."];
+
+        } catch(\Illuminate\Database\QueryException $e) {
+            $results['errors'] = [$e->errorInfo[2]];
+        }
+
+        $pubs = Publication::all();
+        return redirect()->route('admin.superAdmin', compact('pubs', 'results'));
+
+    }
+
+    public function updateAction(Request $request, $id) {
+        
+        $action = Action::findOrFail($id);
+        $pubId = $action->publication->id;
+        $input = $request->all();
+        $action->update($input);
+
+        $publication = Publication::findOrFail($pubId);
+        $actions = $publication->Actions()->get();
+        //dd($publication, $actions);
+        $types = ActionType::pluck('name', 'id');
+
+        return redirect()->route('admin.editPub', compact('publication', 'actions', 'types'));
+    }
+
+    public function storeAction(Request $request) {
+
+        $input = $request->all();
+        $action = Action::create($input);
+        
+        $publication = Publication::findOrFail($input['publication_id']);
+        $actions = $publication->Actions()->get();
+        $types = ActionType::pluck('name', 'id');
+
+        return redirect()->route('admin.editPub', compact('publication', 'actions', 'types'));
+
+    }
+
+    public function deleteAction($id) {
+        $action = Action::findOrFail($id);
+        $pubId = $action->publication->id;
+        $publication = Publication::findOrFail($pubId);
+
+        $action->delete();
+
+        $actions = $publication->Actions()->get();
+        $types = ActionType::pluck('name', 'id');
+        return redirect()->route('admin.editPub', compact('publication', 'actions', 'types'));
     }
 }

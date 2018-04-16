@@ -38,7 +38,11 @@ class LoginController extends Controller
             // or return route('routename');
         }
 
+
         $pubId = \Auth::user()->publication_id;
+        if ($pubId == 1)
+            return "/admin";
+            
         return "/pub/".$pubId;
         // or return route('routename');
     }

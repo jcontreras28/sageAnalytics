@@ -12,7 +12,7 @@
 
                     <div class="panel-body">
 
-                        {!! Form::model($publication, ['method'=>'POST', 'action'=> ['AdminController@updatePub', $publication->id], 'files'=>true]) !!}
+                        {!! Form::model($publication, ['method'=>'PATCH', 'action'=> ['AdminController@updatePub', $publication->id], 'files'=>true]) !!}
                             @csrf
 
                             <div class="form-group row">
@@ -53,7 +53,7 @@
 
                             <div class="form-group row">
                                 <div class="col-md-4 col-form-label text-md-right">
-                                    <img src="{{ $publication->logo }}" width = "100px">
+                                    <img src="{{ asset('images/pubLogos/'.$publication->logo) }}" width = "100px">
                                 </div>
                             </div>
 
@@ -82,47 +82,72 @@
                         {!! Form::close() !!}
                         <!--</form>-->
 
-                        <div class="extra-margin-top"></div>
-                        <h3>Action items list</h3>
-                        <table class="table">
-                            <thead>
-                                <th>Action word</th>
-                                <th>Action type</th>
-                                <th>Save Changes</th>
-                                <th>Delete Action</th>
-                            </thead>
-                            <tbody>
-                            @foreach($actions as $action) 
-                                {!! Form::model($action, ['method'=>'PATCH', 'action'=> ['AdminController@updateAction', $action->id]]) !!}
-                                @csrf
-                                <tr class="">
-                                    <td>
-                                        {!! Form::text('action',  $action->trigger_word , ['class'=>'form-control list-input-field']) !!}
-                                    </td>
-                                    <td>
-                                        <select name="type_id" id="type_id">
-                                            @foreach($types as $type)
-                                                @if ($action->actionType->id == $type->id)
-                                                    <option value="{{ $type->id }}" selected>{{ $type->name }}</option>
-                                                @else
-                                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('admin.updateUser', $action->id, $action) }}" class="extra-margin-left btn btn-primary" title="Edit user"><span class="glyphicon glyphicon-ok"></span></a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('admin.deleteUser', $action->id, $action) }}" class="trash extra-margin-left btn btn-danger" title="Delete user"><span class="glyphicon glyphicon-trash"></span></a>
-                                    </td>
-                                </tr>
-                                {!! Form::close() !!}
+                        {!! Form::open(['method'=>'POST', 'action'=>'AdminController@storeAction']) !!}
+                        {{ csrf_field() }}
+                            <div class="extra-margin-top"></div>
+                            <h3>New Action items</h3>
+                            <table class="table">
+                                <thead>
+                                    <th>Action word</th>
+                                    <th>Action type</th>
+                                    <th>Save new action</th>
+                                </thead>
+                                <tbody>
 
+                                    
+                                    <tr class="">
+                                    
+                                        <td>
+                                            {!! Form::text('trigger_word',  null, ['class'=>'form-control list-input-field']) !!}
+                                        </td>
+                                        <td>
+                                            {!! Form::select('action_type_id', $types, null, ['class'=>'form-control']) !!}
+                                            <input type="hidden" name="publication_id" id="publication_id" value="{{ $publication->id }}" role="button" />
+                                        </td>
+                                        <td>
+                                            <button type="submit" class="extra-margin-left btn btn-primary glyphicon glyphicon-ok" name="newAction"></button>
+                                        </td>
+                                    </tr> 
+                                </tbody>
+                            </table>
+                        {!! Form::close() !!}
+
+                        <h3>Action items list</h3>
+                        <div class="row action-list-header">
+                            <div class="col-xs-4 action-list-header-text">Action word</div>
+                            <div class="col-xs-4 action-list-header-text">Action type</div>
+                            <div class="col-xs-2 text-center">Save Changes</div>
+                            <div class="col-xs-2 text-center">Delete Action</div>
+                        </div>
+
+                        @foreach($actions as $action) 
+
+                            {!! Form::model($action, ['method'=>'PATCH', 'action'=> ['AdminController@updateAction', $action->id]]) !!}
+                            {{ csrf_field() }}
+
+                            <div class="row action-list-row">
+                                <div class="col-xs-4">
+                                    <input type="text" name="trigger_word" id="trigger_word" value="{{ $action->trigger_word }}"/>
+                                  
+                                </div>
+                                <div class="col-xs-4">
+                                    {!! Form::select('action_type_id', $types, $action->actionType->id, ['class'=>'form-control']) !!}
+                                   
+                                </div>
+                                <div class="col-xs-2 text-center">
+                                    <button type="submit" class="btn btn-primary glyphicon glyphicon-ok"></button>
+                                </div>
+                                <div class="col-xs-2 text-center">
+                                    <a href="{{ route('admin.deleteAction', $action->id) }}" class="trash btn btn-danger" title="Delete action"><span class="glyphicon glyphicon-trash"></span></a>
+                                </div>
+                            </div>
+
+                            {!! Form::close() !!}
+  
                                 
-                            @endforeach
-                            </tbody>
-                        </table>
+
+                        @endforeach
+
                     </div>
 
 

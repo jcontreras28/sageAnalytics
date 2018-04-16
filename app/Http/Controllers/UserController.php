@@ -12,15 +12,15 @@ use Auth;
 class UserController extends Controller
 {
     public function newUser() {
-        $roles = Role::all();
-        $publications = Publication::all();
+        $roles = Role::pluck('name', 'id');
+        $publications = Publication::pluck('name', 'id');
         return view('admin.newUser', compact('roles', 'publications'));
     }
 
     public function editUser($id) {
         $user = User::findOrFail($id);
-        $roles = Role::all();
-        $publications = Publication::all();
+        $roles = Role::pluck('name', 'id');
+        $publications = Publication::pluck('name', 'id');
         return view('admin.editUser', compact('user', 'roles', 'publications'));
     }
 
@@ -105,45 +105,23 @@ class UserController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|min:8',
-            'passwordComf' => 'required|min:8'
+            'email' => 'required|unique:users|email',
+            'password' => 'required|min:8|same:password_confirmation',
+            'password_confirmation' => 'required|min:8'
         ]);
 
         $input = $request->all();
-
-        try {
-
-            if ($request->password != $request->passwordComf) {
-
-                $results['errors'] = ['Passwords did not match'];
-
-            } else {
-     
-                //Change Password
-                $user = new User();
-                $user->password = bcrypt($request->get('password'));
-                $user->name = $request->name;
-                $user->email = $request->email;
-                $user->publication_id = $request->publication_id;
-                $user->role_id = $request->role_id;
-                $user->save();
-                $results['success'] = ["User added successfully."];
-            }
-
-        } catch(\Illuminate\Database\QueryException $e) {
-
-            $results['errors'] = [$e->errorInfo[2]];
-
-        }
+        $input['password'] = bcrypt($request->get('password'));
+        $user = User::create($input);
+ 
         $pubId = Auth::user()->publication->id;
         if ($pubId === 1) {
             $users = User::all();
         } else {
             $users = User::where('publication_id', $pubId)->get();
         }
-        $results['success'] = ["User added successfully."];
-        return view('admin.users', compact('users', 'results'));
+        //$results['success'] = ["User added successfully."];
+        return view('admin.users', compact('users'));
 
     }
 

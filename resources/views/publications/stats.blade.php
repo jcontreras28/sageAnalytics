@@ -49,7 +49,9 @@
 		</ul>
 	@endif
 
+	<pre>
 	{{ print_r($returnArray) }}
+	</pre>
 </div>
 
 @endsection

@@ -28,7 +28,8 @@ class PublicationsTableSeeder extends Seeder
         $pub1->GAProfileId = env('PUB1_DB_SEED_PROFILEID', 'aaaa');
         $pub1->email = env('PUB1_DB_SEED_EMAIL', 'aaaa');
         $pub1->phone = env('PUB1_DB_SEED_PHONE', '123');
-        $pub1->logo = env('PUB1_DB_SEED_LOGO', 'aaaa.png');
+        $pub1->logo = env('PUB1_DB_SEED_LOGO', '180410050443_bullSquarBlueLogo.png');
+        $pub1->GAJsonFile = '180410050424_service-account-credentials.json';
         $pub1->ignore_all_params = 0;
         $pub1->save();
 
@@ -38,7 +39,8 @@ class PublicationsTableSeeder extends Seeder
         $pub2->GAProfileId = env('PUB2_DB_SEED_PROFILEID', 'aaaa');
         $pub2->email = env('PUB2_DB_SEED_EMAIL', 'aaaa');
         $pub2->phone = env('PUB2_DB_SEED_PHONE', '123');
-        $pub2->logo = env('PUB2_DB_SEED_LOGO', 'aaaa.png');
+        $pub2->logo = env('PUB2_DB_SEED_LOGO', '180410050438_sage-logo-fav.png');
+        $pub2->GAJsonFile = 'www_uniondemocrat_com.json';
         $pub2->ignore_all_params = 0;
         $pub2->save();
 
@@ -48,7 +50,8 @@ class PublicationsTableSeeder extends Seeder
         $pub3->GAProfileId = env('PUB3_DB_SEED_PROFILEID', 'aaaa');
         $pub3->email = env('PUB3_DB_SEED_EMAIL', 'aaaa');
         $pub3->phone = env('PUB3_DB_SEED_PHONE', '123');
-        $pub3->logo = env('PUB3_DB_SEED_LOGO', 'aaaa.png');
+        $pub3->logo = env('PUB3_DB_SEED_LOGO', '180410050443_bullSquarBlueLogo.png');
+        $pub3->GAJsonFile = 'www_bakercityherald_com.json';
         $pub3->ignore_all_params = 0;
         $pub3->save();
     }

@@ -35,9 +35,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {!! Form::label('passwordComf', 'Confirm password', ['class'=>'col-md-4 col-form-label text-md-right']) !!}
+                                {!! Form::label('password_confirmation', 'Confirm password', ['class'=>'col-md-4 col-form-label text-md-right']) !!}
                                 <div class="col-md-6">
-                                     {!! Form::password('passwordComf', null, ['class'=>'form-control']) !!}
+                                     {!! Form::password('password_confirmation', null, ['class'=>'form-control']) !!}
                                 </div>
                             </div>
 
@@ -46,23 +46,14 @@
                                 <div class="form-group row">
                                     {!! Form::label('role', "User's Role", ['class'=>'col-md-4 col-form-label text-md-right']) !!}
                                         <div class="col-md-6">
-                                            <select name="role_id" id="role_id">
-                                                @foreach($roles as $role)
-                                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                                @endforeach
-                                            </select>
+                                            {!! Form::select('role_id', $roles, null, ['class'=>'form-control']) !!}
                                         </div>
                                 </div>
 
                                 <div class="form-group row display-hidden-start" id="publicationDiv">
                                     {!! Form::label('publication', "User's Publication", ['class'=>'col-md-4 col-form-label text-md-right']) !!}
                                         <div class="col-md-6">
-                                            <select name="publication_id" id="publication_id">
-                                                <option value="0" selected>none</option>
-                                                @foreach($publications as $pub)
-                                                    <option value="{{ $pub->id }}">{{ $pub->name }}</option>
-                                                @endforeach
-                                            </select>
+                                            {!! Form::select('publication_id', $publications, ['class'=>'form-control']) !!}
                                         </div>
                                 </div>
                             @elseif (Auth::user()->role->name == 'Publication Admin')

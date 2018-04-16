@@ -37,7 +37,8 @@
                             @foreach($pubs as $pub) 
                                 @if ($pub->name != "none")
                                 <li class="list-group-item">
-                                    {{ $pub->name }}
+                                    <img src="{{ asset('images/pubLogos/'.$pub->logo) }}" width="40px" class="padding-right">
+                                    {{ $pub->name }} ( {{ $pub->domain }} )
 
                                     <div class="pull-right action-buttons">
                                         <a href="{{ route('pub.index', $pub->id) }}" title="View stats"><span class="glyphicon glyphicon-eye-open sage-green-font"></span></a>

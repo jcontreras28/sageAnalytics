@@ -20,6 +20,7 @@ class CreatePublicationsTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('logo')->nullable();
+            $table->string('GAJsonFile')->nullable();
             $table->integer('GAProfileId')->unsigned()->nullable();  
             $table->boolean('ignore_all_params');
             $table->softDeletes();

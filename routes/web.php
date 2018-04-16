@@ -36,7 +36,8 @@ Route::get('/pub/{id}/admin', 'PublicationController@adminIndex')->name('pub.adm
 
 // action routes
 Route::patch('/admin/updateAction/{id}', 'AdminController@updateAction')->name('admin.updateAction');
-Route::post('/admin/storeAction/{id}', 'AdminController@storeAction')->name('admin.storeAction');
+Route::post('/admin/storeAction', 'AdminController@storeAction')->name('admin.storeAction');
+Route::get('/admin/deleteAction/{id}', 'AdminController@deleteAction')->name('admin.deleteAction');
 
 // user routes
 Route::get('/admin/newuser', 'UserController@newUser')->name('admin.newUser');

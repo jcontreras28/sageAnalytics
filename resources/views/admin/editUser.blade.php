@@ -33,31 +33,14 @@
                                 <div class="form-group row">
                                     {!! Form::label('role', "User's Role", ['class'=>'col-md-4 col-form-label text-md-right']) !!}
                                         <div class="col-md-6">
-                                            <select name="role_id" id="role_id">
-                                                @foreach($roles as $role)
-                                                    @if ($user->role_id == $role->id)
-                                                        <option value="{{ $role->id }}" selected>{{ $role->name }}</option>
-                                                    @else
-                                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
+                                            {!! Form::select('role_id', $roles, $user->role_id, ['class'=>'form-control', 'id' => 'role_id']) !!}   
                                         </div>
                                 </div>
 
                                 <div class="form-group row display-hidden-start" id="publicationDiv">
                                     {!! Form::label('publication', "User's Publication", ['class'=>'col-md-4 col-form-label text-md-right']) !!}
                                         <div class="col-md-6">
-                                            <select name="publication_id" id="publication_id">
-                                                <option value="0" selected>none</option>
-                                                @foreach($publications as $pub)
-                                                    @if ($user->publication_id == $pub->id)
-                                                        <option value="{{ $pub->id }}" selected>{{ $pub->name }}</option>
-                                                    @else
-                                                        <option value="{{ $pub->id }}">{{ $pub->name }}</option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
+                                            {!! Form::select('publication_id', $publications, $user->publication_id, ['class'=>'form-control', 'id'=>'publication_id']) !!}
                                         </div>
                                 </div>
                                 @elseif (Auth::user()->role->name == 'Publication Admin')

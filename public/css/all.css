@@ -10399,8 +10399,26 @@ body > div.container {
 	margin-left: 20px;
 }
 
+.extra-padding-right {
+	padding-right: 30px !important;
+}
+
 .full-width-input {
 	width: 100% !important;
+}
+
+.action-list-header {
+	font-weight: bold;
+	border-bottom: 2px solid #ddd;
+	padding: 5px;
+	margin: 10px 0px;
+}
+
+.action-list-row {
+	margin-bottom: 8px;
+}
+.action-list-header-text {
+	padding-left: 0px;
 }
 
 .aLoadingDiv {
