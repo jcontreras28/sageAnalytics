@@ -33,14 +33,16 @@ class PublicationController extends Controller
             if (count($results['reports'][0]->getData()->getRows()) > 0) {
 
                 $ignoreParams = $this->getIgnoreParams($pubData);
+                
                 $urlArray = $this->getUrlArray($results, $ignoreParams);
 
-                $this->getStoryDataFromUrls($urlArray, $pubData->domain);
+                $this->getPageDataFromUrls($urlArray, $pubData->domain);
                 
-                $results = $this->parseResults($results, $ignoreParams);
+                //$results = $this->parseResults($results, $ignoreParams);
             }
             
-            $returnArray = $results; //$results['reports'][0]->getData()->getRows();
+            //$results = [$urlArray, $results];
+            $returnArray = $urlArray; //$results['reports'][0]->getData()->getRows();
 
         } else {
             $returnArray = ['errors' => ['JSON credentials file has not been uploaded.', 'Another error just to test']];
@@ -55,6 +57,10 @@ class PublicationController extends Controller
         $pub = Publication::findOrFail($id);
 
         return view('admin.pubAdmin', compact('pub'));
+    }
+
+    public function getArticleDataTask() {
+        
     }
 
 }

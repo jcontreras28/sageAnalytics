@@ -17,7 +17,11 @@ class UrlTypesTableSeeder extends Seeder
         $type1->save();
 
         $type2 = new UrlType();
-        $type2->name = "website";
+        $type2->name = "webpage";
         $type2->save();
+
+        $type3 = new UrlType();
+        $type3->name = "nojson";
+        $type3->save();
     }
 }

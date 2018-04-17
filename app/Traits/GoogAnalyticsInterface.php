@@ -203,8 +203,12 @@ trait GoogAnalyticsInterface {
 
     public function getUrlData ($url) {
 
-        //dd($url);
-        $html = file_get_contents( $url );
+        $html = @file_get_contents( $url );
+
+        if ($html === FALSE) {
+            return 'bad json';
+        }
+
         $dom  = new \DOMDocument();
         libxml_use_internal_errors( 1 );
         $dom->loadHTML( $html );
@@ -218,6 +222,12 @@ trait GoogAnalyticsInterface {
         }
 
         $data = json_decode( $json );
+
+        if(!$data || $data == "") {
+
+            $data = 'bad json';
+
+        }
 
         return $data;
     }
@@ -251,16 +261,18 @@ trait GoogAnalyticsInterface {
 
     public function inLookupTable($url) {
 
-        $allUrlData = [];
-
         if (Url::where('url', '=', $url)->exists()) {
+            
             return true;
+
+        } else {
+            //dd($url, Url::where('url', '=', $url)->exists());
         }
 
         return false;
     }
 
-    public function getStoryDataFromUrls($urlArray, $domain) {
+    public function getPageDataFromUrls($urlArray, $domain) {
 
         $allUrlData = [];
         $count = 0;
@@ -268,23 +280,43 @@ trait GoogAnalyticsInterface {
         foreach($urlArray as $url) {
 
             $count++;
-            if ($count > 20)
+            if ($count > 2200)
                 break;
 
             $fullUrl = 'http://'.$domain.$url;
 
             if (!self::inLookupTable($url)) {
 
+                // get the json ld data from the url
                 $urlData = self::getUrlData($fullUrl);
 
-                if (($urlData != 'bad json') && ($urlData))  {
+                if ($urlData) {
 
-                    if ($urlData->{'@type'} == 'NewsArticle') {
-                        $theIdentifier = $urlData->identifier;       
-                    } else {
+                    // parse out the type of page it is - NewsArticle, WebPage, or no json present
+                    $type = "";
+                    if ($urlData == 'bad json') {
+
+                        $type = 'nojson';
                         $theIdentifier = $url;
+
+                    } else if ($urlData->{'@type'} == 'NewsArticle') {
+                        
+                        $theIdentifier = $urlData->identifier;  
+                        $type = 'newsarticle';
+                           
+                    }  else if ($urlData->{'@type'} == 'WebPage') {
+
+                        $theIdentifier = $urlData->identifier;  
+                        $type = 'webpage';
+                        
+                    } else {
+
+                        $type = 'webpage';
+                        $theIdentifier = $url;
+
                     }
 
+                    // Look to see if the identifier is already in identifier table (diff urls can have same identifier)
                     $ident = Identifier::where('identifier', "=", $theIdentifier)->first();
 
                     if ($ident) {
@@ -293,46 +325,59 @@ trait GoogAnalyticsInterface {
 
                     } else {
 
+                        // add new identifier to table
                         $ident = new Identifier();
                         $ident->identifier = $theIdentifier;
                         $ident->publication_id = Auth::user()->publication->id;
 
-                        $type = strtolower($urlData->{'@type'});
-                        $type = UrlType::where('name', '=', $type)->first();
+                        // get url type from table so we have access to its id or add it if not there
+                        $typeObj = UrlType::where('name', '=', $type)->first();
+                       
+                        if ($typeObj) {
 
-                        if ($type) {
-
-                            $ident->url_type_id = $type->id;
+                            $ident->url_type_id = $typeObj->id;
 
                         } else {
 
-                            $data = ['name' => $type];
+                            $data = ['name' => $typeObj];
                             $newType = UrlType::Create($data);
                             $ident->url_type_id = $newType->id;
 
                         }
 
                         $ident->save();
+                        
                     }
 
-                    if ($urlData->{'@type'} == 'NewsArticle') {
+                    // if its a news article, then we need to check if we have story data already
+                    if ($type == 'newsarticle') {
 
-                        $article = self::getArticleData($urlData);
-                        $article->identifier_id = $ident->id;
-                        $article->save();
+                        // check if article is already in table
+                        $article = Article::where('identifier_id', "=", $ident->id)->first();
+
+                        if (!$article) {
+
+                            $newarticle = self::getArticleData($urlData);
+                            $newarticle->identifier_id = $ident->id;
+                            $newarticle->save();
+
+                        }
 
                     }
                     
+                    // finally, add the new url to the url lookup table.
                     $newurl = new Url();
                     $newurl->identifier_id = $ident->id;
                     $newurl->url = $url;
-                    $newurl->save();
+                    $saved = $newurl->save();
 
+                    if (!$saved) { dd($url); }
+
+                } else {
+                    dd($url);
                 }
             }
         }
-
-        //return $allUrlData;
     }
 
     public function calculateNewTotal($dataArray, $row, $type, $url, $index) {
@@ -342,6 +387,28 @@ trait GoogAnalyticsInterface {
         $dataArray[$url->identifier->identifier][$type] = $newVal;
         return $dataArray;
 
+    }
+
+    function getReferrers($row, $theArray, $key) {
+
+    	$theRefUrl = $row['dimensions'][1];
+		$refUrlArr = explode('/', $theRefUrl);
+		$theRefUrl = $refUrlArr[0];
+
+        
+		if (array_key_exists($theRefUrl, $theArray[$key]['referrers'])) {
+
+			$curTot = $theArray[$key]['referrers'][$theRefUrl];
+			$newTot = $curTot + $row['metrics'][0]['values'][0];
+            $theArray[$key]['referrers'][$theRefUrl] = $newTot;
+            
+		} else {
+
+            $theArray[$key]['referrers'][$theRefUrl] = $row['metrics'][0]['values'][0];
+            
+        }
+       
+		return $theArray;
     }
 
     public function parseResults($results, $ignoreParams) {
@@ -367,10 +434,21 @@ trait GoogAnalyticsInterface {
                         $dataArray['articles'] = self::calculateNewTotal($dataArray['articles'], $row, 'Views', $url, 0);
                         $dataArray['articles'] = self::calculateNewTotal($dataArray['articles'], $row, 'Uniques', $url, 2);
                         $dataArray['articles'] = self::calculateNewTotal($dataArray['articles'], $row, 'Dwell', $url, 1);
+                        $dataArray['articles'] = self::getReferrers($row, $dataArray['articles'], $url->identifier->identifier);
 
                     } else {
 
-                        $tmpArray = ['Views' => (int)$row['metrics'][0]['values'][0], 'Uniques' => (int)$row['metrics'][0]['values'][2], 'Dwell' => (float)$row['metrics'][0]['values'][1]];
+                        $refArray = array();
+                        $tmpArray = ['Views' => (int)$row['metrics'][0]['values'][0], 
+                                    'Uniques' => (int)$row['metrics'][0]['values'][2], 
+                                    'Dwell' => (float)$row['metrics'][0]['values'][1], 
+                                    'referrers' => $refArray,
+                                    'headline' => $url->identifier->article->headline,
+                                    'image' => $url->identifier->article->image,
+                                    'published_date' => $url->identifier->article->published_date,
+                                    'author' => $url->identifier->article->author,
+                                    'name' => $url->identifier->article->name
+                                ];
                         $dataArray['articles'][$url->identifier->identifier] = $tmpArray;
 
                     }
@@ -382,17 +460,32 @@ trait GoogAnalyticsInterface {
                         $dataArray['sections'] = self::calculateNewTotal($dataArray['sections'], $row, 'Views', $url, 0);
                         $dataArray['sections'] = self::calculateNewTotal($dataArray['sections'], $row, 'Uniques', $url, 2);
                         $dataArray['sections'] = self::calculateNewTotal($dataArray['sections'], $row, 'Dwell', $url, 1);
+                        $dataArray['sections'] = self::getReferrers($row, $dataArray['sections'], $url->identifier->identifier);
                         
                     } else {
 
-                        $tmpArray = ['Views' => (int)$row['metrics'][0]['values'][0], 'Uniques' => (int)$row['metrics'][0]['values'][2], 'Dwell' => (float)$row['metrics'][0]['values'][1]];
+                        $refArray = array();
+                        $tmpArray = ['Views' => (int)$row['metrics'][0]['values'][0], 
+                                    'Uniques' => (int)$row['metrics'][0]['values'][2], 
+                                    'Dwell' => (float)$row['metrics'][0]['values'][1], 
+                                    'referrers' => $refArray];
                         $dataArray['sections'][$url->identifier->identifier] = $tmpArray;
 
                     }  
                 }
             }
         }
+        uasort($dataArray['articles'], "self::cmp");
+
+        /*$identifier = array_keys($storyArray);
+        $cmsIdsArray = array_slice($identifier, 0, 199);
+        $storyArray = getNameAndHeadline($cmsIdsArray, $storyArray);*/
         return $dataArray;
     }
+
+    public function cmp($a, $b)
+	{
+   		return (($b['Views']) - ($a['Views']));
+	}
 
 }

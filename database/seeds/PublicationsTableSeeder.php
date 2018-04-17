@@ -30,7 +30,7 @@ class PublicationsTableSeeder extends Seeder
         $pub1->phone = env('PUB1_DB_SEED_PHONE', '123');
         $pub1->logo = env('PUB1_DB_SEED_LOGO', '180410050443_bullSquarBlueLogo.png');
         $pub1->GAJsonFile = '180410050424_service-account-credentials.json';
-        $pub1->ignore_all_params = 0;
+        $pub1->ignore_all_params = 1;
         $pub1->save();
 
         $pub2 = new Publication();

@@ -22,8 +22,8 @@ class Identifier extends Model
         return $this->hasMany(Url::class);
     }
 
-    public function story() {
-        return $this->belongsTo(Story::class);
+    public function article() {
+        return $this->hasOne(Article::class);
     }
 
     public function publication() {
