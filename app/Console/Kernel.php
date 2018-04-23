@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         
             //Publication::getArticleDataTask()->hourly();
-            $exitCode = Artisan::call('articleData:get', ['--option' => 'foo'])->hourly();
+            $exitCode = \Artisan::call('articleData:get', ['--option' => 'foo'])->hourly();
     }
 
     /**
