@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Console;
+namespace App\Console\Commands;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Publication;
+use Illuminate\Console\Command;
 
 class Kernel extends ConsoleKernel
 {
@@ -28,7 +29,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         
-            Publication::getArticleDataTask()->hourly();
+            //Publication::getArticleDataTask()->hourly();
+            $exitCode = Artisan::call('articleData:get', ['--option' => 'foo'])->hourly();
     }
 
     /**
