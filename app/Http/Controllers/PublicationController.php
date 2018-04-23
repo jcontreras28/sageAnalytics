@@ -42,7 +42,7 @@ class PublicationController extends Controller
             }
             
             //$results = [$urlArray, $results];
-            $returnArray = $urlArray; //$results['reports'][0]->getData()->getRows();
+            $returnArray = $results; //$results['reports'][0]->getData()->getRows();
 
         } else {
             $returnArray = ['errors' => ['JSON credentials file has not been uploaded.', 'Another error just to test']];
