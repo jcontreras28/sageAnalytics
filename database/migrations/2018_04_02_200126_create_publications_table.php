@@ -22,7 +22,7 @@ class CreatePublicationsTable extends Migration
             $table->string('logo')->nullable();
             $table->string('GAJsonFile')->nullable();
             $table->integer('GAProfileId')->unsigned()->nullable();  
-            $table->boolean('ignore_all_params')->default(false);
+            $table->boolean('ignore_all_params')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
