@@ -60,28 +60,34 @@ class PublicationController extends Controller
     }
 
     public function getArticleDataTask() {
-        $pubData = Publication::findOrFail($id);
 
-        $path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
-        
-        if(file_exists($path)){
-            $GAConn = $this->connect($path, $pubData->name);
+        Log::debug('In getArticleDataTask.');
 
-            $profId = strval($pubData->GAProfileId);
-            //$resultsTotalPages = $this->getAllPageViews($GAConn, $profId, '0daysAgo', 'today'); 
+        $pubs = Publication::all();
 
-            $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
-            //$results2 = $results;
-            if (count($results['reports'][0]->getData()->getRows()) > 0) {
+        foreach($pubs as $pub) {
 
-                $ignoreParams = $this->getIgnoreParams($pubData);
-                
-                $urlArray = $this->getUrlArray($results, $ignoreParams);
-
-                $this->getPageDataFromUrls($urlArray, $pubData->domain);
+            $path = __DIR__ . '/CredentialJson/'.$pub->GAJsonFile;
             
+            if(file_exists($path)){
+                $GAConn = $this->connect($path, $pub->name);
+
+                $profId = strval($pub->GAProfileId);
+                
+                $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
+             
+                if (count($results['reports'][0]->getData()->getRows()) > 0) {
+
+                    $ignoreParams = $this->getIgnoreParams($pub);
+                    
+                    $urlArray = $this->getUrlArray($results, $ignoreParams);
+
+                    $this->getPageDataFromUrls($urlArray, $pub->domain);
+                
+                }
             }
         }
+        Log::debug('Leaving getArticleDataTask.');
     }
 
 }
