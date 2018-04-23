@@ -60,7 +60,28 @@ class PublicationController extends Controller
     }
 
     public function getArticleDataTask() {
+        $pubData = Publication::findOrFail($id);
+
+        $path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
         
+        if(file_exists($path)){
+            $GAConn = $this->connect($path, $pubData->name);
+
+            $profId = strval($pubData->GAProfileId);
+            //$resultsTotalPages = $this->getAllPageViews($GAConn, $profId, '0daysAgo', 'today'); 
+
+            $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
+            //$results2 = $results;
+            if (count($results['reports'][0]->getData()->getRows()) > 0) {
+
+                $ignoreParams = $this->getIgnoreParams($pubData);
+                
+                $urlArray = $this->getUrlArray($results, $ignoreParams);
+
+                $this->getPageDataFromUrls($urlArray, $pubData->domain);
+            
+            }
+        }
     }
 
 }
