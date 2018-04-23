@@ -38,7 +38,7 @@ class PublicationController extends Controller
 
                 $this->getPageDataFromUrls($urlArray, $pubData->domain);
                 
-                $results = $this->parseResults($results, $ignoreParams);
+                $results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
             }
             
             //$results = [$urlArray, $results];
@@ -57,37 +57,6 @@ class PublicationController extends Controller
         $pub = Publication::findOrFail($id);
 
         return view('admin.pubAdmin', compact('pub'));
-    }
-
-    public function getArticleDataTask() {
-
-        Log::debug('In getArticleDataTask.');
-
-        $pubs = Publication::all();
-
-        foreach($pubs as $pub) {
-
-            $path = __DIR__ . '/CredentialJson/'.$pub->GAJsonFile;
-            
-            if(file_exists($path)){
-                $GAConn = $this->connect($path, $pub->name);
-
-                $profId = strval($pub->GAProfileId);
-                
-                $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
-             
-                if (count($results['reports'][0]->getData()->getRows()) > 0) {
-
-                    $ignoreParams = $this->getIgnoreParams($pub);
-                    
-                    $urlArray = $this->getUrlArray($results, $ignoreParams);
-
-                    $this->getPageDataFromUrls($urlArray, $pub->domain);
-                
-                }
-            }
-        }
-        Log::debug('Leaving getArticleDataTask.');
     }
 
 }

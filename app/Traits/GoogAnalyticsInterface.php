@@ -272,7 +272,7 @@ trait GoogAnalyticsInterface {
         return false;
     }
 
-    public function getPageDataFromUrls($urlArray, $domain) {
+    public function getPageDataFromUrls($urlArray, $domain, $pubId) {
 
         $allUrlData = [];
         $count = 0;
@@ -328,7 +328,7 @@ trait GoogAnalyticsInterface {
                         // add new identifier to table
                         $ident = new Identifier();
                         $ident->identifier = $theIdentifier;
-                        $ident->publication_id = Auth::user()->publication->id;
+                        $ident->publication_id = $pubId; //Auth::user()->publication->id;
 
                         // get url type from table so we have access to its id or add it if not there
                         $typeObj = UrlType::where('name', '=', $type)->first();
