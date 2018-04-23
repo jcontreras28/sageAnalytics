@@ -33,12 +33,12 @@ class PublicationController extends Controller
             if (count($results['reports'][0]->getData()->getRows()) > 0) {
 
                 $ignoreParams = $this->getIgnoreParams($pubData);
-                dd($ignoreParams);
+           
                 $urlArray = $this->getUrlArray($results, $ignoreParams);
 
                 $this->getPageDataFromUrls($urlArray, $pubData->domain);
                 
-                //$results = $this->parseResults($results, $ignoreParams);
+                $results = $this->parseResults($results, $ignoreParams);
             }
             
             //$results = [$urlArray, $results];
