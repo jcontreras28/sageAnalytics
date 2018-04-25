@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
 
-        Commands\articleData::class
+        //Commands\articleData::class
 
     ];
 
