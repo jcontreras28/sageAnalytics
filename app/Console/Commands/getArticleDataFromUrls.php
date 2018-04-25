@@ -47,7 +47,7 @@ class getArticleDataFromUrls extends Command
         var_dump($pub);
         //foreach($pubs as $pub) {
 
-            /*$path = __DIR__ . '/../../Http/Controllers/CredentialJson/'.$pub->GAJsonFile;
+            $path = __DIR__ . '/../../Http/Controllers/CredentialJson/'.$pub->GAJsonFile;
             
             echo $path;
             if(file_exists($path)){
@@ -68,7 +68,7 @@ class getArticleDataFromUrls extends Command
                     $this->getPageDataFromUrls($urlArray, $pub->domain, $pubId);
                 
                 }
-            }*/
+            }
        // }
        return $pub;
     }
