@@ -19,3 +19,9 @@ mix.styles([
     'public/css/daterangepicker.min.css',
     'public/css/style.css'
 ], 'public/css/all.css');
+
+mix.scripts([
+    'public/js/app.js',
+    'public/js/moment.min.js',
+    'public/js/thisapp.js'
+], 'public/js/all.js');

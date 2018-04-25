@@ -46,14 +46,14 @@
                                 <div class="form-group row">
                                     {!! Form::label('role', "User's Role", ['class'=>'col-md-4 col-form-label text-md-right']) !!}
                                         <div class="col-md-6">
-                                            {!! Form::select('role_id', $roles, null, ['class'=>'form-control']) !!}
+                                            {!! Form::select('role_id', $roles, null, ['class'=>'form-control', 'id'=>'role_id']) !!}
                                         </div>
                                 </div>
 
-                                <div class="form-group row display-hidden-start" id="publicationDiv">
+                                <div class="form-group row" id="publicationDiv">
                                     {!! Form::label('publication', "User's Publication", ['class'=>'col-md-4 col-form-label text-md-right']) !!}
                                         <div class="col-md-6">
-                                            {!! Form::select('publication_id', $publications, ['class'=>'form-control']) !!}
+                                            {!! Form::select('publication_id', $publications, null, ['class'=>'form-control', 'id'=>'publication_id']) !!}
                                         </div>
                                 </div>
                             @elseif (Auth::user()->role->name == 'Publication Admin')
