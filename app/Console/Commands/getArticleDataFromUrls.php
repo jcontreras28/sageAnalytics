@@ -70,5 +70,6 @@ class getArticleDataFromUrls extends Command
                 }
             }*/
        // }
+       return $pub;
     }
 }
