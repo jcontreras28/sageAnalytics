@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         
             //Publication::getArticleDataTask()->hourly();
-            //\Artisan::call('articleData:get');
+            \Artisan::call('articleData:get')->hourly();
     }
 
     /**
