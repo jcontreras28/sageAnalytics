@@ -280,7 +280,7 @@ trait GoogAnalyticsInterface {
         foreach($urlArray as $url) {
 
             $count++;
-            if ($count > 1000)
+            if ($count > 3000)
                 break;
 
             $fullUrl = 'http://'.$domain.$url;
