@@ -39,7 +39,7 @@
 	</ul>
 	
 
-	@if (array_key_exists('errors', $resutls)) 
+	@if (array_key_exists('errors', $results)) 
 		<ul class="extra-margin-top no-bullet-list">
 
 			@foreach($results['errors'] as $error) 
