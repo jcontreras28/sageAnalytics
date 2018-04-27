@@ -36,7 +36,7 @@ class PublicationController extends Controller
            
                 $urlArray = $this->getUrlArray($results, $ignoreParams);
 
-                $this->getPageDataFromUrls($urlArray, $pubData->domain, Auth::user()->publication->id);
+                //$this->getPageDataFromUrls($urlArray, $pubData->domain, Auth::user()->publication->id);
                 
                 $results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
             }
