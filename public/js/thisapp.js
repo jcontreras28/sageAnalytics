@@ -14,4 +14,18 @@ $(document).ready( function() {
         }
     });*/
 
+    var pubId = $('.pubIdContainer').attr('id');
+    var theUrl = "/pub/"+pubId.toString()+"/refresh";
+    $.ajax({
+        type:"GET",
+        url : theUrl,
+        dataType: "html",
+        success : function(response) {
+            $( "#storiesPanel" ).html(response);
+            console.log(response);
+        },
+        error: function() {
+        }
+    });
+
 });
