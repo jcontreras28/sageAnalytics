@@ -1,44 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-
-    <h2>Stats for {{$pubData->name}}  {{$pubData->GAProfileId }}</h2>
-
-    <div class="row" style="margin-top: 20px">
-        <div class="col-xs-12">
-            <span class="total-page-views"></span>
-        </div>
-        <div class="col-sx-12">
-            <?php //include __DIR__ . '/dailyCompareTemplate.php'; ?>
-        </div>
-    </div>
-    <hr></hr>
-
-    <ul class="nav nav-tabs">
-        
-		<li class="active">
-			<a href="#storyTab" data-toggle="tab">Top 200 stories today</a>
-		</li>
-		<li>
-		    <a href="#sectionTab" data-toggle="tab">Top sections today</a>
-		</li>
-		<li>
-			<a href="#realTimeTab" data-toggle="tab">Real-time</a>
-		</li>
-		<li>
-			<a href="#historicalTab" data-toggle="tab">Historical</a>
-		</li>
-		<li>
-			<a href="#promosTab" data-toggle="tab">Promos/SS</a>
-		</li>
-		<li>
-			<a href="#searchTab" data-toggle="tab">Search</a>
-		</li>
-
-	</ul>
 	
-
 	@if (array_key_exists('errors', $results)) 
 		<ul class="extra-margin-top no-bullet-list">
 
@@ -48,24 +11,6 @@
 
 		</ul>
 	@endif
-
-	<div id='storiesPanel'>
-
-		<div id="top200Total">{{ number_format($rowsAllPages[0]['metrics'][0][0]) }}</div>
-		<div id="top200TotalUniques">{{ number_format($rowsAllPages[0]['metrics'][0][2]) }}</div>
-		<div id="top200StoryTotal">{{ number_format($results['storyTotal']) }}</div>
-		<div id="top200StoryTotalUniques">{{ number_format($results['storyUniqueTotal']) }}</div>
-
-		<ul>
-			<li class="list-group-item">
-				<div class="row title">
-					<div class="col-xs-1">Views</div>
-        			<div class="col-xs-1">Visitors</div>
-					<div class="col-xs-7">Headline, name and author</div>
-        			<div class="col-xs-3">Referrers (Top 6)</div>
-				</div>
-			</li>
-		</ul>
 
 		<ol class="custom-counter">
 			@foreach($results["articles"] as $key => $story )
@@ -104,11 +49,11 @@
 				</li>
 			@endforeach
 		</ol>
-	</div>
 
-	<pre>
-	{{ print_r($results) }}
-	</pre>
+
+		<pre>
+		{{ print_r($results) }}
+		</pre>
 </div>
 
 @endsection
