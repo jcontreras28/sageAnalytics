@@ -76,7 +76,7 @@
 				<li class="list-group-item list-group-item-ordered">
 					<div class="row">
 						<div class="col-xs-1" id="storyViews{{ $loop->index }}">{{ $story['Views']}}</div>
-						<div class="class-xs-1" id="storyUniques{{ $loop->index }}">{{ $story['Uniques'] }}</div>
+						<div class="col-xs-1" id="storyUniques{{ $loop->index }}">{{ $story['Uniques'] }}</div>
 						<div class="col-xs-7">
 							@if (array_key_exists('image', $story) && $story['image'] != 'none') 
 								<img class='pull-left storyImage' width='80px' src='{{ $story["image"] }}' id='storyThumb{{ $loop->index }}' / >
