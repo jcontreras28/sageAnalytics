@@ -14,22 +14,28 @@ $(document).ready( function() {
         }
     });*/
 
-    alert('hello');
-	var pubId = $('.pubIdContainer').attr('id');
-	console.log('pubId: ', pubId);
-	var theUrl = "/pub/"+pubId.toString()+"/refresh";
-	console.log('theUrl', theUrl);
-    $.ajax({
-        type:"GET",
-        url : theUrl,
-        dataType: "html",
-        success : function(response) {
-            $( "#storiesPanel" ).html(response);
-            console.log(response);
-        },
-        error: function() {
-			console.log('error ', response);
-        }
-    });
+    function getStorySectionData(start, end) {
+        //alert('hello');
+        var pubId = $('.pubIdContainer').attr('id');
+        console.log('pubId: ', pubId);
+        var theUrl = "/pub/"+pubId.toString()+"/refresh";
+        console.log('theUrl', theUrl);
+        $.ajax({
+            type:"GET",
+            url : theUrl,
+            dataType: "html",
+            success : function(response) {
+                $( "#storiesPanel" ).html(response);
+                console.log(response);
+            },
+            error: function() {
+                console.log('error ', response);
+            }
+        });
+    }
+
+    setInterval(function(){
+		getStorySectionData('0daysAgo', 'today');
+	}, 120000);
 
 });
