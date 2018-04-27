@@ -47356,7 +47356,7 @@ $(document).ready( function() {
             url : theUrl,
             dataType: "html",
             success : function(response) {
-                $( "#storiesPanel" ).html(response);
+                $( "#top200Content" ).html(response);
                 console.log(response);
             },
             error: function() {
@@ -47364,6 +47364,8 @@ $(document).ready( function() {
             }
         });
     }
+
+    getStorySectionData('0daysAgo', 'today');
 
     setInterval(function(){
 		getStorySectionData('0daysAgo', 'today');

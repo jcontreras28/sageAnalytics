@@ -38,10 +38,32 @@
 
 	</ul>
 	
+	<div class="tab-content">
+		<div class="tab-pane fade in active" id="storyTab">
+			<div id='top200Loading' class='aLoadingDiv'>
+				<img src="./images/large-loading.gif" />
+			</div>
+			<div class="tab-pane fade in active well">
+				<ul>
+					<li class='list-group-item' style='padding-left: 0px;'>
+						<span class='storyTotalReportWrap totalsReport'>
+							STORY STATS TODAY - Pageviews: <span class='storyTotalTotalReport'></span>
+							Uniques: <span class='storyTotalReportUniques'></span>
+							Dwell time: <span class='storyTotalReportDwell'></span>
+						</span>
+					</li>
+				</ul>
 
-	<div id='storiesPanel'>
 
-	</div>	
+				<span id="top200Content"></span>
+			</div>
+		</div>
+		<div class="tab-pane fade" id="sectionTab">
+			<div id='sectionLoading' class='aLoadingDiv'>
+				<img src="./images/large-loading.gif" />
+			</div>
+		<div class="tab-pane fade in active well" id="topSectionsContent"></div>
+	</div>
 </div>
 
 @endsection
