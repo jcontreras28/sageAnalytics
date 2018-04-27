@@ -445,6 +445,12 @@ trait GoogAnalyticsInterface {
             "sections" => [],
         ];
 
+        $dayTotal = 0;
+        $storyTotal = 0;
+        $sectionTotal = 0;
+        $storyUniqueTotal = 0;
+        $sectionUniqueTotal = 0;
+
         foreach($rows as $row) {
             // get identifier from url table
 
@@ -454,6 +460,12 @@ trait GoogAnalyticsInterface {
             if ($url) {
  
                 if($url->identifier->urlType->name == 'newsarticle') {
+
+                    // its an article - calcuate day total results
+                    $dayTotal = $dayTotal + $row['metrics'][0]['values'][0];
+                    $storyTotal = $storyTotal + $row['metrics'][0]['values'][0];
+                    $storyUniqueTotal = $storyUniqueTotal + $row['metrics'][0]['values'][2];
+
                     //      check if identifier is key in array['articles']
                     if (array_key_exists($url->identifier->identifier, $dataArray['articles'])) {
 
@@ -481,6 +493,10 @@ trait GoogAnalyticsInterface {
                     
                 } else {
                 
+                    $dayTotal = $dayTotal + $row['metrics'][0]['values'][0];
+                    $promoTotal = $promoTotal + $row['metrics'][0]['values'][0];
+                    $promoUniqueTotal = $promoUniqueTotal + $row['metrics'][0]['values'][2];
+
                     if (array_key_exists($url->identifier->identifier, $dataArray['sections'])) {
 
                         $dataArray['sections'] = self::calculateNewTotal($dataArray['sections'], $row, 'Views', $url, 0);
@@ -506,6 +522,12 @@ trait GoogAnalyticsInterface {
         /*$identifier = array_keys($storyArray);
         $cmsIdsArray = array_slice($identifier, 0, 199);
         $storyArray = getNameAndHeadline($cmsIdsArray, $storyArray);*/
+        $dataArray['storytotal'] = $storyTotal;
+        $dataArray['storyUniqueTotal'] = $storyUniqueTotal;
+        $dataArray['dayTotal'] = $dayTotal;
+        $dataArray['sectionTotal'] = $sectionTotal;
+        $dataArray['sectionUniqueTotal'] = $sectionUniqueTotal;
+        
         return $dataArray;
     }
 
