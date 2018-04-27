@@ -155,6 +155,10 @@ body > div.container {
 	text-align: center;
 }
 
+.no-left-padding {
+	padding-left: 0px !important;
+}
+
 .storyHeadlineBold {
 	font-weight: bold;
 }

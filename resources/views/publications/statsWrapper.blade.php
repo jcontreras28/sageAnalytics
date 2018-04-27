@@ -45,7 +45,7 @@
 			</div>
 			<div class="tab-pane fade in active well">
 				<ul>
-					<li class='list-group-item' style='padding-left: 0px;'>
+					<li class='list-group-item no-left-padding'>
 						<span class='storyTotalReportWrap totalsReport'>
 							STORY STATS TODAY - Pageviews: <span class='storyTotalTotalReport'></span>
 							Uniques: <span class='storyTotalReportUniques'></span>
