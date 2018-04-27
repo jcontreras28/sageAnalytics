@@ -61,7 +61,7 @@
 				<div class="row title">
 					<div class="col-xs-1">Views</div>
         			<div class="col-xs-1">Visitors</div>
-					<div class="col-xs-7">Headline, name and author</div>'
+					<div class="col-xs-7">Headline, name and author</div>
         			<div class="col-xs-3">Referrers (Top 6)</div>
 				</div>
 			</li>
