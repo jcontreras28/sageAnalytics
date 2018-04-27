@@ -273,6 +273,8 @@ trait GoogAnalyticsInterface {
 
             $article->image = $urlData->thumbnailUrl;
 
+        } else {
+            $article->image = "none";
         }
 
         if (array_key_exists('author', $urlData)) {
