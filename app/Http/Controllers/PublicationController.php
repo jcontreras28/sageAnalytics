@@ -26,7 +26,9 @@ class PublicationController extends Controller
             $GAConn = $this->connect($path, $pubData->name);
 
             $profId = strval($pubData->GAProfileId);
-            //$resultsTotalPages = $this->getAllPageViews($GAConn, $profId, '0daysAgo', 'today'); 
+
+            $resultsTotalPages = $this->getResultsAllPageViews($GAConn, $profId, '0daysAgo', 'today'); 
+            $rowsAllPages = $resultsTotalPages['reports'][0]->getData()->getRows();
 
             $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
             //$results2 = $results;
@@ -39,10 +41,19 @@ class PublicationController extends Controller
                 //$this->getPageDataFromUrls($urlArray, $pubData->domain, Auth::user()->publication->id);
                 
                 $results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
+
+                echo "<div id='storiesPanel'>";
+
+                displayOverallResults($rowsAllPages, $results);
+
+                displayResults($results);
+
+                echo "</div>"
+
             }
             
             //$results = [$urlArray, $results];
-            $returnArray = $results; //$results['reports'][0]->getData()->getRows();
+            //$returnArray = $results; //$results['reports'][0]->getData()->getRows();
 
         } else {
             $returnArray = ['errors' => ['JSON credentials file has not been uploaded.', 'Another error just to test']];
