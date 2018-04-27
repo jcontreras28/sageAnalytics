@@ -41,7 +41,7 @@
 	<div class="tab-content">
 		<div class="tab-pane fade in active" id="storyTab">
 			<div id='top200Loading' class='aLoadingDiv'>
-				<img src="{{ asset('images/large-loading.gif) }}" />
+				<img src="{{ asset('images/large-loading.gif') }}" />
 			</div>
 			<div class="tab-pane fade in active well">
 				<ul>
@@ -60,7 +60,7 @@
 		</div>
 		<div class="tab-pane fade" id="sectionTab">
 			<div id='sectionLoading' class='aLoadingDiv'>
-				<img src="{{ asset('images/large-loading.gif) }}" />
+				<img src="{{ asset('images/large-loading.gif') }}" />
 			</div>
 		<div class="tab-pane fade in active well" id="topSectionsContent"></div>
 	</div>
