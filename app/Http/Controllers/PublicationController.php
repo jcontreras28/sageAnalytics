@@ -16,7 +16,13 @@ class PublicationController extends Controller
 {
     use GoogAnalyticsInterface;
 
-    public function index($id) {
+    public function shell($id) {
+
+        $pubData = Publication::findOrFail($id);
+        return view('publications.statsWrapper', compact('pubData'));
+    }
+
+    public function refreshData($id) {
 
         $pubData = Publication::findOrFail($id);
 

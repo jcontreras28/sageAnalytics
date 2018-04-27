@@ -31,11 +31,9 @@ Route::get('/admin/trash', 'AdminController@viewTrash')->name('admin.trash');
 Route::get('/admin/trash/{id}/restore', 'AdminController@restorePub')->name('admin.restorePub');
 Route::get('/admin/trash/{id}/permanent-delete', 'AdminController@permanentDeletePub')->name('admin.permanentDeletePub');
 Route::get('/admin/pub/{id}', 'AdminController@pubAdmin')->name('admin.pubAdmin');
-Route::get('/pub/{id}', 'PublicationController@index')->name('pub.index');
-//Route::get('/pub/{id}/admin', 'PublicationController@adminIndex')->name('pub.adminindex');
-Route::get('/pub/{id}/admin', function () {
-    return view ('statsShell');
-});
+//Route::get('/pub/{id}', 'PublicationController@index')->name('pub.index');
+Route::get('/pub/{id}', 'PublicationController@wrapper')->name('pub.wrapper');
+Route::get('/pub/{id}/admin', 'PublicationController@adminIndex')->name('pub.adminindex');
 
 // ajax call routes
 Route::get('/pub/{id}/refresh', 'PublicationController@refreshData')->name('pub.refreshData');
