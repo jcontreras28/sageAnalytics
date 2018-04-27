@@ -107,7 +107,7 @@
 	</div>
 
 	<pre>
-	{{ print_r($returnArray) }}
+	{{ print_r($results) }}
 	</pre>
 </div>
 
