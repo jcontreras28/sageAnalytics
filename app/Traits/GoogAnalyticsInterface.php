@@ -522,7 +522,7 @@ trait GoogAnalyticsInterface {
         /*$identifier = array_keys($storyArray);
         $cmsIdsArray = array_slice($identifier, 0, 199);
         $storyArray = getNameAndHeadline($cmsIdsArray, $storyArray);*/
-        $dataArray['storytotal'] = $storyTotal;
+        $dataArray['storyTotal'] = $storyTotal;
         $dataArray['storyUniqueTotal'] = $storyUniqueTotal;
         $dataArray['dayTotal'] = $dayTotal;
         $dataArray['sectionTotal'] = $sectionTotal;
