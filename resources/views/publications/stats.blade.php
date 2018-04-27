@@ -39,10 +39,10 @@
 	</ul>
 	
 
-	@if (array_key_exists('errors', $returnArray)) 
+	@if (array_key_exists('errors', $resutls)) 
 		<ul class="extra-margin-top no-bullet-list">
 
-			@foreach($returnArray['errors'] as $error) 
+			@foreach($results['errors'] as $error) 
 				<li class="alert alert-danger" role="alert">{{ $error }}</li>
 			@endforeach
 
