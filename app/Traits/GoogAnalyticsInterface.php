@@ -494,8 +494,8 @@ trait GoogAnalyticsInterface {
                 } else {
                 
                     $dayTotal = $dayTotal + $row['metrics'][0]['values'][0];
-                    $promoTotal = $promoTotal + $row['metrics'][0]['values'][0];
-                    $promoUniqueTotal = $promoUniqueTotal + $row['metrics'][0]['values'][2];
+                    $sectionTotal = $sectionTotal + $row['metrics'][0]['values'][0];
+                    $sectionUniqueTotal = $sectionUniqueTotal + $row['metrics'][0]['values'][2];
 
                     if (array_key_exists($url->identifier->identifier, $dataArray['sections'])) {
 
@@ -527,7 +527,7 @@ trait GoogAnalyticsInterface {
         $dataArray['dayTotal'] = $dayTotal;
         $dataArray['sectionTotal'] = $sectionTotal;
         $dataArray['sectionUniqueTotal'] = $sectionUniqueTotal;
-        
+
         return $dataArray;
     }
 
