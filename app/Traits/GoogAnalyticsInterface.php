@@ -33,29 +33,29 @@ trait GoogAnalyticsInterface {
     function getResultsAllPageviews($GAConn, $profileId, $start, $end) {
 
         // Create the DateRange object.
-        $dateRange = new Google_Service_AnalyticsReporting_DateRange();
+        $dateRange = new \Google_Service_AnalyticsReporting_DateRange();
         $dateRange->setStartDate($start);
         $dateRange->setEndDate($end);
 
         // Create the Metrics object.
-        $sessions1 = new Google_Service_AnalyticsReporting_Metric();
+        $sessions1 = new \Google_Service_AnalyticsReporting_Metric();
         $sessions1->setExpression("ga:pageviews");
         $sessions1->setAlias("pageviews");
-        $sessions2 = new Google_Service_AnalyticsReporting_Metric();
+        $sessions2 = new \Google_Service_AnalyticsReporting_Metric();
         $sessions2->setExpression("ga:avgTimeOnPage");
         $sessions2->setAlias("dwell");
-        $sessions3 = new Google_Service_AnalyticsReporting_Metric();
+        $sessions3 = new \Google_Service_AnalyticsReporting_Metric();
         $sessions3->setExpression("ga:uniquePageviews");
         $sessions3->setAlias("uniques");
 
 
         // Create the ReportRequest object.
-        $request = new Google_Service_AnalyticsReporting_ReportRequest();
+        $request = new \Google_Service_AnalyticsReporting_ReportRequest();
         $request->setViewId($profileId);
         $request->setDateRanges($dateRange);
         $request->setMetrics(array($sessions1, $sessions2, $sessions3));
 
-        $body = new Google_Service_AnalyticsReporting_GetReportsRequest();
+        $body = new \Google_Service_AnalyticsReporting_GetReportsRequest();
         $body->setReportRequests( array( $request) );
         return $GAConn->reports->batchGet( $body );
 
