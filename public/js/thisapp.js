@@ -25,6 +25,8 @@ $(document).ready( function() {
             url : theUrl,
             dataType: "html",
             success : function(response) {
+                $('#top200Loading').hide();
+				$('#sectionLoading').hide();
                 $( "#top200Content" ).html(response);
                 console.log(response);
             },
