@@ -47380,6 +47380,7 @@ $(document).ready( function() {
                 $('#top200Loading').hide();
                 $( "#top200Content" ).html(response);
                 console.log(response);
+                getSectionData('0daysAgo', 'today');
             },
             error: function() {
                 console.log('error ', response);
@@ -47387,12 +47388,10 @@ $(document).ready( function() {
         });
     }
 
-    getStorySectionData('0daysAgo', 'today');
-    getSectionData('0daysAgo', 'today');
+    getStorySectionData('0daysAgo', 'today')
 
     setInterval(function(){
         getStorySectionData('0daysAgo', 'today');
-        getSectionData('0daysAgo', 'today');
 	}, 120000);
 
 });
