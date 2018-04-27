@@ -14,8 +14,11 @@ $(document).ready( function() {
         }
     });*/
 
-    var pubId = $('.pubIdContainer').attr('id');
-    var theUrl = "/pub/"+pubId.toString()+"/refresh";
+    alert('hello');
+	var pubId = $('.pubIdContainer').attr('id');
+	console.log('pubId: ', pubId);
+	var theUrl = "/pub/"+pubId.toString()+"/refresh";
+	console.log('theUrl', theUrl);
     $.ajax({
         type:"GET",
         url : theUrl,
@@ -25,6 +28,7 @@ $(document).ready( function() {
             console.log(response);
         },
         error: function() {
+			console.log('error ', response);
         }
     });
 
