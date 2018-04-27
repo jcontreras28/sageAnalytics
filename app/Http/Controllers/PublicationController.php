@@ -16,10 +16,20 @@ class PublicationController extends Controller
 {
     use GoogAnalyticsInterface;
 
+    private $g_Results = [];
+
     public function wrapper($id) {
 
         $pubData = Publication::findOrFail($id);
         return view('publications.statsWrapper', compact('pubData'));
+
+    }
+
+    public function sectionRefresh() {
+
+        $results = $g_Results;
+        return view('publications.sectionStats', compact('results'));
+
     }
 
     public function refreshData($id) {
@@ -47,7 +57,7 @@ class PublicationController extends Controller
                 //$this->getPageDataFromUrls($urlArray, $pubData->domain, Auth::user()->publication->id);
                 
                 $results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
-
+                $g_Results = $results; // saving global for filling sections
                /* echo "<div id='storiesPanel'>";
 
                 displayOverallResults($rowsAllPages, $results);
@@ -65,7 +75,7 @@ class PublicationController extends Controller
             $returnArray = ['errors' => ['JSON credentials file has not been uploaded.', 'Another error just to test']];
         }
 
-        return view('publications.stats', compact('results', 'rowsAllPages', 'pubData'));
+        return view('publications.storyStats', compact('results', 'rowsAllPages', 'pubData'));
 
     }
 

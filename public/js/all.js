@@ -47345,6 +47345,27 @@ $(document).ready( function() {
         }
     });*/
 
+    function getSectionData(start, end) {
+        //alert('hello');
+        var pubId = $('.pubIdContainer').attr('id');
+        console.log('pubId section refresh: ', pubId);
+        var theUrl = "/pub/"+pubId.toString()+"/sectionRefresh";
+        console.log('theUrl section refresh', theUrl);
+        $.ajax({
+            type:"GET",
+            url : theUrl,
+            dataType: "html",
+            success : function(response) {
+				$('#sectionLoading').hide();
+                $( "#topSectionsContent" ).html(response);
+                console.log(response);
+            },
+            error: function() {
+                console.log('error ', response);
+            }
+        });
+    }
+
     function getStorySectionData(start, end) {
         //alert('hello');
         var pubId = $('.pubIdContainer').attr('id');
@@ -47357,7 +47378,6 @@ $(document).ready( function() {
             dataType: "html",
             success : function(response) {
                 $('#top200Loading').hide();
-				$('#sectionLoading').hide();
                 $( "#top200Content" ).html(response);
                 console.log(response);
             },
@@ -47368,9 +47388,11 @@ $(document).ready( function() {
     }
 
     getStorySectionData('0daysAgo', 'today');
+    getSectionData('0daysAgo', 'today');
 
     setInterval(function(){
-		getStorySectionData('0daysAgo', 'today');
+        getStorySectionData('0daysAgo', 'today');
+        getSectionData('0daysAgo', 'today');
 	}, 120000);
 
 });
