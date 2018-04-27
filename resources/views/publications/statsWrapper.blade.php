@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" id="{{$pubData->id}}">
 
     <h2>Stats for {{$pubData->name}}  {{$pubData->GAProfileId }}</h2>
 
