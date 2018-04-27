@@ -51,9 +51,9 @@
 
 	<div id='storiesPanel'>
 
-		<div id="top200Total" style="display:none">{{ number_format($rowsAllPages[0]['metrics'][0][0]); }}</div>
-		<div id="top200TotalUniques" style="display:none">{{ number_format($rowsAllPages[0]['metrics'][0][2]); }}</div>
-		<div id="top200StoryTotal" style="display:none">{{ number_format($results['storyTotal']); }}</div>
+		<div id="top200Total" style="display:none">{{ number_format($rowsAllPages[0]['metrics'][0][0]) }}</div>
+		<div id="top200TotalUniques" style="display:none">{{ number_format($rowsAllPages[0]['metrics'][0][2]) }}</div>
+		<div id="top200StoryTotal" style="display:none">{{ number_format($results['storyTotal']) }}</div>
 		<div id="top200StoryTotalUniques" style="display:none">{{ number_format($results['storyUniqueTotal']) }}</div>
 
 		<ul>
