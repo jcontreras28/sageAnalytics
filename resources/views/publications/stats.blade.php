@@ -78,7 +78,7 @@
 						<div class="col-xs-1" id="storyViews{{ $loop->index }}">{{ $story['Views']}}</div>
 						<div class="class-xs-1" id="storyUniques{{ $loop->index }}">{{ $story['Uniques'] }}</div>
 						<div class="col-xs-7">
-							@if (array_key_exists('image', $story) && $story['image' != 'none']) 
+							@if (array_key_exists('image', $story) && $story['image'] != 'none') 
 								<img class='pull-left storyImage' width='80px' src='http://www.bendbulletin.com{{ $story["image"] }}' id='storyThumb{{ $loop->index }}' / >
 							@endif
 							<span id='storyHeadline{{ $loop->index }}' class='storyHeadlineBold'>{{ $story['headline'] }}</span><br>
