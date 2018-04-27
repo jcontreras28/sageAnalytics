@@ -482,6 +482,7 @@ trait GoogAnalyticsInterface {
                         $tmpArray = ['Views' => (int)$row['metrics'][0]['values'][0], 
                                     'Uniques' => (int)$row['metrics'][0]['values'][2], 
                                     'Dwell' => (float)$row['metrics'][0]['values'][1], 
+                                    'link' => $thisUrl,
                                     'referrers' => $refArray,
                                     'headline' => $url->identifier->article->headline,
                                     'image' => $url->identifier->article->image,
