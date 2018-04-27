@@ -49,6 +49,63 @@
 		</ul>
 	@endif
 
+	<div id='storiesPanel'>
+
+		<div id="top200Total" style="display:none">{{ number_format($rowsAllPages[0]['metrics'][0][0]); }}</div>
+		<div id="top200TotalUniques" style="display:none">{{ number_format($rowsAllPages[0]['metrics'][0][2]); }}</div>
+		<div id="top200StoryTotal" style="display:none">{{ number_format($results['storyTotal']); }}</div>
+		<div id="top200StoryTotalUniques" style="display:none">{{ number_format($results['storyUniqueTotal']) }}</div>
+
+		<ul>
+			<li class="list-group-item">
+				<div class="row title">
+					<div class="col-xs-1">Views</div>
+        			<div class="col-xs-1">Visitors</div>
+					<div class="col-xs-7">Headline, name and author</div>'
+        			<div class="col-xs-3">Referrers (Top 6)</div>
+				</div>
+			</li>
+		</ul>
+
+		<ol class="custom-counter">
+			@foreach($results["stories"] as $key => $story )
+				@if ($loop->index > 200) 
+					@break
+				@endif
+				
+				<li class="list-group-item list-group-item-ordered">
+					<div class="row">
+						<div class="col-xs-1" id="storyViews{{ $loop->index }}">{{ $story['Views']}}</div>
+						<div class="class-xs-1" id="storyUniques{{ $loop->index }}">{{ $story['Uniques'] }}</div>
+						<div class="col-xs-7">
+							@if ($story['thumb' != 'none']) 
+								<img class='pull-left storyImage' width='80px' src='http://www.bendbulletin.com{{ $story["thumb"] }}' id='storyThumb{{ $loop->index }}' / >
+							@endif
+							<span id='storyHeadline{{ $loop->index }}' class='storyHeadlineBold'>{{ $story['realHeadline'] }}</span><br>
+        					<span id='storyName{{ $loop->index }}'>{{ $story['name'] }}</span><br>
+        					<span id='storyAuthor'>{{ $story['author'] }}</span> - 
+							<a href='{{ $story["link"] }}' target='_blank' id='storyUrl{{ $loop->index }}'>View story</a>
+						</div>
+						<div class="referrer-row col-xs-3" style="font-size:.9em">
+							<span id='storyRefs{{ $loop->index }}'>
+								@foreach($story['referrers'] as $subKey => $ref)
+									@if ($loop->index == 0)
+										{{ $ref }} - {{ $subKey }}
+									@else	
+										| {{ $ref }} - {{ $subKey }}
+									@endif
+									@if ($loop->index > 5)
+										@break
+									@endif
+								@endforeach
+							</span>
+						</div>
+					</div>
+				</li>
+			@endforeach
+		</ol>
+	</div>
+
 	<pre>
 	{{ print_r($returnArray) }}
 	</pre>

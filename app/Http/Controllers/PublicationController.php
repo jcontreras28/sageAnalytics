@@ -42,13 +42,13 @@ class PublicationController extends Controller
                 
                 $results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
 
-                echo "<div id='storiesPanel'>";
+               /* echo "<div id='storiesPanel'>";
 
                 displayOverallResults($rowsAllPages, $results);
 
                 displayResults($results);
 
-                echo "</div>"
+                echo "</div>"*/
 
             }
             
@@ -59,7 +59,7 @@ class PublicationController extends Controller
             $returnArray = ['errors' => ['JSON credentials file has not been uploaded.', 'Another error just to test']];
         }
 
-        return view('publications.stats', compact('returnArray', 'pubData'));
+        return view('publications.stats', compact('results', 'rowsAllPages', 'pubData'));
 
     }
 
