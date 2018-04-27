@@ -68,7 +68,7 @@
 		</ul>
 
 		<ol class="custom-counter">
-			@foreach($results["stories"] as $key => $story )
+			@foreach($results["articles"] as $key => $story )
 				@if ($loop->index > 200) 
 					@break
 				@endif
