@@ -60,7 +60,7 @@
 		</div>
 		<div class="tab-pane fade" id="sectionTab">
 			<div id='sectionLoading' class='aLoadingDiv'>
-				<img src="{{ asset('images/large-loading.gif) }}"" />
+				<img src="{{ asset('images/large-loading.gif) }}" />
 			</div>
 		<div class="tab-pane fade in active well" id="topSectionsContent"></div>
 	</div>
