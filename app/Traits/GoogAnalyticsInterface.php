@@ -290,16 +290,11 @@ trait GoogAnalyticsInterface {
                 // get the json ld data from the url
                 $urlData = self::getUrlData($fullUrl);
 
-                if ($urlData) {
+                if ($urlData != 'bad json') {
 
                     // parse out the type of page it is - NewsArticle, WebPage, or no json present
                     $type = "";
-                    if ($urlData == 'bad json') {
-
-                        $type = 'nojson';
-                        $theIdentifier = $url;
-
-                    } else if ($urlData->{'@type'} == 'NewsArticle') {
+                    if ($urlData->{'@type'} == 'NewsArticle') {
                         
                         $theIdentifier = $urlData->identifier;  
                         $type = 'newsarticle';
