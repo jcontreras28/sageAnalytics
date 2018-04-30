@@ -41,7 +41,7 @@
                                     {{ $pub->name }} ( {{ $pub->domain }} )
 
                                     <div class="pull-right action-buttons">
-                                        <a href="{{ route('pub.index', $pub->id) }}" title="View stats"><span class="glyphicon glyphicon-eye-open sage-green-font"></span></a>
+                                        <a href="{{ route('pub.wrapper', $pub->id) }}" title="View stats"><span class="glyphicon glyphicon-eye-open sage-green-font"></span></a>
                                         <a href="{{ route('admin.editPub', $pub->id) }}" class="extra-margin-left" title="Edit publication"><span class="glyphicon glyphicon-pencil sage-green-font"></span></a>
                                         <a href="{{ route('admin.deletePub', $pub->id) }}" class="trash extra-margin-left" title="Delete publication"><span class="glyphicon glyphicon-trash sage-green-font"></span></a>
                                     </div>
