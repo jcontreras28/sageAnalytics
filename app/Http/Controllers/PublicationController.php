@@ -53,10 +53,10 @@ class PublicationController extends Controller
                 $ignoreParams = $this->getIgnoreParams($pubData);
            
                 $urlArray = $this->getUrlArray($results, $ignoreParams);
-                $results = $urlArray;
+
                 //$this->getPageDataFromUrls($urlArray, $pubData->domain, Auth::user()->publication->id);
                 
-                //$results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
+                $results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
                 $g_Results = $results; // saving global for filling sections
                /* echo "<div id='storiesPanel'>";
 
@@ -74,9 +74,8 @@ class PublicationController extends Controller
         } else {
             $returnArray = ['errors' => ['JSON credentials file has not been uploaded.', 'Another error just to test']];
         }
-        $returnHtml = view('publications.storyStats', compact('results', 'rowsAllPages', 'pubData', 'returnArray'))->render();
-        return response()->json(array('success' => true, 'html' => $returnHTML));
-        //return view('publications.storyStats', compact('results', 'rowsAllPages', 'pubData', 'returnArray'));
+
+        return view('publications.storyStats', compact('results', 'rowsAllPages', 'pubData', 'returnArray'));
 
     }
 
