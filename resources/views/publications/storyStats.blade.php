@@ -14,6 +14,7 @@
 
 
 		<pre>
+		{{ print_r(count($results['stories'])}}
 		{{ print_r($results) }}
 		</pre>
 </div>
