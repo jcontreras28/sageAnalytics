@@ -52,7 +52,7 @@ $(document).ready( function() {
                 $('#top200Loading').hide();
                 $( "#top200Content" ).html(response);
                 console.log(response);
-                getSectionData('0daysAgo', 'today');
+                //getSectionData('0daysAgo', 'today');
             },
             error: function() {
                 console.log('error ', response);

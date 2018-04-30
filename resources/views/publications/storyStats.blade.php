@@ -12,6 +12,11 @@
 		</ul>
 	@endif
 
+		<div id="top200Total" class="display-hidden-start">{{ number_format(dayTotalViews) }}</div>
+		<div id="top200TotalUniques" class="display-hidden-start">{{ number_format(dayTotalUniques) }}</div>
+		<div id="top200StoryTotal" class="display-hidden-start">{{ number_format(totalStoriesViews) }}</div>
+		<div id="top200StoryTotalUniques" class="display-hidden-start">{{ number_format(totalStoriesUniques) }}</div>
+
 		<ol class="custom-counter">
 			@foreach($results["articles"] as $key => $story )
 				@if ($loop->index > 200) 

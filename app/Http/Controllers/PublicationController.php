@@ -74,8 +74,12 @@ class PublicationController extends Controller
         } else {
             $returnArray = ['errors' => ['JSON credentials file has not been uploaded.', 'Another error just to test']];
         }
+        $totalStoriesUniques = $results['storyUniqueTotal'];
+        $totalStoriesViews = $results['storyTotal'];
+        $dayTotalViews = $rowsAllPages[0]['metrics'][0][0]
+        $dayTotalUniques = $rowsAllPages[0]['metrics'][0][2]
 
-        return view('publications.storyStats', compact('results', 'rowsAllPages', 'pubData', 'returnArray'));
+        return view('publications.storyStats', compact('results', 'pubData', 'returnArray', 'totalStoriesUniques', 'totalStoriesViews', 'dayTotalViews', 'dayTotalUniques'));
 
     }
 
