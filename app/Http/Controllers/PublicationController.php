@@ -88,7 +88,7 @@ class PublicationController extends Controller
             //$returnArray = $results; //$results['reports'][0]->getData()->getRows();
 
         } else {
-            $results['errors'] => ['JSON credentials file has not been uploaded.', 'Another error just to test']];
+            $results['errors'] = ['JSON credentials file has not been uploaded.'];
         }
         
 
