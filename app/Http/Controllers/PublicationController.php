@@ -74,8 +74,9 @@ class PublicationController extends Controller
         } else {
             $returnArray = ['errors' => ['JSON credentials file has not been uploaded.', 'Another error just to test']];
         }
-
-        return view('publications.storyStats', compact('results', 'rowsAllPages', 'pubData', 'returnArray'));
+        $returnHtml = view('publications.storyStats', compact('results', 'rowsAllPages', 'pubData', 'returnArray'))->render();
+        return response()->json(array('success' => true, 'html' => $returnHTML));
+        //return view('publications.storyStats', compact('results', 'rowsAllPages', 'pubData', 'returnArray'));
 
     }
 
