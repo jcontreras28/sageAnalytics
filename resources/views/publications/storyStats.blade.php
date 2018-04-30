@@ -1,6 +1,4 @@
-@extends('layouts.app')
 
-@section('content')
 	
 	@if (array_key_exists('errors', $results)) 
 		<ul class="extra-margin-top no-bullet-list">
@@ -60,5 +58,3 @@
 		{{ print_r($results) }}
 		</pre>
 </div>
-
-@endsection
