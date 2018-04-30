@@ -60,7 +60,7 @@ class PublicationController extends Controller
                 
                 $results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
                 //$this->g_Results = $results; // saving global for filling sections
-                $resString = $results.toString();
+                $resString = JSON.stringify($results);
                 File::put('resultsArray.txt');
                 
                /* echo "<div id='storiesPanel'>";

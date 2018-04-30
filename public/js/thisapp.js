@@ -36,7 +36,7 @@ $(document).ready( function() {
     }
 
     function getStorySectionData(start, end) {
-        alert('hello');
+
         var pubId = $('.pubIdContainer').attr('id');
         console.log('pubId: ', pubId);
         var theUrl = "/pub/"+pubId.toString()+"/refresh";
