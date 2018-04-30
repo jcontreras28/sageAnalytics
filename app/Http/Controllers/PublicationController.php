@@ -29,7 +29,7 @@ class PublicationController extends Controller
     public function sectionRefresh() {
 
         $contents = file_get_contents('resultsArray.txt');
-        $results = json_decode($contents);
+        $results = json_decode($contents, true);
         //$results = Config::get('gResults');
         return view('publications.sectionStats', compact('results'));
 
