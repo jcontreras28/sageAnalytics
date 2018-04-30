@@ -47383,6 +47383,14 @@ $(document).ready( function() {
                 $('#top200Loading').hide();
                 $( "#top200Content" ).html(response);
                 console.log(response);
+                var totViews = $('#top200Total').html();
+				var totUniques = $('#top200TotalUniques').html();
+				$('.total-page-views').html("Total pageviews so far today: "+totViews+" - Uniques: "+totUniques);
+				var totViews = $('#top200StoryTotal').html();
+				$('.storyTotalTotalReport').html(totViews);
+				totViews = $('#top200StoryTotalUniques').html();
+				$('.storyTotalReportUniques').html(totViews);
+				totViews = $('#top200StoryTotalDwell').html();
                 //getSectionData('0daysAgo', 'today');
             },
             error: function() {
