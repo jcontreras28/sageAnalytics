@@ -57,7 +57,7 @@ $(document).ready( function() {
 				totViews = $('#top200StoryTotalUniques').html();
 				$('.storyTotalReportUniques').html(totViews);
 				totViews = $('#top200StoryTotalDwell').html();
-                getSectionData('0daysAgo', 'today');
+                //getSectionData('0daysAgo', 'today');
             },
             error: function() {
                 console.log('error ', response);
