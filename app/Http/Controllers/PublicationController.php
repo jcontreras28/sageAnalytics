@@ -76,8 +76,8 @@ class PublicationController extends Controller
         }
         $totalStoriesUniques = $results['storyUniqueTotal'];
         $totalStoriesViews = $results['storyTotal'];
-        $dayTotalViews = $rowsAllPages[0]['metrics'][0][0]
-        $dayTotalUniques = $rowsAllPages[0]['metrics'][0][2]
+        $dayTotalViews = $rowsAllPages[0]['metrics'][0][0];
+        $dayTotalUniques = $rowsAllPages[0]['metrics'][0][2];
 
         return view('publications.storyStats', compact('results', 'pubData', 'returnArray', 'totalStoriesUniques', 'totalStoriesViews', 'dayTotalViews', 'dayTotalUniques'));
 
