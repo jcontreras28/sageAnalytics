@@ -15,7 +15,7 @@ $(document).ready( function() {
     });*/
 
     function getSectionData(start, end, pubId) {
-        alert('hello');
+       
         console.log('pubId section refresh: ', pubId);
         var theUrl = "/pub/"+pubId.toString()+"/sectionRefresh";
         console.log('theUrl section refresh', theUrl);

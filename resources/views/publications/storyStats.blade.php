@@ -1,6 +1,7 @@
 
 	
 	@if (array_key_exists('errors', $results)) 
+	
 		<ul class="extra-margin-top no-bullet-list">
 
 			@foreach($results['errors'] as $error) 
@@ -8,6 +9,7 @@
 			@endforeach
 
 		</ul>
+
 	@else
 
 		<div id="top200Total" class="display-hidden-start">{{ number_format($dayTotalViews) }}</div>
