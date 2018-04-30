@@ -8,7 +8,7 @@
 			@endforeach
 
 		</ul>
-	@endif
+	@elseif
 
 		<div id="top200Total" class="display-hidden-start">{{ number_format($dayTotalViews) }}</div>
 		<div id="top200TotalUniques" class="display-hidden-start">{{ number_format($dayTotalUniques) }}</div>
@@ -59,4 +59,6 @@
 		<pre>
 		{{ print_r($results) }}
 		</pre>
+
+	@endif
 </div>
