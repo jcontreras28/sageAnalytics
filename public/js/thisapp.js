@@ -24,9 +24,6 @@ $(document).ready( function() {
             type:"GET",
             url : theUrl,
             dataType: "html",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
             success : function(response) {
 				$('#sectionLoading').hide();
                 $( "#topSectionsContent" ).html(response);
@@ -60,7 +57,7 @@ $(document).ready( function() {
 				totViews = $('#top200StoryTotalUniques').html();
 				$('.storyTotalReportUniques').html(totViews);
 				totViews = $('#top200StoryTotalDwell').html();
-                //getSectionData('0daysAgo', 'today');
+                getSectionData('0daysAgo', 'today');
             },
             error: function() {
                 console.log('error ', response);
