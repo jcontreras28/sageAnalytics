@@ -27,7 +27,7 @@ class PublicationController extends Controller
 
     public function sectionRefresh() {
 
-        $results = $this->g_Results;
+        $results = Config::get('gResults');
         return view('publications.sectionStats', compact('results'));
 
     }
@@ -57,7 +57,9 @@ class PublicationController extends Controller
                 //$this->getPageDataFromUrls($urlArray, $pubData->domain, Auth::user()->publication->id);
                 
                 $results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
-                $this->g_Results = $results; // saving global for filling sections
+                //$this->g_Results = $results; // saving global for filling sections
+                Config::set('gResults', $results);
+
                /* echo "<div id='storiesPanel'>";
 
                 displayOverallResults($rowsAllPages, $results);
