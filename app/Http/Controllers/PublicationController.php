@@ -44,34 +44,38 @@ class PublicationController extends Controller
         if(file_exists($path)){
             $GAConn = $this->connect($path, $pubData->name);
 
-            $profId = strval($pubData->GAProfileId);
+            if ($GAConn) {
+                $profId = strval($pubData->GAProfileId);
 
-            $resultsTotalPages = $this->getResultsAllPageViews($GAConn, $profId, '0daysAgo', 'today'); 
-            $rowsAllPages = $resultsTotalPages['reports'][0]->getData()->getRows();
+                $resultsTotalPages = $this->getResultsAllPageViews($GAConn, $profId, '0daysAgo', 'today'); 
+                $rowsAllPages = $resultsTotalPages['reports'][0]->getData()->getRows();
 
-            $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
-            //$results2 = $results;
-            if (count($results['reports'][0]->getData()->getRows()) > 0) {
+                $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
+                //$results2 = $results;
+                if (count($results['reports'][0]->getData()->getRows()) > 0) {
 
-                $ignoreParams = $this->getIgnoreParams($pubData);
-           
-                $urlArray = $this->getUrlArray($results, $ignoreParams);
+                    $ignoreParams = $this->getIgnoreParams($pubData);
+            
+                    $urlArray = $this->getUrlArray($results, $ignoreParams);
 
-                //$this->getPageDataFromUrls($urlArray, $pubData->domain, Auth::user()->publication->id);
-                
-                $results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
-                //$this->g_Results = $results; // saving global for filling sections
-                
-                File::put('resultsArray.txt', json_encode($results));
-                
-               /* echo "<div id='storiesPanel'>";
+                    //$this->getPageDataFromUrls($urlArray, $pubData->domain, Auth::user()->publication->id);
+                    
+                    $results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
+                    //$this->g_Results = $results; // saving global for filling sections
+                    
+                    File::put('resultsArray.txt', json_encode($results));
+                    
+                /* echo "<div id='storiesPanel'>";
 
-                displayOverallResults($rowsAllPages, $results);
+                    displayOverallResults($rowsAllPages, $results);
 
-                displayResults($results);
+                    displayResults($results);
 
-                echo "</div>"*/
+                    echo "</div>"*/
 
+                }
+            } else {
+                $returnArray = ['errors' => ['Could not connect to GA.', 'GAReturn' => $GAConn]];
             }
             
             //$results = [$urlArray, $results];

@@ -4,7 +4,11 @@
 		<ul class="extra-margin-top no-bullet-list">
 
 			@foreach($results['errors'] as $error) 
-				<li class="alert alert-danger" role="alert">{{ $error }}</li>
+				<li class="alert alert-danger" role="alert">{{ $error }}
+					@if (array_key_exists('GAReturn', $error))
+						 - {{ print_r($results['errors']['GAReturn'])}}
+					@endif
+				</li>
 			@endforeach
 
 		</ul>
