@@ -53,10 +53,10 @@ class PublicationController extends Controller
                 $ignoreParams = $this->getIgnoreParams($pubData);
            
                 $urlArray = $this->getUrlArray($results, $ignoreParams);
-
+                $results = $urlArray;
                 //$this->getPageDataFromUrls($urlArray, $pubData->domain, Auth::user()->publication->id);
                 
-                $results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
+                //$results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
                 $g_Results = $results; // saving global for filling sections
                /* echo "<div id='storiesPanel'>";
 

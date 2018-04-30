@@ -30,7 +30,7 @@
 			<a href="#historicalTab" data-toggle="tab">Historical</a>
 		</li>
 		<li>
-			<a href="#promosTab" data-toggle="tab">Promos/SS</a>
+			<a href="#promosTab" data-toggle="tab">Events</a>
 		</li>
 		<li>
 			<a href="#searchTab" data-toggle="tab">Search</a>
