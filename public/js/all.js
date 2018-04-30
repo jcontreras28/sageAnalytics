@@ -47390,8 +47390,8 @@ $(document).ready( function() {
 
     getStorySectionData('0daysAgo', 'today')
 
-    setInterval(function(){
+   /* setInterval(function(){
         getStorySectionData('0daysAgo', 'today');
-	}, 120000);
+	}, 120000);*/
 
 });
