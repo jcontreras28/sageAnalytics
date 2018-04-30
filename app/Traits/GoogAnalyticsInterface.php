@@ -523,7 +523,7 @@ trait GoogAnalyticsInterface {
             }
         }
         uasort($dataArray['articles'], "self::cmp");
-        $dataArray['articles'] = array_slice($dataArray, 0, 199, true);
+        $dataArray['articles'] = array_slice($dataArray['articles'], 0, 199, true);
 
         /*$identifier = array_keys($storyArray);
         $cmsIdsArray = array_slice($identifier, 0, 199);
