@@ -11,6 +11,7 @@ use App\Role;
 use App\Action;
 use File;
 use Auth;
+use Config;
 
 class PublicationController extends Controller
 {
