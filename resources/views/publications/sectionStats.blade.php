@@ -20,7 +20,7 @@
 						Uniques
 					</div>
 					<div class="col-xs-7">
-						Section Url
+						Section Name
 					</div>
 					<div class="col-xs-3">
 						Referrers (top 5)
@@ -31,7 +31,7 @@
 		</ul>
 
 		<ol class="custom-counter sectionDataList">
-			@foreach($results["sections"] as $section)
+			@foreach($results["sections"] as $key => $section)
 				@if ($loop->index > 200) 
 					@break
 				@endif
@@ -45,7 +45,7 @@
                             {{ $section['Uniques'] }}
                         </div>
                         <div class="col-xs-7">
-                            {{ $section['Url'] }}
+                            {{ $key }}
                         </div>
                         <div class="referrer-row col-xs-3">
 
