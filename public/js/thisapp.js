@@ -14,9 +14,8 @@ $(document).ready( function() {
         }
     });*/
 
-    function getSectionData(start, end) {
-        //alert('hello');
-        var pubId = $('.pubIdContainer').attr('id');
+    function getSectionData(start, end, pubId) {
+        alert('hello');
         console.log('pubId section refresh: ', pubId);
         var theUrl = "/pub/"+pubId.toString()+"/sectionRefresh";
         console.log('theUrl section refresh', theUrl);
@@ -57,7 +56,7 @@ $(document).ready( function() {
 				totViews = $('#top200StoryTotalUniques').html();
 				$('.storyTotalReportUniques').html(totViews);
 				totViews = $('#top200StoryTotalDwell').html();
-                getSectionData('0daysAgo', 'today');
+                getSectionData('0daysAgo', 'today', pubId);
             },
             error: function() {
                 console.log('error ', response);
