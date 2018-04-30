@@ -49,7 +49,7 @@ class getArticleDataFromUrls extends Command
 
             $path = __DIR__ . '/../../Http/Controllers/CredentialJson/'.$pub->GAJsonFile;
             
-            echo $path;
+            //echo $path;
             if(file_exists($path)){
                 
                 $GAConn = $this->connect($path, $pub->name);
@@ -69,6 +69,7 @@ class getArticleDataFromUrls extends Command
                 
                 }
             }
+            //var_dump( $urlArray );
        // }
        return $pub;
     }

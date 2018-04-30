@@ -323,6 +323,7 @@ trait GoogAnalyticsInterface {
                 // get the json ld data from the url
                 $urlData = self::getUrlData($fullUrl);
 
+                //print_r($urlData);
                 if ($urlData != 'bad json') {
 
                     // parse out the type of page it is - NewsArticle, WebPage, or no json present
@@ -402,7 +403,8 @@ trait GoogAnalyticsInterface {
                     if (!$saved) { dd($url); }
 
                 } else {
-                    dd($url);
+                    //dd($url);
+                    print_r ($url);
                 }
             }
         }
