@@ -81,18 +81,18 @@ class PublicationController extends Controller
                 $dayTotalUniques = $rowsAllPages[0]['metrics'][0][2];
 
             } else {
-                $returnArray = ['errors' => ['Could not connect to GA.', 'GAReturn' => $GAConn]];
+                $resulsts['errors'] => ['Could not connect to GA.', 'GAReturn' => $GAConn]];
             }
             
             //$results = [$urlArray, $results];
             //$returnArray = $results; //$results['reports'][0]->getData()->getRows();
 
         } else {
-            $returnArray = ['errors' => ['JSON credentials file has not been uploaded.', 'Another error just to test']];
+            $resulsts['errors'] => ['JSON credentials file has not been uploaded.', 'Another error just to test']];
         }
         
 
-        return view('publications.storyStats', compact('results', 'pubData', 'returnArray', 'totalStoriesUniques', 'totalStoriesViews', 'dayTotalViews', 'dayTotalUniques'));
+        return view('publications.storyStats', compact('results', 'pubData', 'totalStoriesUniques', 'totalStoriesViews', 'dayTotalViews', 'dayTotalUniques'));
 
     }
 
