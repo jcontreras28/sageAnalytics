@@ -1,7 +1,7 @@
 
 	
 	@if (array_key_exists('errors', $results)) 
-	
+
 		<ul class="extra-margin-top no-bullet-list">
 
 			@foreach($results['errors'] as $error) 
@@ -38,6 +38,7 @@
 						</div>
 						<div class="referrer-row col-xs-3" style="font-size:.9em">
 							<span id='storyRefs{{ $loop->index }}'>
+								{{ uasort($story['referrers'], "cmp") }}
 								@foreach($story['referrers'] as $subKey => $ref)
 									@if ($loop->index == 0)
 										{{ $ref }} - {{ $subKey }}
