@@ -55,7 +55,11 @@
 				</ul>
 
 
-				<span id="top200Content"></span>
+				<span id="top200Content">
+					
+					@yield('top200Template')
+
+				</span>
 			</div>
 		</div>
 		<div class="tab-pane fade" id="sectionTab">
