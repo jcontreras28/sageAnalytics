@@ -14,7 +14,7 @@
 
 
 		<pre>
-	
+		{{ print_r(count($results['articles']))}}
 		{{ print_r($results) }}
 		</pre>
 </div>
