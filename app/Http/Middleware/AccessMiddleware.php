@@ -22,7 +22,7 @@ class AccessMiddleware
         }
 
         if ((Auth::user()->role_id != 1) && (Auth::user()->publication_id != $pubId)) {
-            return redirect('home');
+            return redirect('/');
         }
 
         return $next($request);
