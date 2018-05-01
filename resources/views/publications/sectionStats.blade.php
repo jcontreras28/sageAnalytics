@@ -1,4 +1,5 @@
 
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	
 	@if (array_key_exists('errors', $results)) 
 		<ul class="extra-margin-top no-bullet-list">

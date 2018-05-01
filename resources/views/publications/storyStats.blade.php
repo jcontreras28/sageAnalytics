@@ -1,5 +1,6 @@
 
-	
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+
 	@if (array_key_exists('errors', $results)) 
 
 		<ul class="extra-margin-top no-bullet-list">
@@ -39,7 +40,6 @@
 						<div class="referrer-row col-xs-3" style="font-size:.9em">
 							<span id='storyRefs{{ $loop->index }}'>
 								
-								{{ uasort($story['referrers'], 'cmp2') }}
 								@foreach($story['referrers'] as $subKey => $ref)
 									@if ($loop->index == 0)
 										{{ $ref }} - {{ $subKey }}
