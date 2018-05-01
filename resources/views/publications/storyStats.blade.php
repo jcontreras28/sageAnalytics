@@ -18,6 +18,17 @@
 		<div id="top200StoryTotal" class="display-hidden-start">{{ number_format($totalStoriesViews) }}</div>
 		<div id="top200StoryTotalUniques" class="display-hidden-start">{{ number_format($totalStoriesUniques) }}</div>
 
+		<ul>
+			<li class="list-group-item">
+				<div class="row title">
+					<div class="col-xs-1">Views</div>
+        			<div class="col-xs-1">Visitors</div>
+					<div class="col-xs-7">Headline, name and author</div>
+        			<div class="col-xs-3">Referrers (Top 7)</div>
+				</div>
+			</li>
+		</ul>
+
 		<ol class="custom-counter">
 			@foreach($results["articles"] as $key => $story )
 				@if ($loop->index > 210) 
