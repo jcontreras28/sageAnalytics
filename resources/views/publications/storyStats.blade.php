@@ -40,6 +40,7 @@
 						<div class="referrer-row col-xs-3" style="font-size:.9em">
 							<span id='storyRefs{{ $loop->index }}'>
 								
+								{{ krsort($story['referrers']) }}
 								@foreach($story['referrers'] as $subKey => $ref)
 									@if ($loop->index == 0)
 										{{ $ref }} - {{ $subKey }}
