@@ -545,9 +545,8 @@ trait GoogAnalyticsInterface {
 
         // sort the referrers array into descending order
         //$tmpArray = sortReferrers($tmpArray);
-        $dataArray['articles'] = $tmpArray;
-        $tmpArray = self::sortReferrers($dataArray['articles']);
-        dd($tmpArray);
+        $dataArray['articles'] = self::sortReferrers($dataArray['articles']);
+
         // sort the referrers array for sections into descending order
         //$dataArray['sections'] = sortReferrers($dataArray['sections']);
 
