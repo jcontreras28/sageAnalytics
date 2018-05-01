@@ -47354,6 +47354,9 @@ $(document).ready( function() {
             type:"GET",
             url : theUrl,
             dataType: "html",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             success : function(response) {
 				$('#sectionLoading').hide();
                 $( "#topSectionsContent" ).html(response);
@@ -47375,6 +47378,9 @@ $(document).ready( function() {
             type:"GET",
             url : theUrl,
             dataType: "html",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             success : function(response) {
                 $('#top200Loading').hide();
                 $( "#top200Content" ).html(response);

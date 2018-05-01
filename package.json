@@ -21,7 +21,7 @@
     },
     "autoload": {
         "files": [
-            "app/helpers.php" // <---- ADD THIS
+            "app/helpers.php"
         ]
     }
 }
