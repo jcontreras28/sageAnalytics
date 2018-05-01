@@ -547,7 +547,7 @@ trait GoogAnalyticsInterface {
 
     public function sortReferrers($data) {
         foreach($data as $val) {
-            uasort($data['referrers'], "cmp2")
+            uasort($data['referrers'], "cmp2");
         }
         return $data;
     }
