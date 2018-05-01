@@ -530,7 +530,7 @@ trait GoogAnalyticsInterface {
         $tmpArray = sortReferrers($tmpArray);
         $dataArray['articles'] = $tmpArray;
         // sort the referrers array for sections into descending order
-        $dataArray['sections'] = sortReferrers($dataArray['sections']);
+        //$dataArray['sections'] = sortReferrers($dataArray['sections']);
 
 
         /*$identifier = array_keys($storyArray);
