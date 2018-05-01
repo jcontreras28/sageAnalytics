@@ -66,7 +66,7 @@
 
 		<div class="tab-pane fade" id="realTimeTab">
 			<div id='realTimeLoading' class='aLoadingDiv'>
-				<img src="./images/large-loading.gif" />
+				<img src="{{ asset('images/large-loading.gif') }}"  />
 			</div>
 
 			<div class="tab-pane fade in active well">
