@@ -135,6 +135,23 @@ trait GoogAnalyticsInterface {
         return $GAConn->reports->batchGet( $body );
     }
 
+    public function sortReferrers($data) {
+        foreach($data as $val) {
+            self::uasort($data['referrers'], "cmp2");
+        }
+        return $data;
+    }
+
+    public function cmp($a, $b)
+	{
+   		return (($b['Views']) - ($a['Views']));
+    }
+    
+    function cmp2($a, $b) 
+    {   
+        return (($b) - ($a));
+    } 
+
     public function getIgnoreParams($pubData) {
 
         if ($pubData->ignore_all_params) {
@@ -529,7 +546,7 @@ trait GoogAnalyticsInterface {
         // sort the referrers array into descending order
         //$tmpArray = sortReferrers($tmpArray);
         $dataArray['articles'] = $tmpArray;
-        $tmpArray = sortReferrers($dataArray['articles']);
+        $tmpArray = self::sortReferrers($dataArray['articles']);
         dd($tmpArray);
         // sort the referrers array for sections into descending order
         //$dataArray['sections'] = sortReferrers($dataArray['sections']);
@@ -547,21 +564,6 @@ trait GoogAnalyticsInterface {
         return $dataArray;
     }
 
-    public function sortReferrers($data) {
-        foreach($data as $val) {
-            uasort($data['referrers'], "cmp2");
-        }
-        return $data;
-    }
-
-    public function cmp($a, $b)
-	{
-   		return (($b['Views']) - ($a['Views']));
-    }
     
-    function cmp2($a, $b) 
-    {   
-        return (($b) - ($a));
-    } 
 
 }
