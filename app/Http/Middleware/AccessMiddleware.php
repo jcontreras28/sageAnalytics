@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class AccessMiddleware
 {
@@ -15,6 +16,15 @@ class AccessMiddleware
      */
     public function handle($request, Closure $next)
     {
+        $pubId = $request->route()->parameters()->id;
+        if (!Auth::check()) {
+            return redirect('home');
+        }
+
+        if ((Auth::user()->role_id != 1) && (Auth::user()->publication_id != $pubId)) {
+            return redirect('home');
+        }
+        
         return $next($request);
     }
 }
