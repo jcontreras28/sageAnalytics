@@ -18,7 +18,7 @@ class AccessMiddleware
     {
         $pubId = $request->id;
         if (!Auth::check()) {
-            return redirect('home');
+            return redirect('/');
         }
 
         if ((Auth::user()->role_id != 1) && (Auth::user()->publication_id != $pubId)) {
