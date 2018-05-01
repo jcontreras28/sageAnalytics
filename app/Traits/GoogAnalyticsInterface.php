@@ -137,7 +137,7 @@ trait GoogAnalyticsInterface {
 
     public function sortReferrers($data) {
         foreach($data as $val) {
-            self::uasort($data['referrers'], "cmp2");
+            self::uasort($val['referrers'], "cmp2");
         }
         return $data;
     }
