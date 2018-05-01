@@ -34,17 +34,18 @@ Route::get('/admin/pub/{id}', 'AdminController@pubAdmin')->name('admin.pubAdmin'
 //Route::get('/pub/{id}', 'PublicationController@index')->name('pub.index');
 
 
-//Route::group(['middleware' => 'App\Http\Middleware\AccessMiddleware'], function() {
+Route::group(['middleware' => 'App\Http\Middleware\AccessMiddleware'], function() {
 
     Route::get('/pub/{id}', 'PublicationController@wrapper')->name('pub.wrapper');
     Route::get('/pub/{id}/admin', 'PublicationController@adminIndex')->name('pub.adminindex');
 
-    // ajax call routes
-    Route::get('/pub/{id}/refresh/', 'PublicationController@refreshData')->name('pub.refreshData');
-    Route::get('/pub/{id}/sectionRefresh/', 'PublicationController@sectionRefresh')->name('pub.sectionRefresh');
+    
 
-//});
+});
 
+// ajax call routes
+Route::get('/pub/{id}/refresh/', 'PublicationController@refreshData')->name('pub.refreshData');
+Route::get('/pub/{id}/sectionRefresh/', 'PublicationController@sectionRefresh')->name('pub.sectionRefresh');
 
 // action routes
 Route::patch('/admin/updateAction/{id}', 'AdminController@updateAction')->name('admin.updateAction');
