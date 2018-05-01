@@ -525,7 +525,13 @@ trait GoogAnalyticsInterface {
         uasort($dataArray['articles'], "self::cmp");
         uasort($dataArray['sections'], "self::cmp");
         $tmpArray = array_slice($dataArray['articles'], 0, 200, true);
+
+        // sort the referrers array into descending order
+        $tmpArray = sortReferrers($tmpArray);
         $dataArray['articles'] = $tmpArray;
+        // sort the referrers array for sections into descending order
+        $dataArray['sections'] = sortReferrers($dataArray['sections']);
+
 
         /*$identifier = array_keys($storyArray);
         $cmsIdsArray = array_slice($identifier, 0, 199);
@@ -539,9 +545,21 @@ trait GoogAnalyticsInterface {
         return $dataArray;
     }
 
+    public function sortReferrers($data) {
+        foreach($data as $val) {
+            uasort($data['referrers'], "cmp2")
+        }
+        return $data;
+    }
+
     public function cmp($a, $b)
 	{
    		return (($b['Views']) - ($a['Views']));
-	}
+    }
+    
+    function cmp2($a, $b) 
+    {   
+        return (($b) - ($a));
+    } 
 
 }

@@ -81,7 +81,7 @@ class PublicationController extends Controller
                 $dayTotalUniques = $rowsAllPages[0]['metrics'][0][2];
 
             } else {
-                $results['errors'] = ['GAReturn' => $GAConn];
+                $results['errors'] = ['Failed connecting to Google Analytics API'];
             }
             
             //$results = [$urlArray, $results];
