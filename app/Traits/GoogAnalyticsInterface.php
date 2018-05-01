@@ -543,7 +543,10 @@ trait GoogAnalyticsInterface {
         }
 
         // sort the referrers array for sections into descending order
-        //$dataArray['sections'] = sortReferrers($dataArray['sections']);
+        foreach($dataArray['sections'] as $key => $section) {
+            uasort($section['referrers'], "self::cmp2");
+            $dataArray['sections'][$key]['referrers'] = $section['referrers'];
+        }
 
 
         /*$identifier = array_keys($storyArray);
