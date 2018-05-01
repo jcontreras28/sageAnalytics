@@ -537,9 +537,9 @@ trait GoogAnalyticsInterface {
         $dataArray['articles'] = array_slice($dataArray['articles'], 0, 200, true);
 
         // sort the referrers array into descending order
-        foreach($dataArray['articles'] as $article) {
+        foreach($dataArray['articles'] as $key => $article) {
             uasort($article['referrers'], "self::cmp2");
-            $dataArray['articles'][$article]['referrers'] = $article['referrers'];
+            $dataArray['articles'][$key]['referrers'] = $article['referrers'];
             dd($dataArray['articles']);
         }
 
