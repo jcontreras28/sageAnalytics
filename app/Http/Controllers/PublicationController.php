@@ -77,7 +77,7 @@ class PublicationController extends Controller
             $dayTotalUniques = $results['dayTotalUniques'];
 
         } else {
-            $results['errors'] => "Could not open data file.";
+            $results['errors']  = "Could not open data file.";
         }
             
             //$results = [$urlArray, $results];
