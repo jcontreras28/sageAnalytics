@@ -39,9 +39,10 @@ class PublicationController extends Controller
 
         $contents = file_get_contents('resultsArray.txt');
         $results = json_decode($contents, true);
-        
+
         $pubData = Publication::findOrFail($id);
 
+        dd($results);
         /*$path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
         
         if(file_exists($path)){
