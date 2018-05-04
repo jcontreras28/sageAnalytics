@@ -83,7 +83,7 @@ class makeGADataArray extends Command
 
         } else {
 
-            $results['errors'] = ['JSON credentials file has not been uploaded.'];
+            $results['errors'] = ['JSON credentials file has not been uploaded. Path: '.$path];
 
         }
         
