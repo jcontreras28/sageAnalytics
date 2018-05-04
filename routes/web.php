@@ -25,16 +25,7 @@ Auth::routes();
 Route::get('/changePassword', 'HomeController@showChangePasswordForm')->name('auth.changePassword');
 Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
 
-// publication routes
-Route::get('/admin/newpub', 'AdminController@newPub')->name('admin.newPub');
-Route::post('/admin/store', 'AdminController@store')->name('admin.store');
-Route::get('/admin/editpub/{id}', 'AdminController@editPub')->name('admin.editPub');
-Route::patch('/admin/updatePub/{id}', 'AdminController@updatePub')->name('admin.updatePub');
-Route::get('/admin/deletepub/{id}', 'AdminController@deletePub')->name('admin.deletePub');
-Route::get('/admin/trash', 'AdminController@viewTrash')->name('admin.trash');
-Route::get('/admin/trash/{id}/restore', 'AdminController@restorePub')->name('admin.restorePub');
-Route::get('/admin/trash/{id}/permanent-delete', 'AdminController@permanentDeletePub')->name('admin.permanentDeletePub');
-Route::get('/admin/pub/{id}', 'AdminController@pubAdmin')->name('admin.pubAdmin');
+
 //Route::get('/pub/{id}', 'PublicationController@index')->name('pub.index');
 
 
@@ -45,6 +36,17 @@ Route::group(['middleware' => 'App\Http\Middleware\AccessMiddleware'], function(
 
     Route::get('/admin', 'AdminController@superAdmin')->name('admin.superAdmin');    
     Route::get('/', 'AdminController@superAdmin')->name('admin.superAdmin');
+
+    // publication routes
+    Route::get('/admin/newpub', 'AdminController@newPub')->name('admin.newPub');
+    Route::post('/admin/store', 'AdminController@store')->name('admin.store');
+    Route::get('/admin/editpub/{id}', 'AdminController@editPub')->name('admin.editPub');
+    Route::patch('/admin/updatePub/{id}', 'AdminController@updatePub')->name('admin.updatePub');
+    Route::get('/admin/deletepub/{id}', 'AdminController@deletePub')->name('admin.deletePub');
+    Route::get('/admin/trash', 'AdminController@viewTrash')->name('admin.trash');
+    Route::get('/admin/trash/{id}/restore', 'AdminController@restorePub')->name('admin.restorePub');
+    Route::get('/admin/trash/{id}/permanent-delete', 'AdminController@permanentDeletePub')->name('admin.permanentDeletePub');
+    Route::get('/admin/pub/{id}', 'AdminController@pubAdmin')->name('admin.pubAdmin');
 
 });
 
