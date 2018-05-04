@@ -46,7 +46,7 @@ class makeGADataArray extends Command
         //
         $pubData = Publication::findOrFail(1);
 
-        $path = 'Http/Controllers/CredentialJson/'.$pubData->GAJsonFile;
+        $path = '/CredentialJson/'.$pubData->GAJsonFile;
         
         if(file_exists($path)){
             $GAConn = $this->connect($path, $pubData->name);
