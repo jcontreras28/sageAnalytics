@@ -59,17 +59,14 @@ class makeGADataArray extends Command
                 $rowsAllPages = $resultsTotalPages['reports'][0]->getData()->getRows();
 
                 $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
-                //$results2 = $results;
+
                 if (count($results['reports'][0]->getData()->getRows()) > 0) {
 
                     $ignoreParams = $this->getIgnoreParams($pubData);
             
                     $urlArray = $this->getUrlArray($results, $ignoreParams);
 
-                    //$this->getPageDataFromUrls($urlArray, $pubData->domain, Auth::user()->publication->id);
-                    
                     $results = $this->parseResults($results, $ignoreParams, $pubId);
-                    //$this->g_Results = $results; // saving global for filling sections
 
                 }
 
