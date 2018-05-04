@@ -15,9 +15,9 @@
 
 Auth::routes();
 
-/*Route::get('/', function () {
-    return redirect('/login');
-});*/
+Route::get('/', function () {
+    return redirect('/admin');
+});
 
 
 
@@ -48,25 +48,26 @@ Route::group(['middleware' => 'App\Http\Middleware\AccessMiddleware'], function(
     Route::get('/admin/trash/{id}/permanent-delete', 'AdminController@permanentDeletePub')->name('admin.permanentDeletePub');
     Route::get('/admin/pub/{id}', 'AdminController@pubAdmin')->name('admin.pubAdmin');
 
+    // action routes
+    Route::patch('/admin/updateAction/{id}', 'AdminController@updateAction')->name('admin.updateAction');
+    Route::post('/admin/storeAction', 'AdminController@storeAction')->name('admin.storeAction');
+    Route::get('/admin/deleteAction/{id}', 'AdminController@deleteAction')->name('admin.deleteAction');
+
+    // user routes
+    Route::get('/admin/newuser', 'UserController@newUser')->name('admin.newUser');
+    Route::post('/admin/storeUser', 'UserController@storeUser')->name('admin.storeUser');
+    Route::get('/admin/editUser/{id}', 'UserController@editUser')->name('admin.editUser');
+    Route::patch('/admin/updateUser/{id}', 'UserController@updateUser')->name('admin.updateUser');
+    Route::get('/admin/deleteuser/{id}', 'UserController@deleteUser')->name('admin.deleteUser');
+    Route::get('/admin/usertrash', 'UserController@userViewTrash')->name('admin.userTrash');
+    Route::get('/admin/usertrash/{id}/restore', 'UserController@restoreUser')->name('admin.restoreUser');
+    Route::get('/admin/usertrash/{id}/permanent-delete', 'UserController@permanentDeleteUser')->name('admin.permanentDeleteUser');
+    Route::get('/admin/users/', 'UserController@showUsers')->name('admin.users');
+
 });
 
 // ajax call routes
 Route::get('/pub/{id}/refresh/', 'PublicationController@refreshData')->name('pub.refreshData');
 Route::get('/pub/{id}/sectionRefresh/', 'PublicationController@sectionRefresh')->name('pub.sectionRefresh');
 
-// action routes
-Route::patch('/admin/updateAction/{id}', 'AdminController@updateAction')->name('admin.updateAction');
-Route::post('/admin/storeAction', 'AdminController@storeAction')->name('admin.storeAction');
-Route::get('/admin/deleteAction/{id}', 'AdminController@deleteAction')->name('admin.deleteAction');
-
-// user routes
-Route::get('/admin/newuser', 'UserController@newUser')->name('admin.newUser');
-Route::post('/admin/storeUser', 'UserController@storeUser')->name('admin.storeUser');
-Route::get('/admin/editUser/{id}', 'UserController@editUser')->name('admin.editUser');
-Route::patch('/admin/updateUser/{id}', 'UserController@updateUser')->name('admin.updateUser');
-Route::get('/admin/deleteuser/{id}', 'UserController@deleteUser')->name('admin.deleteUser');
-Route::get('/admin/usertrash', 'UserController@userViewTrash')->name('admin.userTrash');
-Route::get('/admin/usertrash/{id}/restore', 'UserController@restoreUser')->name('admin.restoreUser');
-Route::get('/admin/usertrash/{id}/permanent-delete', 'UserController@permanentDeleteUser')->name('admin.permanentDeleteUser');
-Route::get('/admin/users/', 'UserController@showUsers')->name('admin.users');
 
