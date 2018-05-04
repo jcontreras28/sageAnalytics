@@ -19,7 +19,7 @@ Auth::routes();
     return redirect('/login');
 });*/
 
-Route::get('/', 'AdminController@superAdmin')->name('admin.superAdmin');
+
 
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/changePassword', 'HomeController@showChangePasswordForm')->name('auth.changePassword');
@@ -44,6 +44,7 @@ Route::group(['middleware' => 'App\Http\Middleware\AccessMiddleware'], function(
     Route::get('/pub/{id}/admin', 'PublicationController@adminIndex')->name('pub.adminindex');
 
     Route::get('/admin', 'AdminController@superAdmin')->name('admin.superAdmin');    
+    Route::get('/', 'AdminController@superAdmin')->name('admin.superAdmin');
 
 });
 
