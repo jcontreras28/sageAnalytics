@@ -87,7 +87,7 @@ class makeGADataArray extends Command
 
         }
         
-        File::put('resultsArray.txt', json_encode($results));
+        File::put('public/resultsArray.txt', json_encode($results));
 
         return view('publications.storyStats', compact('results', 'pubData', 'totalStoriesUniques', 'totalStoriesViews', 'dayTotalViews', 'dayTotalUniques'));
     }
