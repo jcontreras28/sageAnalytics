@@ -42,6 +42,7 @@ class PublicationController extends Controller
 
             $results = json_decode($contents, true);
 
+            dd($results);
         //$path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
         
         /*if(file_exists($path)){
