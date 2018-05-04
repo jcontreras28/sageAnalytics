@@ -7,8 +7,6 @@ use Illuminate\Console\Command;
 use App\Publication;
 use App\Traits\GoogAnalyticsInterface;
 use File;
-use Auth;
-use App\User;
 
 class makeGADataArray extends Command
 {
@@ -45,8 +43,9 @@ class makeGADataArray extends Command
      */
     public function handle()
     {
+        $pubId = 2;
         //
-        $pubData = Publication::findOrFail(2);
+        $pubData = Publication::findOrFail($pubId);
 
         $path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
         
@@ -69,7 +68,7 @@ class makeGADataArray extends Command
 
                     //$this->getPageDataFromUrls($urlArray, $pubData->domain, Auth::user()->publication->id);
                     
-                    $results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
+                    $results = $this->parseResults($results, $ignoreParams, $pubId);
                     //$this->g_Results = $results; // saving global for filling sections
 
                 }
