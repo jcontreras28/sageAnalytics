@@ -84,7 +84,7 @@ class makeGADataArray extends Command
         } else {
 
             $results['errors'] = ['JSON credentials file has not been uploaded.'];
-            
+
         }
         
         File::put('resultsArray.txt', json_encode($results));

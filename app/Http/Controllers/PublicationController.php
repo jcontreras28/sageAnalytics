@@ -37,13 +37,9 @@ class PublicationController extends Controller
 
     public function refreshData($id) {
 
-        $contents = file_get_contents('resultsArray.txt');
-        $results = json_decode($contents, true);
-
         $pubData = Publication::findOrFail($id);
 
-        dd($results);
-        /*$path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
+        $path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
         
         if(file_exists($path)){
             $GAConn = $this->connect($path, $pubData->name);
@@ -54,7 +50,7 @@ class PublicationController extends Controller
                 $resultsTotalPages = $this->getResultsAllPageViews($GAConn, $profId, '0daysAgo', 'today'); 
                 $rowsAllPages = $resultsTotalPages['reports'][0]->getData()->getRows();
 
-                $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
+                /*$results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
                 //$results2 = $results;
                 if (count($results['reports'][0]->getData()->getRows()) > 0) {
 
@@ -68,16 +64,8 @@ class PublicationController extends Controller
                     //$this->g_Results = $results; // saving global for filling sections
                     
                     File::put('resultsArray.txt', json_encode($results));
-                    
-                /* echo "<div id='storiesPanel'>";
 
-                    displayOverallResults($rowsAllPages, $results);
-
-                    displayResults($results);
-
-                    echo "</div>"*/
-
-            //    }
+                }*/
 
                 $totalStoriesUniques = $results['storyUniqueTotal'];
                 $totalStoriesViews = $results['storyTotal'];
@@ -85,7 +73,7 @@ class PublicationController extends Controller
                 $dayTotalUniques = $results['dayTotalUniques'];
 
 
-          /*  } else {
+            } else {
                 $results['errors'] = ['Failed connecting to Google Analytics API'];
             }
             
@@ -94,7 +82,7 @@ class PublicationController extends Controller
 
         } else {
             $results['errors'] = ['JSON credentials file has not been uploaded.'];
-        }*/
+        }
         
 
         return view('publications.storyStats', compact('results', 'pubData', 'totalStoriesUniques', 'totalStoriesViews', 'dayTotalViews', 'dayTotalUniques'));
