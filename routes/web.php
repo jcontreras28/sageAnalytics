@@ -35,7 +35,6 @@ Route::group(['middleware' => 'App\Http\Middleware\AccessMiddleware'], function(
     Route::get('/pub/{id}/admin', 'PublicationController@adminIndex')->name('pub.adminindex');
 
     Route::get('/admin', 'AdminController@superAdmin')->name('admin.superAdmin');    
-    //Route::get('/', 'AdminController@superAdmin')->name('admin.superAdmin');
 
     // publication routes
     Route::get('/admin/newpub', 'AdminController@newPub')->name('admin.newPub');
