@@ -44,7 +44,7 @@ class makeGADataArray extends Command
     public function handle()
     {
         //
-        $pubData = Publication::findOrFail(1);
+        $pubData = Publication::findOrFail(2);
 
         $path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
         
