@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use App\Publication;
 use App\Traits\GoogAnalyticsInterface;
 use File;
+use Auth;
 
 class makeGADataArray extends Command
 {
