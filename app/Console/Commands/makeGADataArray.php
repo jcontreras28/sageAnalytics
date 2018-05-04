@@ -8,6 +8,7 @@ use App\Publication;
 use App\Traits\GoogAnalyticsInterface;
 use File;
 use Auth;
+use App\User;
 
 class makeGADataArray extends Command
 {
