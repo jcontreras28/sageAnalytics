@@ -37,9 +37,12 @@ class PublicationController extends Controller
 
     public function refreshData($id) {
 
+        $contents = file_get_contents('resultsArray.txt');
+        $results = json_decode($contents, true);
+        
         $pubData = Publication::findOrFail($id);
 
-        $path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
+        /*$path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
         
         if(file_exists($path)){
             $GAConn = $this->connect($path, $pubData->name);
@@ -73,14 +76,15 @@ class PublicationController extends Controller
 
                     echo "</div>"*/
 
-                }
+            //    }
 
                 $totalStoriesUniques = $results['storyUniqueTotal'];
                 $totalStoriesViews = $results['storyTotal'];
-                $dayTotalViews = $rowsAllPages[0]['metrics'][0][0];
-                $dayTotalUniques = $rowsAllPages[0]['metrics'][0][2];
+                $dayTotalViews = $results['dayTotalViews'];
+                $dayTotalUniques = $results['dayTotalUniques'];
 
-            } else {
+
+          /*  } else {
                 $results['errors'] = ['Failed connecting to Google Analytics API'];
             }
             
@@ -89,7 +93,7 @@ class PublicationController extends Controller
 
         } else {
             $results['errors'] = ['JSON credentials file has not been uploaded.'];
-        }
+        }*/
         
 
         return view('publications.storyStats', compact('results', 'pubData', 'totalStoriesUniques', 'totalStoriesViews', 'dayTotalViews', 'dayTotalUniques'));

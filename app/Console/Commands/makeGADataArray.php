@@ -69,10 +69,13 @@ class makeGADataArray extends Command
                     
                     $results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
                     //$this->g_Results = $results; // saving global for filling sections
-                    
-                    File::put('resultsArray.txt', json_encode($results));
 
                 }
+
+                $results['dayTotalViews'] = $rowsAllPages[0]['metrics'][0][0];
+                $results['dayTotalUniques'] = $rowsAllPages[0]['metrics'][0][2];
+
+                File::put('resultsArray.txt', json_encode($results));
 
             } else {
                 $results['errors'] = ['Failed connecting to Google Analytics API'];
