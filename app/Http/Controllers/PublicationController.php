@@ -38,17 +38,20 @@ class PublicationController extends Controller
     public function refreshData($id) {
 
         $pubData = Publication::findOrFail($id);
+        if ($contents = file_get_contents('resultsArray.txt')) {
 
-        $path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
+            $results = json_decode($contents, true);
+
+        //$path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
         
-        if(file_exists($path)){
+        /*if(file_exists($path)){
             $GAConn = $this->connect($path, $pubData->name);
 
             if ($GAConn) {
                 $profId = strval($pubData->GAProfileId);
 
                 $resultsTotalPages = $this->getResultsAllPageViews($GAConn, $profId, '0daysAgo', 'today'); 
-                $rowsAllPages = $resultsTotalPages['reports'][0]->getData()->getRows();
+                $rowsAllPages = $resultsTotalPages['reports'][0]->getData()->getRows();*/
 
                 /*$results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
                 //$results2 = $results;
@@ -67,22 +70,17 @@ class PublicationController extends Controller
 
                 }*/
 
-                $totalStoriesUniques = $results['storyUniqueTotal'];
-                $totalStoriesViews = $results['storyTotal'];
-                $dayTotalViews = $results['dayTotalViews'];
-                $dayTotalUniques = $results['dayTotalUniques'];
+            $totalStoriesUniques = $results['storyUniqueTotal'];
+            $totalStoriesViews = $results['storyTotal'];
+            $dayTotalViews = $results['dayTotalViews'];
+            $dayTotalUniques = $results['dayTotalUniques'];
 
-
-            } else {
-                $results['errors'] = ['Failed connecting to Google Analytics API'];
-            }
+        } else {
+            $results['errors'] => "Could not open data file.";
+        }
             
             //$results = [$urlArray, $results];
             //$returnArray = $results; //$results['reports'][0]->getData()->getRows();
-
-        } else {
-            $results['errors'] = ['JSON credentials file has not been uploaded.'];
-        }
         
 
         return view('publications.storyStats', compact('results', 'pubData', 'totalStoriesUniques', 'totalStoriesViews', 'dayTotalViews', 'dayTotalUniques'));
