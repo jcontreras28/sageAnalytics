@@ -42,34 +42,6 @@ class PublicationController extends Controller
 
             $results = json_decode($contents, true);
 
-        //$path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
-        
-        /*if(file_exists($path)){
-            $GAConn = $this->connect($path, $pubData->name);
-
-            if ($GAConn) {
-                $profId = strval($pubData->GAProfileId);
-
-                $resultsTotalPages = $this->getResultsAllPageViews($GAConn, $profId, '0daysAgo', 'today'); 
-                $rowsAllPages = $resultsTotalPages['reports'][0]->getData()->getRows();*/
-
-                /*$results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
-                //$results2 = $results;
-                if (count($results['reports'][0]->getData()->getRows()) > 0) {
-
-                    $ignoreParams = $this->getIgnoreParams($pubData);
-            
-                    $urlArray = $this->getUrlArray($results, $ignoreParams);
-
-                    //$this->getPageDataFromUrls($urlArray, $pubData->domain, Auth::user()->publication->id);
-                    
-                    $results = $this->parseResults($results, $ignoreParams, Auth::user()->publication->id);
-                    //$this->g_Results = $results; // saving global for filling sections
-                    
-                    File::put('resultsArray.txt', json_encode($results));
-
-                }*/
-
             $totalStoriesUniques = $results['storyUniqueTotal'];
             $totalStoriesViews = $results['storyTotal'];
             $dayTotalViews = $results['dayTotalViews'];
@@ -78,10 +50,6 @@ class PublicationController extends Controller
         } else {
             $results['errors']  = "Could not open data file.";
         }
-            
-            //$results = [$urlArray, $results];
-            //$returnArray = $results; //$results['reports'][0]->getData()->getRows();
-        
 
         return view('publications.storyStats', compact('results', 'pubData', 'totalStoriesUniques', 'totalStoriesViews', 'dayTotalViews', 'dayTotalUniques'));
 
