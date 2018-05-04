@@ -75,19 +75,19 @@ class makeGADataArray extends Command
                 $results['dayTotalViews'] = $rowsAllPages[0]['metrics'][0][0];
                 $results['dayTotalUniques'] = $rowsAllPages[0]['metrics'][0][2];
 
-                File::put('resultsArray.txt', json_encode($results));
-
             } else {
+
                 $results['errors'] = ['Failed connecting to Google Analytics API'];
+
             }
-            
-            //$results = [$urlArray, $results];
-            //$returnArray = $results; //$results['reports'][0]->getData()->getRows();
 
         } else {
+
             $results['errors'] = ['JSON credentials file has not been uploaded.'];
+            
         }
         
+        File::put('resultsArray.txt', json_encode($results));
 
         return view('publications.storyStats', compact('results', 'pubData', 'totalStoriesUniques', 'totalStoriesViews', 'dayTotalViews', 'dayTotalUniques'));
     }
