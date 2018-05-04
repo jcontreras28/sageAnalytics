@@ -15,11 +15,15 @@
 
 Auth::routes();
 
+/*Route::get('/', function () {
+    return redirect('/login');
+});*/
+
+Route::get('/', 'AdminController@superAdmin')->name('admin.superAdmin');
+
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/changePassword', 'HomeController@showChangePasswordForm')->name('auth.changePassword');
 Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
-
-Route::get('/admin', 'AdminController@superAdmin')->name('admin.superAdmin');
 
 // publication routes
 Route::get('/admin/newpub', 'AdminController@newPub')->name('admin.newPub');
@@ -39,7 +43,7 @@ Route::group(['middleware' => 'App\Http\Middleware\AccessMiddleware'], function(
     Route::get('/pub/{id}', 'PublicationController@wrapper')->name('pub.wrapper');
     Route::get('/pub/{id}/admin', 'PublicationController@adminIndex')->name('pub.adminindex');
 
-    
+    Route::get('/admin', 'AdminController@superAdmin')->name('admin.superAdmin');    
 
 });
 
@@ -63,6 +67,3 @@ Route::get('/admin/usertrash/{id}/restore', 'UserController@restoreUser')->name(
 Route::get('/admin/usertrash/{id}/permanent-delete', 'UserController@permanentDeleteUser')->name('admin.permanentDeleteUser');
 Route::get('/admin/users/', 'UserController@showUsers')->name('admin.users');
 
-Route::get('/', function () {
-    return redirect('/login');
-});
