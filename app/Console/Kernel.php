@@ -32,8 +32,8 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         
             //Publication::getArticleDataTask()->hourly();
-            $schedule->command('articleData:get')->everyFiveMinutes();
-            $schedule->command('articleData:getGAData')->everyMinute();
+            //$schedule->command('articleData:get')->everyFiveMinutes();
+            //$schedule->command('articleData:getGAData')->everyMinute();
     }
 
     /**
