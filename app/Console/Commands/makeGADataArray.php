@@ -48,6 +48,7 @@ class makeGADataArray extends Command
 
         foreach($pubs as $pubData) {
 
+            $results = [];
             $pubId = $pubData->id;
             echo "doing pub: ".$pubData->name;
             //
@@ -103,11 +104,13 @@ class makeGADataArray extends Command
             }
 
             $fileName = './public/'.$pubData->id.'.txt';
-            
+
             var_dump($results);
             var_dump($fileName);
 
             File::put($fileName, json_encode($results));
+
+            unset($results);
 
         }
 
