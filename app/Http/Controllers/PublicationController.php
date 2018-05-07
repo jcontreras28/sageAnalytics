@@ -31,7 +31,7 @@ class PublicationController extends Controller
         $pubData = Publication::findOrFail($id);
         $fileName = $pubData->id.".txt";
 
-        $contents = file_get_contents($pubData);
+        $contents = file_get_contents($fileName);
         $results = json_decode($contents, true);
         //$results = Config::get('gResults');
         return view('publications.sectionStats', compact('results'));

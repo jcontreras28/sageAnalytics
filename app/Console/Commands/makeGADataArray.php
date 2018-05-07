@@ -98,6 +98,8 @@ class makeGADataArray extends Command
 
                 }
 
+                var_dump($results);
+
                 File::put('./public/'.$pubId.'.txt', json_encode($results));
 
             }
