@@ -46,7 +46,7 @@ class getArticleDataFromUrls extends Command
 
             foreach($pubs as $pub) {
             
-                var_dump($pub);
+                echo " Working on ".$pub->name;
 
                 if ($pub->GAJsonFile == NULL) {
 
