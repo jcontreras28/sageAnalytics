@@ -54,7 +54,11 @@
                                 {!! Form::label('ignore_all_params', 'Ignore all url parameters', ['class'=>'col-md-4 col-form-label text-md-right']) !!}
 
                                 <div class="col-md-6">
-                                    {!! Form::checkbox('ignore_all_params', null, ['class'=>'form-control']) !!}
+                                    @if ($publication->ignore_all_params == 1)
+                                        {!! Form::checkbox('ignore_all_params', 'yes', ['class'=>'form-control']) !!}
+                                    @else
+                                        {!! Form::checkbox('ignore_all_params', 'no', ['class'=>'form-control']) !!}
+                                    @endif
                                 </div>
                             </div>
 
