@@ -51,10 +51,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {!! Form::label('ignoreAllParmasCheck', 'Ignore all url parameters', ['class'=>'col-md-4 col-form-label text-md-right']) !!}
+                                {!! Form::label('ignore_all_params', 'Ignore all url parameters', ['class'=>'col-md-4 col-form-label text-md-right']) !!}
 
                                 <div class="col-md-6">
-                                    {!! Form::checkbox('ignoreAllParmasCheck', null, ['class'=>'form-control']) !!}
+                                    {!! Form::checkbox('ignore_all_params', null, ['class'=>'form-control']) !!}
                                 </div>
                             </div>
 
