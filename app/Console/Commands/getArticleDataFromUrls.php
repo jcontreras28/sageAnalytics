@@ -54,7 +54,7 @@ class getArticleDataFromUrls extends Command
     
                 } else {
 
-                    $path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
+                    $path = __DIR__ . '/CredentialJson/'.$pub->GAJsonFile;
                     
                     //echo $path;
                     if(file_exists($path)){
