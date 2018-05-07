@@ -495,17 +495,17 @@ trait GoogAnalyticsInterface {
                         $dataArray['articles'] = self::calculateNewTotal($dataArray['articles'], $row, 'Dwell', $url, 1);
                         $dataArray['articles'] = self::getReferrers($row, $dataArray['articles'], $url->identifier->identifier);
 
-                        if (array_key_exists($url->articleSection, $dataArray['articles']['sections'])) {
+                        /*if (array_key_exists($url->articleSection, $dataArray['articles']['sections'])) {
                             $oldSectionValue = $dataArray['articles'][$url->articleSection];
                             $newValue = $oldSectionValue + $row['metrics'][0]['values'][0];
                             $dataArray['articles']['sections'][$url->articleSection] = $newValue;
                         } else {
                             $dataArray['articles']['sections'][$url->articleSection] = $row['metrics'][0]['values'][0];
-                        }
+                        }*/
 
                     } else {
 
-                        $secArray[$url->articleSection] = (int)$row['metrics'][0]['values'][0];
+                        //$secArray[$url->articleSection] = (int)$row['metrics'][0]['values'][0];
                         $refArray = array();
                         $tmpArray = ['Views' => (int)$row['metrics'][0]['values'][0], 
                                     'Uniques' => (int)$row['metrics'][0]['values'][2], 
@@ -516,8 +516,8 @@ trait GoogAnalyticsInterface {
                                     'image' => $url->identifier->article->image,
                                     'published_date' => $url->identifier->article->published_date,
                                     'author' => $url->identifier->article->author,
-                                    'name' => $url->identifier->article->name,
-                                    'sections' => $secArray
+                                    'name' => $url->identifier->article->name
+                                    //'sections' => $secArray
                                 ];
                         $dataArray['articles'][$url->identifier->identifier] = $tmpArray;
 
