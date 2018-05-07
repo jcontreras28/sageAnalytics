@@ -26,9 +26,12 @@ class PublicationController extends Controller
 
     }
 
-    public function sectionRefresh() {
+    public function sectionRefresh($id) {
 
-        $contents = file_get_contents('resultsArray.txt');
+        $pubData = Publication::findOrFail($id);
+        $fileName = $pubData->id.".txt";
+
+        $contents = file_get_contents($pubData);
         $results = json_decode($contents, true);
         //$results = Config::get('gResults');
         return view('publications.sectionStats', compact('results'));
@@ -38,7 +41,8 @@ class PublicationController extends Controller
     public function refreshData($id) {
 
         $pubData = Publication::findOrFail($id);
-        if ($contents = file_get_contents('resultsArray.txt')) {
+        $fileName = $pubData->id.".txt";
+        if ($contents = file_get_contents($fileName)) {
 
             $results = json_decode($contents, true);
 
