@@ -43,50 +43,67 @@ class makeGADataArray extends Command
      */
     public function handle()
     {
-        $pubId = 2;
-        //
-        $pubData = Publication::findOrFail($pubId);
 
-        $path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
-        
-        if(file_exists($path)){
-            $GAConn = $this->connect($path, $pubData->name);
+        $pubs = Publication::all();
 
-            if ($GAConn) {
-                $profId = strval($pubData->GAProfileId);
+        foreach($pubs as $pubData) {
 
-                $resultsTotalPages = $this->getResultsAllPageViews($GAConn, $profId, '0daysAgo', 'today'); 
-                $rowsAllPages = $resultsTotalPages['reports'][0]->getData()->getRows();
+            $pubId = $pubData->id;
+            echo "doing pub: ".$pubData->name;
+            //
+            //$pubData = Publication::findOrFail($pubId);
 
-                $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
+            if ($pubData->GAJsonFile == NULL) {
 
-                if (count($results['reports'][0]->getData()->getRows()) > 0) {
-
-                    $ignoreParams = $this->getIgnoreParams($pubData);
-            
-                    $urlArray = $this->getUrlArray($results, $ignoreParams);
-
-                    $results = $this->parseResults($results, $ignoreParams, $pubId);
-
-                }
-
-                $results['dayTotalViews'] = $rowsAllPages[0]['metrics'][0][0];
-                $results['dayTotalUniques'] = $rowsAllPages[0]['metrics'][0][2];
+                echo "No GA JSON for this pub.";
 
             } else {
 
-                $results['errors'] = ['Failed connecting to Google Analytics API'];
+                $path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
+            
+                if(file_exists($path)){
+                    $GAConn = $this->connect($path, $pubData->name);
+
+                    if ($GAConn) {
+                        $profId = strval($pubData->GAProfileId);
+
+                        echo "connect to ga...";
+                        $resultsTotalPages = $this->getResultsAllPageViews($GAConn, $profId, '0daysAgo', 'today'); 
+                        $rowsAllPages = $resultsTotalPages['reports'][0]->getData()->getRows();
+
+                        $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
+
+                        if (count($results['reports'][0]->getData()->getRows()) > 0) {
+
+                            $ignoreParams = $this->getIgnoreParams($pubData);
+                    
+                            $urlArray = $this->getUrlArray($results, $ignoreParams);
+
+                            $results = $this->parseResults($results, $ignoreParams, $pubId);
+
+                        }
+
+                        $results['dayTotalViews'] = $rowsAllPages[0]['metrics'][0][0];
+                        $results['dayTotalUniques'] = $rowsAllPages[0]['metrics'][0][2];
+
+                    } else {
+
+                        $results['errors'] = ['Failed connecting to Google Analytics API'];
+
+                    }
+
+                } else {
+
+                    $results['errors'] = ['JSON credentials file has not been uploaded. Path: '.$path];
+
+                }
+
+                File::put('./public/'.$pubId.'.txt', json_encode($results));
 
             }
 
-        } else {
-
-            $results['errors'] = ['JSON credentials file has not been uploaded. Path: '.$path];
-
         }
-        
-        File::put('./public/resultsArray.txt', json_encode($results));
 
-        return view('publications.storyStats', compact('results', 'pubData', 'totalStoriesUniques', 'totalStoriesViews', 'dayTotalViews', 'dayTotalUniques'));
+        return 1; //view('publications.storyStats', compact('results', 'pubData', 'totalStoriesUniques', 'totalStoriesViews', 'dayTotalViews', 'dayTotalUniques'));
     }
 }

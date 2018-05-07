@@ -42,35 +42,38 @@ class getArticleDataFromUrls extends Command
     public function handle()
     {
 
-        $id = 2;
-        $pub = Publication::findOrFail($id);
-        var_dump($pub);
-        //foreach($pubs as $pub) {
+        $pubs = Publication::all();
 
-            $path = __DIR__ . '/../../Http/Controllers/CredentialJson/'.$pub->GAJsonFile;
-            
-            //echo $path;
-            if(file_exists($path)){
+            foreach($pubs as $pub) {
+            //$pub = Publication::findOrFail($id);
+            var_dump($pub);
+            //foreach($pubs as $pub) {
+
+                $path = __DIR__ . '/../../Http/Controllers/CredentialJson/'.$pub->GAJsonFile;
                 
-                $GAConn = $this->connect($path, $pub->name);
-
-                $profId = strval($pub->GAProfileId);
-                
-                $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
-             
-                if (count($results['reports'][0]->getData()->getRows()) > 0) {
-
-                    $ignoreParams = $this->getIgnoreParams($pub);
+                //echo $path;
+                if(file_exists($path)){
                     
-                    $urlArray = $this->getUrlArray($results, $ignoreParams);
+                    $GAConn = $this->connect($path, $pub->name);
 
-                    $pubId = 2; // todo switch to per pub
-                    $this->getPageDataFromUrls($urlArray, $pub->domain, $pubId);
+                    $profId = strval($pub->GAProfileId);
+                    
+                    $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
                 
+                    if (count($results['reports'][0]->getData()->getRows()) > 0) {
+
+                        $ignoreParams = $this->getIgnoreParams($pub);
+                        
+                        $urlArray = $this->getUrlArray($results, $ignoreParams);
+
+                        $pubId = 2; // todo switch to per pub
+                        $this->getPageDataFromUrls($urlArray, $pub->domain, $pubId);
+                    
+                    }
                 }
+                //var_dump( $urlArray );
+        // }
             }
-            //var_dump( $urlArray );
-       // }
-       return $pub;
+        return 1;
     }
 }

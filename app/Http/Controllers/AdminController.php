@@ -174,14 +174,15 @@ class AdminController extends Controller
             } 
             if ($file = $request->file('file')) {
 
-                $jsonFile = app_path() . "/Http/Controllers/CredentialJson/".$oldJson;
+                $jsonFile = app_path() . "/Console/Commands/CredentialJson/".$oldJson;
                 if(File::exists($jsonFile)) {
                     File::delete($jsonFile);
                 }
 
                 // move file to folder
-                $destination = app_path() . "/Http/Controllers/CredentialJson/";
+                $destination = app_path() . "/Console/Commands/CredentialJson/";
                 $name = $unique."_".$file->getClientOriginalName();
+                $name = str_replace(" ", "_", $name);
                 $file->move($destination, $name);
 
                 // add json file name to database
