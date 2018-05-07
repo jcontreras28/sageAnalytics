@@ -55,9 +55,9 @@
 
                                 <div class="col-md-6">
                                     @if ($publication->ignore_all_params == 1)
-                                        <input checked="checked" name="ignore_all_params" type="checkbox" value=1 class='form-control'>
+                                        <input checked="checked" name="ignore_all_params" type="checkbox" value='ignore_all_params' class='form-control'>
                                     @else
-                                        <input name="ignore_all_params" type="checkbox" value=0 class='form-control'>
+                                        <input name="ignore_all_params" type="checkbox" value='ignore_all_params' class='form-control'>
                                     @endif
                                 </div>
                             </div>

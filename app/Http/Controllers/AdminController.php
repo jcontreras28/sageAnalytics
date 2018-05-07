@@ -156,6 +156,8 @@ class AdminController extends Controller
             $oldLogo = $pub->logo;
             $oldJson = $pub->GAJsonFile;
 
+            dd($request->has('ignore_all_params'));
+
             $pub->update($input);
 
             if ($filelogo = $request->file('filelogo')) {
