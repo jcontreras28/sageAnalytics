@@ -99,8 +99,9 @@ class makeGADataArray extends Command
                 }
 
                 var_dump($results);
+                //$fileName = './public/'.$pub
 
-                File::put('./public/'.$pubId.'.txt', json_encode($results));
+                File::put('./public/'.$pubData->id.'.txt', json_encode($results));
 
             }
 
