@@ -50,6 +50,13 @@
                                     {!! Form::number('GAProfileId', null, ['class'=>'form-control']) !!}
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                {!! Form::label('ignoreAllParmasCheck', 'Ignore all url parameters', ['class'=>'col-md-4 col-form-label text-md-right']) !!}
+
+                                <div class="col-md-6">
+                                    {!! Form::checkbox('ignoreAllParmasCheck', null, ['class'=>'form-control']) !!}
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <div class="col-md-4 col-form-label text-md-right">
