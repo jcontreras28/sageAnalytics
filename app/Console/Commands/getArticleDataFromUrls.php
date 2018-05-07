@@ -62,7 +62,7 @@ class getArticleDataFromUrls extends Command
                         $GAConn = $this->connect($path, $pub->name);
 
                         if ($GAConn) {
-                            $profId = strval($pubData->GAProfileId);
+                            $profId = strval($pub->GAProfileId);
     
                             echo "connect to ga...";
 
