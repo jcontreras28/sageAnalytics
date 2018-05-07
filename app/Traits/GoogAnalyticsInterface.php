@@ -341,6 +341,12 @@ trait GoogAnalyticsInterface {
                     if ($urlData->{'@type'} == 'NewsArticle') {
                         
                         $theIdentifier = $urlData->identifier;  
+
+                        $theArticleSection = 'noneGiven';
+                        if (isset($urlData->articleSection)) {
+                            $theArticleSection = $urlData->articleSection;
+                        }
+
                         $type = 'newsarticle';
                            
                     }  else if ($urlData->{'@type'} == 'WebPage') {
@@ -408,6 +414,7 @@ trait GoogAnalyticsInterface {
                     $newurl = new Url();
                     $newurl->identifier_id = $ident->id;
                     $newurl->url = $url;
+                    $newurl->articleSection = $theArticleSection;
                     $saved = $newurl->save();
 
                     if (!$saved) { dd($url); }
