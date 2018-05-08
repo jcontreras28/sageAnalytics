@@ -459,7 +459,7 @@ trait GoogAnalyticsInterface {
 		return $theArray;
     }
 
-    public function parseResults($results, $ignoreParams) {
+    public function parseResults($results, $ignoreParams, $pubId) {
 
         $rows = $results['reports'][0]->getData()->getRows();
         $dataArray = [
@@ -477,7 +477,7 @@ trait GoogAnalyticsInterface {
             // get identifier from url table
 
             $thisUrl = self::cleanUrl($row['dimensions'][0], $ignoreParams);
-            $url = Url::where('url', '=', $thisUrl)->first();
+            $url = Url::where('url', '=', $thisUrl)->where('publication_id', '=', $pubId)->first();
 
             if ($url) {
  
