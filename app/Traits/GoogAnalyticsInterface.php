@@ -328,7 +328,7 @@ trait GoogAnalyticsInterface {
 
             $fullUrl = 'http://'.$domain.$url;
 
-            if (!self::inLookupTable($url)) {
+            if (!self::inLookupTable($url, $pubId)) {
 
                 // get the json ld data from the url
                 $urlData = self::getUrlData($fullUrl);
@@ -415,6 +415,7 @@ trait GoogAnalyticsInterface {
                     $newurl->identifier_id = $ident->id;
                     $newurl->url = $url;
                     $newurl->articleSection = $theArticleSection;
+                    $newurl->publication_id = $pubId;
                     $saved = $newurl->save();
 
                     if (!$saved) { dd($url); }
