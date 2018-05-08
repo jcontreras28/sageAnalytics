@@ -304,7 +304,7 @@ trait GoogAnalyticsInterface {
 
     public function inLookupTable($url, $pubId) {
 
-        $url = Url::where('url', '=', $thisUrl)->where('publication_id', '=', $pubId)->first();
+        $url = Url::where('url', '=', $url)->where('publication_id', '=', $pubId)->first();
         if ($url) {
             
             return true;
@@ -335,7 +335,7 @@ trait GoogAnalyticsInterface {
                 $urlData = self::getUrlData($fullUrl);
 
                 dd($url, $urlData);
-                
+
                 $theArticleSection = 'noneGiven';
 
                 //print_r($urlData);
