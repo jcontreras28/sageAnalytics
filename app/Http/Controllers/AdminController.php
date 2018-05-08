@@ -112,7 +112,8 @@ class AdminController extends Controller
             if ($file = $request->file('file')) {
 
                 // move file to folder
-                $destination = app_path() . "/Http/Controllers/CredentialJson/";
+                // $destination = app_path() . "/Http/Controllers/CredentialJson/";
+                $destination = app_path() . "/Console/Commands/CredentialJson/";
                 $name = $unique."_".$file->getClientOriginalName();
                 $file->move($destination, $name);
 
