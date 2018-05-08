@@ -304,7 +304,8 @@ trait GoogAnalyticsInterface {
 
     public function inLookupTable($url, $pubId) {
 
-        if (Url::where('url', '=', $url)->where('publication_id', '=', $pubId)->exists()) {
+        $url = Url::where('url', '=', $thisUrl)->where('publication_id', '=', $pubId)->first();
+        if ($url) {
             
             return true;
 
@@ -333,6 +334,8 @@ trait GoogAnalyticsInterface {
                 // get the json ld data from the url
                 $urlData = self::getUrlData($fullUrl);
 
+                dd($url, $urlData);
+                
                 $theArticleSection = 'noneGiven';
 
                 //print_r($urlData);
@@ -348,7 +351,7 @@ trait GoogAnalyticsInterface {
                         if (isset($urlData->articleSection)) {
 
                             $theArticleSection = $urlData->articleSection;
-                            
+
                         }
 
                         $type = 'newsarticle';
