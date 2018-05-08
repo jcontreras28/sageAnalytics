@@ -328,6 +328,7 @@ trait GoogAnalyticsInterface {
             //    break;
 
             $fullUrl = 'http://'.$domain.$url;
+            echo "   ".$url."   ";
 
             if (!self::inLookupTable($url, $pubId)) {
 
@@ -340,7 +341,7 @@ trait GoogAnalyticsInterface {
                 if ($urlData != 'bad json') {
 
                     dd($url, $urlData);
-                    
+
                     // parse out the type of page it is - NewsArticle, WebPage, or no json present
                     $type = "";
                     if ($urlData->{'@type'} == 'NewsArticle') {
