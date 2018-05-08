@@ -302,9 +302,9 @@ trait GoogAnalyticsInterface {
         return $article;
     }
 
-    public function inLookupTable($url) {
+    public function inLookupTable($url, $pubId) {
 
-        if (Url::where('url', '=', $url)->exists()) {
+        if (Url::where('url', '=', $url)->where('publication_id', '=', $pubId)->exists()) {
             
             return true;
 

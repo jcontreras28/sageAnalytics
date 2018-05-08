@@ -75,8 +75,7 @@ class getArticleDataFromUrls extends Command
                                 
                                 $urlArray = $this->getUrlArray($results, $ignoreParams);
 
-                                $pubId = 2; // todo switch to per pub
-                                $this->getPageDataFromUrls($urlArray, $pub->domain, $pubId);
+                                $this->getPageDataFromUrls($urlArray, $pub->domain, $pub->id);
                             
                             }
                         } else {
