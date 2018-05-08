@@ -333,6 +333,8 @@ trait GoogAnalyticsInterface {
                 // get the json ld data from the url
                 $urlData = self::getUrlData($fullUrl);
 
+                $theArticleSection = 'noneGiven';
+
                 //print_r($urlData);
                 if ($urlData != 'bad json') {
 
@@ -342,9 +344,11 @@ trait GoogAnalyticsInterface {
                         
                         $theIdentifier = $urlData->identifier;  
 
-                        $theArticleSection = 'noneGiven';
+                        
                         if (isset($urlData->articleSection)) {
+
                             $theArticleSection = $urlData->articleSection;
+                            
                         }
 
                         $type = 'newsarticle';
