@@ -312,7 +312,7 @@ trait GoogAnalyticsInterface {
 
         $theUrl = Url::where('url', '=', $url)->where('publication_id', '=', $pubId)->first();
         
-        var_dump($theUrl);
+        //var_dump($theUrl);
         
         if ($theUrl) {
             
