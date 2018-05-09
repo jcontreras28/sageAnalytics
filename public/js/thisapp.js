@@ -32,7 +32,7 @@ $(document).ready( function() {
             success : function(response) {
                 $('#realTimeLoading').hide();
                 //console.log(response);
-                $( "#realTimeStories" ).html(response);
+                $( "#realTimeContent" ).html(response);
 
             },
             error: function() {
