@@ -9,7 +9,7 @@
 			<span class="total-page-views"></span>
 		</div>
 		<div class="col-xs-2">
-			<img src="{{ asset('images/pubLogos/'.$pubData->logo) }}" width="200px" class="pull-right"/>
+			<img src="{{ asset('images/pubLogos/'.$pubData->logo) }}" width="100px" class="pull-right"/>
 		</div>
 	</div>
 	<div>
