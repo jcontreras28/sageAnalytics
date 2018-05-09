@@ -99,8 +99,6 @@ class makeGADataArray extends Command
 
                 }
 
-                
-
             }
 
             $fileName = './public/'.$pubData->id.'.txt';

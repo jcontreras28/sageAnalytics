@@ -135,6 +135,24 @@ trait GoogAnalyticsInterface {
         return $GAConn->reports->batchGet( $body );
     }
 
+    function getResultsRealTime($analytics, $profileId) {
+		// Calls the Core Reporting API and queries for the number of sessions
+  		// for the last seven days.
+		$optParams = array();
+
+		// Required Parameters
+		$metrics = 'rt:activeUsers'; // Users: get active users
+
+        $optParams['dimensions']  = 'rt:pagePath';
+        $optParams['sort']        = '-rt:activeUsers';
+
+		return $analytics->data_realtime->get(
+              	'ga:'. $profileId,
+               	$metrics,
+               	$optParams
+        );
+	}
+
     public function cmp($a, $b)
 	{
    		return (($b['Views']) - ($a['Views']));

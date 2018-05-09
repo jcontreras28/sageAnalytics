@@ -60,11 +60,23 @@ class PublicationController extends Controller
     }
 
     public function realtimeRefresh($id) {
+
         $pubData = Publication::findOrFail($id);
+        $fileName = $pubData->id.".txt";
 
-        $returnData = " Return from realTimeRefresh";
+        if ($contents = file_get_contents($fileName)) {
 
-        return view('publications.realTime', compact('returnData', 'pubData'));
+            $results = json_decode($contents, true);
+
+        } else {
+
+            $results['errors']  = "Could not open data file.";
+
+        }
+
+        $realTimeResults = getResultsRealTime($analytics, $profile);
+
+        return view('publications.realTime', compact('returnData', 'pubData', 'results', 'realTimeResults'));
 
     }
 
