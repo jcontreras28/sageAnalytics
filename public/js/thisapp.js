@@ -30,8 +30,8 @@ $(document).ready( function() {
             success : function(response) {
                 $('#realTimeLoading').hide();
                 console.log(response);
-                $( "#realTimeStories" ).html(response['realtime']);
-                $( "#realTimeStories" ).html(response['dayTotal']);
+                $( "#realTimeStories" ).html(response);
+
             },
             error: function() {
                 console.log('error ', response);

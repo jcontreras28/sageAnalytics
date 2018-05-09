@@ -74,9 +74,19 @@ class PublicationController extends Controller
 
         }
 
-        //$realTimeResults = getResultsRealTime($analytics, $profile);
+        $fileName = $pubData->id."rt.txt";
 
-        return view('publications.realTime', compact('pubData', 'results'));
+        if ($contents = file_get_contents($fileName)) {
+
+            $resultsRealtime = json_decode($contents, true);
+
+        } else {
+
+            $resultsRealtime['errors']  = "Could not open real time data file.";
+
+        }
+
+        return view('publications.realTime', compact('pubData', 'results', 'resultsRealtime'));
 
     }
 
