@@ -62,6 +62,8 @@ class PublicationController extends Controller
     public function realtimeRefresh($id) {
 
         $pubData = Publication::findOrFail($id);
+
+        dd($pubData);
         $fileName = $pubData->id.".txt";
 
         if ($contents = file_get_contents($fileName)) {
