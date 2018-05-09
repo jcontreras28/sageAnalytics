@@ -33,11 +33,11 @@ trait GoogAnalyticsInterface {
     public function connectRealTime($pubKeyFile) {
 
   		// Create and configure a new client object.
-  		$client = new Google_Client();
+  		$client = new \Google_Client();
   		$client->setApplicationName("Hello Analytics Reporting");
   		$client->setAuthConfig($pubKeyFile);
   		$client->setScopes(['https://www.googleapis.com/auth/analytics.readonly']);
-  		$analytics = new Google_Service_Analytics($client);
+  		$analytics = new \Google_Service_Analytics($client);
 
   		return $analytics;
     }
