@@ -26,7 +26,7 @@
                     <h2>Errror: {{ $resultsRealtime['error'] }} </h2>
                 @else
                     
-                @end
+                @endif
             </ol>
         </div>
 	</div>
