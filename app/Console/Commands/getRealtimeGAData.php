@@ -72,11 +72,11 @@ class getRealtimeGAData extends Command
                         $profId = strval($pubData->GAProfileId);
 
                         echo "connect to ga...";
-                        $resultsTotalPages = $this->getResultsRealtime($GAConn, $profId); 
+                        $rows = $this->getResultsRealtime($GAConn, $profId); 
 
                         $ignoreParams = $this->getIgnoreParams($pubData);
 
-                        $resultsTotalPages = $this->parseResultsRealtime($results, $ignoreParams, $pubId);
+                        $resultsTotalPages = $this->parseResultsRealtime($rows, $ignoreParams, $pubId);
 
                     } else {
 

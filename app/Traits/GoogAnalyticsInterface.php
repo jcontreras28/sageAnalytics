@@ -158,11 +158,13 @@ trait GoogAnalyticsInterface {
         $optParams['dimensions']  = 'rt:pagePath';
         $optParams['sort']        = '-rt:activeUsers';
 
-		return $analytics->data_realtime->get(
+		$return = $analytics->data_realtime->get(
               	'ga:'. $profileId,
                	$metrics,
                	$optParams
         );
+
+        return $return->getRows();
 	}
 
     public function cmp($a, $b)
@@ -511,10 +513,9 @@ trait GoogAnalyticsInterface {
 		return $theArray;
     }
 
-    public function parseResultsRealtime($results, $ignoreParams, $pubId, $count = 20) {
+    public function parseResultsRealtime($rows, $ignoreParams, $pubId, $count = 20) {
 
         // Get the entry for the first entry in the first row.
-        $rows = $results->getRows();
 
         $sessions = $rows[0][0];
 
@@ -563,7 +564,8 @@ trait GoogAnalyticsInterface {
         $storyArray = array_slice($storyArray, 0, 20, true);
         $returnArray = array("stories" => $storyArray,
                              "storyTotal" => $storyTotal,
-                             "allPageTotal" => $allPageTotal);
+                             "allPageTotal" => $allPageTotal,
+                             "sessions" => $sessions);
 
         return $storyArray;
     }
