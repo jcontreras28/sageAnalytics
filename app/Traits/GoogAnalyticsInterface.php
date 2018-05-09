@@ -311,7 +311,7 @@ trait GoogAnalyticsInterface {
         echo "\r\n\r\n   ".$url."  ";
 
         $theUrl = Url::where('url', '=', $url)->first();
-        var_dump($thUrl);
+        var_dump($theUrl);
         
         if ($theUrl) {
             
