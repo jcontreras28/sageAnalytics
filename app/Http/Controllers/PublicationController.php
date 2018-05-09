@@ -63,7 +63,6 @@ class PublicationController extends Controller
 
         $pubData = Publication::findOrFail($id);
 
-        dd($pubData);
         $fileName = $pubData->id.".txt";
 
         if ($contents = file_get_contents($fileName)) {
@@ -87,6 +86,7 @@ class PublicationController extends Controller
             $resultsRealtime['errors']  = "Could not open real time data file.";
 
         }
+        dd($resultsRealtime);
 
         return view('publications.realTime', compact('pubData', 'results', 'resultsRealtime'));
 
