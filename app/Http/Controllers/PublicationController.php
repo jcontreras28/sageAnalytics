@@ -59,11 +59,12 @@ class PublicationController extends Controller
 
     }
 
-    public function realTimeRefresh($id) {
+    public function realtimeRefresh($id) {
         $pubData = Publication::findOrFail($id);
 
         $returnData = " Return from realTimeRefresh";
 
+        return view('publications.realTime', compact('returnData', 'pubData'));
 
     }
 
