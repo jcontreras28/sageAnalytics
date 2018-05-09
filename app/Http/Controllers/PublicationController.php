@@ -74,9 +74,9 @@ class PublicationController extends Controller
 
         }
 
-        $realTimeResults = getResultsRealTime($analytics, $profile);
+        //$realTimeResults = getResultsRealTime($analytics, $profile);
 
-        return view('publications.realTime', compact('returnData', 'pubData', 'results', 'realTimeResults'));
+        return view('publications.realTime', compact('pubData', 'results'));
 
     }
 
