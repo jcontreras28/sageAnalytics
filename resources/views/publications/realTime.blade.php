@@ -23,7 +23,7 @@
             <ol class="custom-counter">
 
                 @if (array_key_exists('errors', $resultsRealtime)) 
-                    <h2>Errror: {{ $resultsRealtime['error'] }}
+                    <h2>Errror: {{ $resultsRealtime['error'] }} </h2>
                 @else
                     
                 @end
