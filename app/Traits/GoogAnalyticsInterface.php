@@ -560,7 +560,7 @@ trait GoogAnalyticsInterface {
             }
         }
 
-        uasort($storyArray, "self::comp3");
+        uasort($storyArray, "self::cmp3");
         $storyArray = array_slice($storyArray, 0, 20, true);
         $returnArray = array("stories" => $storyArray,
                              "storyTotal" => $storyTotal,
