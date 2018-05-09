@@ -14,13 +14,14 @@ $(document).ready( function() {
         }
     });*/
 
-    function getRealTimeData(start, end) {
+    function getRealTimeData() {
+
         var pubId = $('.pubIdContainer').attr('id');
         console.log('pubId: ', pubId);
         var theUrl = "/pub/"+pubId.toString()+"/realtime";
         console.log('theUrl', theUrl);
 
-        alert("in getrealtime");
+        
         $.ajax({
             type:"GET",
             url : theUrl,
@@ -29,14 +30,12 @@ $(document).ready( function() {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success : function(response) {
-                alert("success");
                 $('#realTimeLoading').hide();
-                console.log(response);
+                //console.log(response);
                 $( "#realTimeStories" ).html(response);
 
             },
             error: function() {
-                alert("fail");
                 console.log('error ', response);
             }
         });
@@ -98,11 +97,12 @@ $(document).ready( function() {
         });
     }
 
-    getStorySectionData('0daysAgo', 'today')
+    getStorySectionData('0daysAgo', 'today');
+    getRealTimeData();
 
     setInterval(function(){
         getStorySectionData('0daysAgo', 'today');
-        getRealTimeData('0daysAgo', 'today');
+        getRealTimeData();
 	}, 120000);
 
 });
