@@ -64,7 +64,8 @@ class getRealtimeGAData extends Command
                 $path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
             
                 if(file_exists($path)){
-                    $GAConn = $this->connect($path, $pubData->name);
+
+                    $GAConn = $this->connectRealTime($path);
 
                     if ($GAConn) {
                         $profId = strval($pubData->GAProfileId);
