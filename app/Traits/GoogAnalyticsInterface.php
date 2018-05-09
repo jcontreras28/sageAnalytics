@@ -539,7 +539,7 @@ trait GoogAnalyticsInterface {
                     if (array_key_exists($url->identifier->identifier, $storyArray)) {
 
                         $oldTotal = $storyArray[$url->identifier->identifier]['count'];
-                        $newtotal = $row[1] + $oldTotal;
+                        $newTotal = $row[1] + $oldTotal;
                         $storyArray[$url->identifier->identifier]['count'] = $newTotal;
 
                     } else {
