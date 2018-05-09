@@ -304,7 +304,7 @@ trait GoogAnalyticsInterface {
 
     public function inLookupTable($url, $pubId) {
 
-        $url = Url::where('url', '=', $url)->exists();
+        $url = Url::where('url', '=', $url)->first();
         if ($url) {
             
             if ($url->publication->id == $pubId) {
@@ -485,7 +485,7 @@ trait GoogAnalyticsInterface {
             // get identifier from url table
 
             $thisUrl = self::cleanUrl($row['dimensions'][0], $ignoreParams);
-            $url = Url::where('url', '=', $thisUrl)->exists();
+            $url = Url::where('url', '=', $thisUrl)->first();
 
             if ($url && ($url->publication->id == $pubId)) {
  
