@@ -10,14 +10,14 @@
 	<div class="col-sm-6">
 		<h3>Top 20 stories right now:</h3>
 		<div id="realTimeStories">
-            {{ var_dump($resultsRealtime) }}
+            {{ echo var_dump($resultsRealtime) }}
         </div>
 	</div>
 
 	<div class="col-sm-6">
 		<h3>Top 20 for day:</h3>
 		<div id="curDayStories">
-            {{ var_dump($results) }}
+            {{ echo var_dump($results) }}
         </div>
 	</div>
 </div>
