@@ -63,22 +63,26 @@
                 @if (array_key_exists('errors', $results)) 
                     <h2>Errror: {{ $results['error'] }}
                 @else
-                    @foreach( $results['stories'] as $story)
-                    <li class="list-group-item list-group-item-ordered">
-                        <div class="row">
-                            <div class="col-xs-1">
-                                {{ $story['Views'] }}
+
+                    @foreach($results["articles"] as $key => $story )
+                        @if ($loop->index > 210) 
+                            @break
+                        @endif
+                        <li class="list-group-item list-group-item-ordered">
+                            <div class="row">
+                                <div class="col-xs-1">
+                                    {{ $story['Views'] }}
+                                </div>
+                                <div class="col-xs-11">
+                                    @if (array_key_exists('image', $story) && $story['image'] != 'none') 
+                                        <img class='pull-right storyImage' width='80px' src='{{ $story["image"] }}'/ >
+                                    @endif
+                                    <span class='storyHeadlineBold'> {{ $story['headline'] }}</span><br>
+                                    <span>{{ $story['name'] }}</span><br>
+                                    <a href='{{ $story["link"] }}' target='_blank'>View story</a>
+                                </div>
                             </div>
-                            <div class="col-xs-11">
-                                @if (array_key_exists('image', $story) && $story['image'] != 'none') 
-                                    <img class='pull-right storyImage' width='80px' src='{{ $story["image"] }}'/ >
-                                @endif
-                                <span class='storyHeadlineBold'> {{ $story['headline'] }}</span><br>
-                                <span>{{ $story['name'] }}</span><br>
-                                <a href='{{ $story["link"] }}' target='_blank'>View story</a>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
                     @endforeach
                 @endif
             </ol>
