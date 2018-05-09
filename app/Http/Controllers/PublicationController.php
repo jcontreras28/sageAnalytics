@@ -86,7 +86,6 @@ class PublicationController extends Controller
             $resultsRealtime['errors']  = "Could not open real time data file.";
 
         }
-        dd($resultsRealtime);
 
         return view('publications.realTime', compact('pubData', 'results', 'resultsRealtime'));
 
