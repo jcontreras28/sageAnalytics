@@ -304,10 +304,10 @@ trait GoogAnalyticsInterface {
 
     public function inLookupTable($url, $pubId) {
 
-        $url = Url::where('url', '=', $url)->first();
-        if ($url) {
+        $theUrl = Url::where('url', '=', $url)->first();
+        if ($theUrl) {
             
-            if ($url->publication->id == $pubId) {
+            if ($theUrl->publication->id == $pubId) {
                 return true;
             }
 
@@ -328,10 +328,11 @@ trait GoogAnalyticsInterface {
             //    break;
 
             $fullUrl = 'http://'.$domain.$url;
-            echo "   ".$url."   ";
 
             if (!self::inLookupTable($url, $pubId)) {
 
+                echo "   ".$url."   ";
+                
                 // get the json ld data from the url
                 $urlData = self::getUrlData($fullUrl);
 
