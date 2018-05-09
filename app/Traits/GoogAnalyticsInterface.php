@@ -176,9 +176,9 @@ trait GoogAnalyticsInterface {
         $cleanUrl = '';
 
         $url = trim($url);
-        $url = ltrim($url, '/');
-        $url = rtrim($url, '/');
-
+        /*$url = ltrim($url, '/');
+        $url = rtrim($url, '/');*/
+ 
         if ($ignoreParams['type'] == 'All'){
 
             $url = explode("?", $url);
@@ -308,15 +308,20 @@ trait GoogAnalyticsInterface {
 
     public function inLookupTable($url, $pubId) {
 
+        echo "\r\n\r\n   ".$url."  ";
+
         $theUrl = Url::where('url', '=', $url)->first();
+        var_dump($thUrl);
+        
         if ($theUrl) {
             
             if ($theUrl->publication->id == $pubId) {
+                echo " ***** found! ";
                 return true;
             }
 
         }
-
+        echo " not found!";
         return false;
     }
 
@@ -334,8 +339,6 @@ trait GoogAnalyticsInterface {
             $fullUrl = 'http://'.$domain.$url;
 
             if (!self::inLookupTable($url, $pubId)) {
-
-                echo "   ".$url."   ";
 
                 // get the json ld data from the url
                 $urlData = self::getUrlData($fullUrl);
