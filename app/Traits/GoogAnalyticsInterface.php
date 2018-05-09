@@ -512,8 +512,6 @@ trait GoogAnalyticsInterface {
     }
 
     public function parseResultsRealtime($results, $ignoreParams, $pubId, $count = 20) {
-        // Get the profile name.
-        $profileName = $results->getProfileInfo()->getProfileName();
 
         // Get the entry for the first entry in the first row.
         $rows = $results->getRows();
@@ -566,7 +564,7 @@ trait GoogAnalyticsInterface {
         $returnArray = array("stories" => $storyArray,
                              "storyTotal" => $storyTotal,
                              "allPageTotal" => $allPageTotal);
-                             
+
         return $storyArray;
     }
 
