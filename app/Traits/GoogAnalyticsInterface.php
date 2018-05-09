@@ -310,7 +310,8 @@ trait GoogAnalyticsInterface {
 
         echo "\r\n\r\n   ".$url."  ";
 
-        $theUrl = Url::where('url', '=', $url)->first();
+        $theUrl = Url::where('url', '=', $url)->where('publication_id', '=', $pubId)->first();
+        
         var_dump($theUrl);
         
         if ($theUrl) {
