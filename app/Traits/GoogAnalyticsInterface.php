@@ -307,7 +307,7 @@ trait GoogAnalyticsInterface {
         $url = Url::where('url', '=', $url)->exists();
         if ($url) {
             
-            if ($url->publicaation == $pubId) {
+            if ($url->publication == $pubId) {
                 return true;
             }
 
