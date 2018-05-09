@@ -175,6 +175,10 @@ trait GoogAnalyticsInterface {
 
         $cleanUrl = '';
 
+        $url = trim($url);
+        $url = ltrim($url, '/');
+        $url = rtrim($url, '/');
+
         if ($ignoreParams['type'] == 'All'){
 
             $url = explode("?", $url);
@@ -332,7 +336,7 @@ trait GoogAnalyticsInterface {
             if (!self::inLookupTable($url, $pubId)) {
 
                 echo "   ".$url."   ";
-                
+
                 // get the json ld data from the url
                 $urlData = self::getUrlData($fullUrl);
 
