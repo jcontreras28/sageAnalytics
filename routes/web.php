@@ -68,5 +68,6 @@ Route::group(['middleware' => 'App\Http\Middleware\AccessMiddleware'], function(
 // ajax call routes
 Route::get('/pub/{id}/refresh/', 'PublicationController@refreshData')->name('pub.refreshData');
 Route::get('/pub/{id}/sectionRefresh/', 'PublicationController@sectionRefresh')->name('pub.sectionRefresh');
+Route::get('/pub/{id}/realtime/', 'PublicationController@sectionRefresh')->name('pub.realTimeRefresh');
 
 
