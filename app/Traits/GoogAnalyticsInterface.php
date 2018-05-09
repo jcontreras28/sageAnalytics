@@ -319,7 +319,7 @@ trait GoogAnalyticsInterface {
                 echo " ***** found! ";
                 return true;
             }
-
+            echo " exists but wrong pub - ".$theUrl->publication->id." - ".$pubId;
         }
         echo " not found!";
         return false;
