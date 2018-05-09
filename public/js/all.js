@@ -47345,6 +47345,31 @@ $(document).ready( function() {
         }
     });*/
 
+    function getRealTimeData(start, end) {
+        var pubId = $('.pubIdContainer').attr('id');
+        console.log('pubId: ', pubId);
+        var theUrl = "/pub/"+pubId.toString()+"/realtime";
+        console.log('theUrl', theUrl);
+
+        $.ajax({
+            type:"GET",
+            url : theUrl,
+            dataType: "html",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success : function(response) {
+                $('#realTimeLoading').hide();
+                console.log(response);
+                $( "#realTimeStories" ).html(response);
+
+            },
+            error: function() {
+                console.log('error ', response);
+            }
+        });
+    }
+
     function getSectionData(start, end, pubId) {
        
         console.log('pubId section refresh: ', pubId);
@@ -47403,8 +47428,9 @@ $(document).ready( function() {
 
     getStorySectionData('0daysAgo', 'today')
 
-   /* setInterval(function(){
+    setInterval(function(){
         getStorySectionData('0daysAgo', 'today');
-	}, 120000);*/
+        getRealTimeData('0daysAgo', 'today');
+	}, 120000);
 
 });
