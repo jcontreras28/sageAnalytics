@@ -50,6 +50,7 @@ class getRealtimeGAData extends Command
         foreach($pubs as $pubData) {
 
             $results = [];
+            $resultsTotalPages = [];
             $pubId = $pubData->id;
             echo "doing pub: ".$pubData->name;
             //
