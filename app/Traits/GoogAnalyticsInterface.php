@@ -175,6 +175,11 @@ trait GoogAnalyticsInterface {
         return (($b) - ($a));
     } 
 
+    function cmp3($a, $b)
+    {
+        return (($b['count']) - ($a['count']));
+    }
+
     public function getIgnoreParams($pubData) {
 
         if ($pubData->ignore_all_params) {
@@ -504,6 +509,65 @@ trait GoogAnalyticsInterface {
         }
        
 		return $theArray;
+    }
+
+    public function parseResultsRealtime($results, $ignoreParams, $pubId, $count = 20) {
+        // Get the profile name.
+        $profileName = $results->getProfileInfo()->getProfileName();
+
+        // Get the entry for the first entry in the first row.
+        $rows = $results->getRows();
+
+        $sessions = $rows[0][0];
+
+        $storyArray = [];
+        $allPageTotal = 0;
+        $storyTotal = 0;
+
+        foreach($rows as $row) {
+
+            $thisUrl = self::cleanUrl($row[0], $ignoreParams);
+            $url = Url::where('url', '=', $thisUrl)->where('publication_id', '=', $pubId)->first();
+
+            $allPageTotal = $curTotal + $row[1];
+
+            if ($url && ($url->publication->id == $pubId)) {
+ 
+                if($url->identifier->urlType->name == 'newsarticle') {
+ 
+                    $storyTotal = $storyTotal + $row[1];
+
+                    if (array_key_exists($url->identifier->identifier, $storyArray)) {
+
+                        $oldTotal = $storyArray[$url->identifier->identifier]['count'];
+                        $newtotal = $row[1] + $oldTotal;
+                        $storyArray[$url->identifier->identifier]['count'] = $newTotal;
+
+                    } else {
+
+                        $tmpArray = [
+                            'count' => (int)$row[1],
+                            'link' => $thisUrl,
+                            'headline' => $url->identifier->article->headline,
+                            'image' => $url->identifier->article->image,
+                            'published_date' => $url->identifier->article->published_date,
+                            'author' => $url->identifier->article->author,
+                            'name' => $url->identifier->article->name
+                        ];
+
+                        $storyArray[$url->identifier->identifier] = $tmpArray;
+                    }
+                }
+            }
+        }
+
+        uasort($storyArray, "self::comp3");
+        $storyArray = array_slice($storyArray, 0, 20, true);
+        $returnArray = array("stories" => $storyArray,
+                             "storyTotal" => $storyTotal,
+                             "allPageTotal" => $allPageTotal);
+                             
+        return $storyArray;
     }
 
     public function parseResults($results, $ignoreParams, $pubId) {

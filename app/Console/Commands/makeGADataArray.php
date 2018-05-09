@@ -78,7 +78,7 @@ class makeGADataArray extends Command
 
                             $ignoreParams = $this->getIgnoreParams($pubData);
                     
-                            $urlArray = $this->getUrlArray($results, $ignoreParams);
+                            //$urlArray = $this->getUrlArray($results, $ignoreParams);
 
                             $results = $this->parseResults($results, $ignoreParams, $pubId);
 

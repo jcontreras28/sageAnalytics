@@ -74,6 +74,10 @@ class getRealtimeGAData extends Command
                         echo "connect to ga...";
                         $resultsTotalPages = $this->getResultsRealtime($GAConn, $profId); 
 
+                        $ignoreParams = $this->getIgnoreParams($pubData);
+
+                        $resultsTotalPages = $this->parseResultsRealtime($results, $ignoreParams, $pubId);
+
                     } else {
 
                         $results['errors'] = ['Failed connecting to Google Analytics API'];
@@ -86,8 +90,16 @@ class getRealtimeGAData extends Command
 
                 }
 
+                $fileName = './public/'.$pubData->id.'rt.txt';
+
+                var_dump($resultsTotalPages);
+                var_dump($fileName);
+
+                File::put($fileName, json_encode($resultsTotalPages));
+
+                unset($resultsTotalPages);
+
             }
-            var_dump($resultsTotalPages);
         }
     }
 }
