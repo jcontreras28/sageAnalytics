@@ -3,12 +3,16 @@
 @section('content')
 <div class="container pubIdContainer" id="{{$pubData->id}}">
 
-    <h2>Stats for {{$pubData->name}}  {{$pubData->GAProfileId }}</h2>
-
-    <div class="row" style="margin-top: 20px">
-        <div class="col-xs-12">
-            <span class="total-page-views"></span>
-        </div>
+	<div class="row" style="margin-top: 20px">
+		<div class="col-xs-10">
+    		<h2>Stats for {{$pubData->name}}  {{$pubData->GAProfileId }}</h2>
+			<span class="total-page-views"></span>
+		</div>
+		<div class="col-xs-2">
+			<img src="{{ asset('images/pubLogos/'.$pubData->logo) }}" width="200px" />
+		</div>
+	</div>
+	<div>
         <div class="col-sx-12">
             <?php //include __DIR__ . '/dailyCompareTemplate.php'; ?>
         </div>
