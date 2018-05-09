@@ -307,7 +307,7 @@ trait GoogAnalyticsInterface {
         $url = Url::where('url', '=', $url)->exists();
         if ($url) {
             
-            if ($url->publication == $pubId) {
+            if ($url->publication->id == $pubId) {
                 return true;
             }
 
@@ -487,7 +487,7 @@ trait GoogAnalyticsInterface {
             $thisUrl = self::cleanUrl($row['dimensions'][0], $ignoreParams);
             $url = Url::where('url', '=', $thisUrl)->exists();
 
-            if ($url && ($url->publication == $pubId)) {
+            if ($url && ($url->publication->id == $pubId)) {
  
                 if($url->identifier->urlType->name == 'newsarticle') {
 
