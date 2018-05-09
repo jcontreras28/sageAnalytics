@@ -68,10 +68,10 @@ Route::group(['middleware' => 'App\Http\Middleware\AccessMiddleware'], function(
 // ajax call routes
 Route::get('/pub/{id}/refresh/', 'PublicationController@refreshData')->name('pub.refreshData');
 Route::get('/pub/{id}/sectionRefresh/', 'PublicationController@sectionRefresh')->name('pub.sectionRefresh');
-//Route::get('/pub/{id}/realtime/', 'PublicationController@realtimeRefresh')->name('pub.realtimeRefresh');
+Route::get('/pub/{id}/realtime/', 'PublicationController@realtimeRefresh')->name('pub.realtimeRefresh');
 
-Route::get('/pub/{id}/realtime', function() {
+/*Route::get('/pub/{id}/realtime', function() {
     return "<h3>Hello world</h3>";
-});
+});*/
 
 
