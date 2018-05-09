@@ -23,9 +23,25 @@
             <ol class="custom-counter">
 
                 @if (array_key_exists('errors', $resultsRealtime)) 
-                    <h2>Errror: {{ $resultsRealtime['error'] }} </h2>
+                    <h2>Errror: {{ $resultsRealtime['error'] }}
                 @else
-                    
+                    @foreach( $resultsRealtime as $story)
+                    <li class="list-group-item list-group-item-ordered">
+                        <div class="row">
+                            <div class="col-xs-1">
+                                {{ $story['count'] }}
+                            </div>
+                            <div class="col-xs-11">
+                                @if (array_key_exists('image', $story) && $story['image'] != 'none') 
+                                    <img class='pull-right storyImage' width='80px' src='{{ $story["image"] }}'/ >
+                                @endif
+                                <span class='storyHeadlineBold'> {{ $story['headline'] }}</span><br>
+                                <span>{{ $story['name'] }}</span><br>
+                                <a href='{{ $story["link"] }}' target='_blank'>View story</a>
+                            </div>
+                        </div>
+                    </li>
+                    @endforeach
                 @endif
             </ol>
         </div>
