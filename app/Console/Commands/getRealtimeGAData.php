@@ -86,7 +86,7 @@ class getRealtimeGAData extends Command
                 }
 
             }
-            var_dump($results);
+            var_dump($resultsTotalPages);
         }
     }
 }
