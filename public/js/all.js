@@ -47351,6 +47351,7 @@ $(document).ready( function() {
         var theUrl = "/pub/"+pubId.toString()+"/realtime";
         console.log('theUrl', theUrl);
 
+        alert("in getrealtime");
         $.ajax({
             type:"GET",
             url : theUrl,
@@ -47359,12 +47360,14 @@ $(document).ready( function() {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success : function(response) {
+                alert("success");
                 $('#realTimeLoading').hide();
                 console.log(response);
                 $( "#realTimeStories" ).html(response);
 
             },
             error: function() {
+                alert("fail");
                 console.log('error ', response);
             }
         });
@@ -47385,7 +47388,7 @@ $(document).ready( function() {
             success : function(response) {
 				$('#sectionLoading').hide();
                 $( "#topSectionsContent" ).html(response);
-                console.log(response);
+                //console.log(response);
             },
             error: function() {
                 console.log('error ', response);
@@ -47409,7 +47412,7 @@ $(document).ready( function() {
             success : function(response) {
                 $('#top200Loading').hide();
                 $( "#top200Content" ).html(response);
-                console.log(response);
+                //console.log(response);
                 var totViews = $('#top200Total').html();
 				var totUniques = $('#top200TotalUniques').html();
 				$('.total-page-views').html("Total pageviews so far today: "+totViews+" - Uniques: "+totUniques);
