@@ -67,7 +67,7 @@
                 @else
 
                     @foreach($results["articles"] as $key => $story )
-                        @if ($loop->index > 210) 
+                        @if ($loop->index > 20) 
                             @break
                         @endif
                         <li class="list-group-item list-group-item-ordered">
