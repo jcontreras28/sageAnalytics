@@ -494,7 +494,7 @@ trait GoogAnalyticsInterface {
             // get identifier from url table
 
             $thisUrl = self::cleanUrl($row['dimensions'][0], $ignoreParams);
-            $url = Url::where('url', '=', $thisUrl)->first();
+            $url = Url::where('url', '=', $thisUrl)->where('publication_id', '=', $pubId)->first();
 
             if ($url && ($url->publication->id == $pubId)) {
  
