@@ -523,49 +523,54 @@ trait GoogAnalyticsInterface {
         $allPageTotal = 0;
         $storyTotal = 0;
 
-        foreach($rows as $row) {
+        if ($rows) {
 
-            $thisUrl = self::cleanUrl($row[0], $ignoreParams);
-            $url = Url::where('url', '=', $thisUrl)->where('publication_id', '=', $pubId)->first();
+            foreach($rows as $row) {
 
-            $allPageTotal = $allPageTotal + $row[1];
+                $thisUrl = self::cleanUrl($row[0], $ignoreParams);
+                $url = Url::where('url', '=', $thisUrl)->where('publication_id', '=', $pubId)->first();
 
-            if ($url && ($url->publication->id == $pubId)) {
- 
-                if($url->identifier->urlType->name == 'newsarticle') {
- 
-                    $storyTotal = $storyTotal + $row[1];
+                $allPageTotal = $allPageTotal + $row[1];
 
-                    if (array_key_exists($url->identifier->identifier, $storyArray)) {
+                if ($url && ($url->publication->id == $pubId)) {
+    
+                    if($url->identifier->urlType->name == 'newsarticle') {
+    
+                        $storyTotal = $storyTotal + $row[1];
 
-                        $oldTotal = $storyArray[$url->identifier->identifier]['count'];
-                        $newTotal = $row[1] + $oldTotal;
-                        $storyArray[$url->identifier->identifier]['count'] = $newTotal;
+                        if (array_key_exists($url->identifier->identifier, $storyArray)) {
 
-                    } else {
+                            $oldTotal = $storyArray[$url->identifier->identifier]['count'];
+                            $newTotal = $row[1] + $oldTotal;
+                            $storyArray[$url->identifier->identifier]['count'] = $newTotal;
 
-                        $tmpArray = [
-                            'count' => (int)$row[1],
-                            'link' => $thisUrl,
-                            'headline' => $url->identifier->article->headline,
-                            'image' => $url->identifier->article->image,
-                            'published_date' => $url->identifier->article->published_date,
-                            'author' => $url->identifier->article->author,
-                            'name' => $url->identifier->article->name
-                        ];
+                        } else {
 
-                        $storyArray[$url->identifier->identifier] = $tmpArray;
+                            $tmpArray = [
+                                'count' => (int)$row[1],
+                                'link' => $thisUrl,
+                                'headline' => $url->identifier->article->headline,
+                                'image' => $url->identifier->article->image,
+                                'published_date' => $url->identifier->article->published_date,
+                                'author' => $url->identifier->article->author,
+                                'name' => $url->identifier->article->name
+                            ];
+
+                            $storyArray[$url->identifier->identifier] = $tmpArray;
+                        }
                     }
                 }
             }
-        }
 
-        uasort($storyArray, "self::cmp3");
-        $storyArray = array_slice($storyArray, 0, 20, true);
-        $returnArray = array("stories" => $storyArray,
-                             "storyTotal" => $storyTotal,
-                             "allPageTotal" => $allPageTotal,
-                             "sessions" => $sessions);
+            uasort($storyArray, "self::cmp3");
+            $storyArray = array_slice($storyArray, 0, 20, true);
+            $returnArray = array("stories" => $storyArray,
+                                "storyTotal" => $storyTotal,
+                                "allPageTotal" => $allPageTotal,
+                                "sessions" => $sessions);
+        } else {
+            $storyArray['errors'] = 'No rows returned from GA';
+        }
 
         return $storyArray;
     }
