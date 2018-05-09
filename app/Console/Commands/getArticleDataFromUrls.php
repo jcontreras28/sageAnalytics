@@ -42,10 +42,12 @@ class getArticleDataFromUrls extends Command
     public function handle()
     {
 
-        $pubs = Publication::all();
+       // $pubs = Publication::all();
 
-            foreach($pubs as $pub) {
-            
+         //   foreach($pubs as $pub) {
+         
+            $pub = Publication::findOrFail(5);
+
                 echo " Working on ".$pub->name;
 
                 if ($pub->GAJsonFile == NULL) {
@@ -86,8 +88,7 @@ class getArticleDataFromUrls extends Command
                     }
                 }
                 //var_dump( $urlArray );
-        // }
-            }
+            //}
         return 1;
     }
 }

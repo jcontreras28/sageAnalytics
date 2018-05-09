@@ -335,6 +335,8 @@ trait GoogAnalyticsInterface {
                 // get the json ld data from the url
                 $urlData = self::getUrlData($fullUrl);
 
+                var_dump($urlData);
+                
                 $theArticleSection = 'noneGiven';
 
                 //print_r($urlData);
