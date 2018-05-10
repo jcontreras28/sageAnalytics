@@ -37,12 +37,7 @@ class getRealtimeGAData extends Command
         parent::__construct();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-    public function handle()
+    public function getData() 
     {
         //
         $pubs = Publication::all();
@@ -101,5 +96,17 @@ class getRealtimeGAData extends Command
 
             }
         }
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
+        this::getData();
+        sleep(25);
+        this::getData();
     }
 }
