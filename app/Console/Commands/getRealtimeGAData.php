@@ -112,8 +112,8 @@ class getRealtimeGAData extends Command
         self::getData();
         sleep(15);
         self::getData();
-        sleep(15);
-        self::getData();
+        //sleep(15);
+        //self::getData();
 
         return 1;
     }
