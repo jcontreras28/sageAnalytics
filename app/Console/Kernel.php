@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
 
         Commands\getArticleDataFromUrls::class,
         Commands\makeGADataArray::class,
+        Commands\getRealtimeGAData::class,
 
     ];
 
@@ -33,7 +34,9 @@ class Kernel extends ConsoleKernel
         
             //Publication::getArticleDataTask()->hourly();
             $schedule->command('articleData:get')->everyFiveMinutes();
-            $schedule->command('articleData:getGAData')->everyMinute();
+
+            $schedule->command('article:getGAData')->everyMinute();
+            $schedule->command('article:getGARealtimeData')->everyMinute();
     }
 
     /**
