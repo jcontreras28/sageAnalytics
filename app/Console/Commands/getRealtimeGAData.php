@@ -105,8 +105,8 @@ class getRealtimeGAData extends Command
      */
     public function handle()
     {
-        this::getData();
+        self::getData();
         sleep(25);
-        this::getData();
+        self::getData();
     }
 }
