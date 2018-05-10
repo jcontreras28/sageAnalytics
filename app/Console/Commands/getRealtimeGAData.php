@@ -98,15 +98,14 @@ class getRealtimeGAData extends Command
         }
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
     public function handle()
     {
         self::getData();
-        sleep(25);
+        sleep(15);
+        self::getData();
+        sleep(15);
+        self::getData();
+        sleep(15);
         self::getData();
     }
 }

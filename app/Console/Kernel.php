@@ -36,7 +36,7 @@ class Kernel extends ConsoleKernel
             $schedule->command('articleData:get')->everyFiveMinutes();
 
             $schedule->command('article:getGAData')->everyMinute();
-            $schedule->command('article:getGARealtimeData')->everyMinute();
+            $schedule->command('article:getGARealtimeData')->everyMinute()->withoutOverlapping();;
 
     }
 
