@@ -47433,7 +47433,10 @@ $(document).ready( function() {
 
     setInterval(function(){
         getStorySectionData('0daysAgo', 'today');
-        getRealTimeData();
-	}, 120000);
+    }, 120000);
+    
+    setInterval(function(){
+		getRealTimeData();
+	}, 15000);
 
 });
