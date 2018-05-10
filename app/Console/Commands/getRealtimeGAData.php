@@ -37,6 +37,7 @@ class getRealtimeGAData extends Command
         parent::__construct();
     }
 
+    
     public function getData() 
     {
         //
@@ -96,8 +97,14 @@ class getRealtimeGAData extends Command
 
             }
         }
+        return 1;
     }
 
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
     public function handle()
     {
         self::getData();
@@ -107,5 +114,7 @@ class getRealtimeGAData extends Command
         self::getData();
         sleep(15);
         self::getData();
+
+        return 1;
     }
 }
