@@ -419,7 +419,7 @@ trait GoogAnalyticsInterface {
                     }
 
                     echo "identifier: ".$theIdentifier;
-                    dd($urlData);
+                    
 
                     // Look to see if the identifier is already in identifier table (diff urls can have same identifier)
                     $ident = Identifier::where('identifier', "=", $theIdentifier)->first();
@@ -431,7 +431,7 @@ trait GoogAnalyticsInterface {
 
                     } else {
 
-
+                        echo " couldn't find identifier, adding it.";
                         // add new identifier to table
                         $ident = new Identifier();
                         $ident->identifier = $theIdentifier;
@@ -456,6 +456,7 @@ trait GoogAnalyticsInterface {
                         
                     }
 
+                    dd($urlData);
                     // if its a news article, then we need to check if we have story data already
                     if ($type == 'newsarticle') {
 
