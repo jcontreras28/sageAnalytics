@@ -384,6 +384,7 @@ trait GoogAnalyticsInterface {
                 //print_r($urlData);
                 if ($url == '/localstate/6232435-151/oregon-could-relaunch-state-insurance-exchange') {
                     echo "dumping data";
+                    var_dump($urlData);
                     dd($urlData);
                 }
                 if ($urlData != 'bad json') {
