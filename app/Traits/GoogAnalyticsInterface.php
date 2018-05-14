@@ -565,10 +565,10 @@ trait GoogAnalyticsInterface {
                                 "allPageTotal" => $allPageTotal,
                                 "sessions" => $sessions);
         } else {
-            $storyArray['errors'] = 'No rows returned from GA';
+            $returnArray['errors'] = 'No rows returned from GA';
         }
 
-        return $storyArray;
+        return $returnArray;
     }
 
     public function parseResults($results, $ignoreParams, $pubId) {

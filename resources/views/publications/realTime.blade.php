@@ -27,7 +27,7 @@
                 @if (array_key_exists('errors', $resultsRealtime)) 
                     <h2>Errror: {{ $resultsRealtime['error'] }}
                 @else
-                    @foreach( $resultsRealtime as $story)
+                    @foreach( $resultsRealtime['stories'] as $story)
                     <li class="list-group-item list-group-item-ordered">
                         <div class="row">
                             <div class="col-xs-1">
