@@ -418,16 +418,19 @@ trait GoogAnalyticsInterface {
 
                     }
 
+                    echo "identifier: ".$theIdentifier;
                     dd($urlData);
-                    
+
                     // Look to see if the identifier is already in identifier table (diff urls can have same identifier)
                     $ident = Identifier::where('identifier', "=", $theIdentifier)->first();
 
                     if ($ident) {
 
+                        echo "found identifier";
                         $id = $ident->id;
 
                     } else {
+
 
                         // add new identifier to table
                         $ident = new Identifier();
