@@ -4,7 +4,7 @@
 	<ul>
 		<li class='list-group-item'>
 			<span class='realTimeTotalReport totalsReport'>
-				Currently On Bendbulletin: <span id='totalCurrentCount'>{{ $results['allPageTotal'] }}</span>
+				Currently On Bendbulletin: <span id='totalCurrentCount'>{{ $resultsRealtime['allPageTotal'] }}</span>
 			</span>
 		</li>
 	</ul>
