@@ -87,6 +87,7 @@ class PublicationController extends Controller
 
         }
 
+        dd($resultsRealtime);
         return view('publications.realTime', compact('pubData', 'results', 'resultsRealtime'));
 
     }
