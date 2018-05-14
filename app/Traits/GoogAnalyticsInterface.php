@@ -382,6 +382,10 @@ trait GoogAnalyticsInterface {
                 $theArticleSection = 'noneGiven';
 
                 //print_r($urlData);
+                if ($url == '/localstate/6232435-151/oregon-could-relaunch-state-insurance-exchange') {
+                    echo "dumping data";
+                    dd($urlData);
+                }
                 if ($urlData != 'bad json') {
 
                     // parse out the type of page it is - NewsArticle, WebPage, or no json present
