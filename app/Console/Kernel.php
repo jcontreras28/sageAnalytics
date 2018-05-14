@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         
             //Publication::getArticleDataTask()->hourly();
-            $schedule->command('articleData:get')->everyFiveMinutes()->withoutOverlapping();
+            //$schedule->command('articleData:get')->everyFiveMinutes()->withoutOverlapping();
 
             $schedule->command('article:getGAData')->everyMinute()->withoutOverlapping();
             $schedule->command('article:getGARealtimeData')->everyMinute()->withoutOverlapping();
