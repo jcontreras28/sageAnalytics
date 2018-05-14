@@ -393,6 +393,7 @@ trait GoogAnalyticsInterface {
                     $type = "";
                     if ($urlData->{'@type'} == 'NewsArticle') {
                         
+                        echo "type newsarticle";
                         $theIdentifier = $urlData->identifier;  
 
                         
@@ -406,11 +407,12 @@ trait GoogAnalyticsInterface {
                            
                     }  else if ($urlData->{'@type'} == 'WebPage') {
 
+                        echo "type webpage";
                         $theIdentifier = $urlData->identifier;  
                         $type = 'webpage';
                         
                     } else {
-
+                         echo "type not newsarticle or webpage";
                         $type = 'webpage';
                         $theIdentifier = $url;
 
