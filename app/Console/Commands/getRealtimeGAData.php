@@ -108,12 +108,12 @@ class getRealtimeGAData extends Command
     public function handle()
     {
         self::getData();
-        sleep(15);
+        sleep(12);
         self::getData();
-        sleep(15);
+        sleep(12);
         self::getData();
-        //sleep(15);
-        //self::getData();
+        sleep(12);
+        self::getData();
 
         return 1;
     }
