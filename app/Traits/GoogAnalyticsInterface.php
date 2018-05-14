@@ -382,18 +382,12 @@ trait GoogAnalyticsInterface {
                 $theArticleSection = 'noneGiven';
 
                 //print_r($urlData);
-                if ($url == '/localstate/6232435-151/oregon-could-relaunch-state-insurance-exchange') {
-                    //echo "dumping data";
-                    //var_dump($urlData);
-                    
-                }
                 if ($urlData != 'bad json') {
 
                     // parse out the type of page it is - NewsArticle, WebPage, or no json present
                     $type = "";
                     if ($urlData->{'@type'} == 'NewsArticle') {
                         
-                        //echo "type newsarticle";
                         $theIdentifier = $urlData->identifier;  
 
                         
@@ -407,31 +401,24 @@ trait GoogAnalyticsInterface {
                            
                     }  else if ($urlData->{'@type'} == 'WebPage') {
 
-                        //echo "type webpage";
                         $theIdentifier = $urlData->identifier;  
                         $type = 'webpage';
                         
                     } else {
-                         //echo "type not newsarticle or webpage";
+
                         $type = 'webpage';
                         $theIdentifier = $url;
 
                     }
-
-                    //echo "identifier: ".$theIdentifier;
-                    
 
                     // Look to see if the identifier is already in identifier table (diff urls can have same identifier)
                     $ident = Identifier::where('identifier', "=", $theIdentifier)->first();
 
                     if ($ident) {
 
-                        //echo "found identifier";
                         $id = $ident->id;
 
                     } else {
-
-                        //echo " couldn't find identifier, adding it.";
 
                         // add new identifier to table
                         $ident = new Identifier();
@@ -456,7 +443,7 @@ trait GoogAnalyticsInterface {
                         $ident->save();
                         
                     }
-                    
+
                     // if its a news article, then we need to check if we have story data already
                     if ($type == 'newsarticle') {
 
