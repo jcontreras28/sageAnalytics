@@ -385,7 +385,7 @@ trait GoogAnalyticsInterface {
                 if ($url == '/localstate/6232435-151/oregon-could-relaunch-state-insurance-exchange') {
                     echo "dumping data";
                     var_dump($urlData);
-                    dd($urlData);
+                    
                 }
                 if ($urlData != 'bad json') {
 
@@ -418,6 +418,8 @@ trait GoogAnalyticsInterface {
 
                     }
 
+                    dd($urlData);
+                    
                     // Look to see if the identifier is already in identifier table (diff urls can have same identifier)
                     $ident = Identifier::where('identifier', "=", $theIdentifier)->first();
 
