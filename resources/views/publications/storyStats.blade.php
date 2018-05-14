@@ -46,7 +46,7 @@
 							<span id='storyHeadline{{ $loop->index }}' class='storyHeadlineBold'>{{ $story['headline'] }}</span><br>
         					<span id='storyName{{ $loop->index }}'>{{ $story['name'] }}</span><br>
         					<span id='storyAuthor'>{{ $story['author'] }}</span> - 
-							<a href='http://{{ $pub["domain"] }}{{ $story["link"] }}' target='_blank' id='storyUrl{{ $loop->index }}'>View story</a>
+							<a href='http://{{ $pubData["domain"] }}{{ $story["link"] }}' target='_blank' id='storyUrl{{ $loop->index }}'>View story</a>
 						</div>
 						<div class="referrer-row col-xs-3" style="font-size:.9em">
 							<span id='storyRefs{{ $loop->index }}'>
