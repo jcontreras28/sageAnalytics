@@ -383,8 +383,8 @@ trait GoogAnalyticsInterface {
 
                 //print_r($urlData);
                 if ($url == '/localstate/6232435-151/oregon-could-relaunch-state-insurance-exchange') {
-                    echo "dumping data";
-                    var_dump($urlData);
+                    //echo "dumping data";
+                    //var_dump($urlData);
                     
                 }
                 if ($urlData != 'bad json') {
@@ -393,7 +393,7 @@ trait GoogAnalyticsInterface {
                     $type = "";
                     if ($urlData->{'@type'} == 'NewsArticle') {
                         
-                        echo "type newsarticle";
+                        //echo "type newsarticle";
                         $theIdentifier = $urlData->identifier;  
 
                         
@@ -407,18 +407,18 @@ trait GoogAnalyticsInterface {
                            
                     }  else if ($urlData->{'@type'} == 'WebPage') {
 
-                        echo "type webpage";
+                        //echo "type webpage";
                         $theIdentifier = $urlData->identifier;  
                         $type = 'webpage';
                         
                     } else {
-                         echo "type not newsarticle or webpage";
+                         //echo "type not newsarticle or webpage";
                         $type = 'webpage';
                         $theIdentifier = $url;
 
                     }
 
-                    echo "identifier: ".$theIdentifier;
+                    //echo "identifier: ".$theIdentifier;
                     
 
                     // Look to see if the identifier is already in identifier table (diff urls can have same identifier)
@@ -426,12 +426,12 @@ trait GoogAnalyticsInterface {
 
                     if ($ident) {
 
-                        echo "found identifier";
+                        //echo "found identifier";
                         $id = $ident->id;
 
                     } else {
 
-                        echo " couldn't find identifier, adding it.";
+                        //echo " couldn't find identifier, adding it.";
 
                         // add new identifier to table
                         $ident = new Identifier();
@@ -453,7 +453,6 @@ trait GoogAnalyticsInterface {
 
                         }
 
-                        dd($ident);
                         $ident->save();
                         
                     }
