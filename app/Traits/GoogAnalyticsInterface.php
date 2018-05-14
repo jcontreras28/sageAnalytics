@@ -526,7 +526,7 @@ trait GoogAnalyticsInterface {
                 $thisUrl = self::cleanUrl($row[0], $ignoreParams);
                 $url = Url::where('url', '=', $thisUrl)->where('publication_id', '=', $pubId)->first();
 
-                $allPageTotal = $allPageTotal + $row[1];
+                $allPageTotal = $allPageTotal + $row[1]; // ongoing total of everybody on site
 
                 if ($url && ($url->publication->id == $pubId)) {
     
