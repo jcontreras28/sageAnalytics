@@ -18,9 +18,10 @@ class CreateDailyStoryStatsTotalsTable extends Migration
             $table->timestamps();
             $table->integer('identifier_id');
             $table->date('date');
-            $table->int('hits');
-            $table->int('uniques');
+            $table->integer('hits');
+            $table->integer('uniques');
             $table->float('dwell', 8, 4);
+            
         });
     }
 

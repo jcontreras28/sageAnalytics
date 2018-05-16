@@ -17,10 +17,10 @@ class CreateDailyStatsTotalsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->date('date');
-            $table->int('hits');
-            $table->int('uniques');
-            $table->int('dwell');
-            $table->int('typeId');
+            $table->integer('hits');
+            $table->integer('uniques');
+            $table->float('dwell', 8, 4);
+            $table->integer('typeId');
         });
     }
 
