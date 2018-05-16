@@ -16,5 +16,9 @@ class StatTypesTableSeeder extends Seeder
         $type1 = new StatType();
         $type1->name = "story";
         $type1->save();
+
+        $type2 = new StatType();
+        $type2->name = "all";
+        $type2->save();
     }
 }
