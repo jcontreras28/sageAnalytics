@@ -165,7 +165,38 @@ trait GoogAnalyticsInterface {
         );
 
         return $return->getRows();
-	}
+    }
+    
+    function getAllStoryStats($analytics, $profileId, $urlPart, $start, $end, $type)
+    {
+        $query = [
+            "viewId" => $profileId,
+            "dateRanges" => [
+                "startDate" => $start,
+                "endDate" => $end
+            ],
+            "metrics" => [
+                "expression" => $type
+                //"expression" => "ga:avgTimeOnPage",
+                //"expression" => "ga:uniquePageviews"
+            ],
+
+            "dimensionFilterClauses" => [
+                'filters' => [
+                    "dimension_name" => "ga:pagepath",
+                    "operator" => "PARTIAL", // valid operators can be found here: https://developers.google.com/analytics/devguides/reporting/core/v4/rest/v4/reports/batchGet#FilterLogicalOperator
+                    "expressions" => $urlPart
+                ]
+            ]
+        ];
+
+        // build the request and response
+        $body = new Google_Service_AnalyticsReporting_GetReportsRequest();
+        $body->setReportRequests(array($query));
+        // now batchGet the results https://developers.google.com/analytics/devguides/reporting/core/v4/rest/v4/reports/batchGet
+        $report = $analytics->reports->batchGet($body);
+        return $report;
+    }
 
     public function cmp($a, $b)
 	{

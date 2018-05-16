@@ -42,9 +42,10 @@ class getArticleDataFromUrls extends Command
     public function handle()
     {
 
-        $pubs = Publication::all();
+        $pub = Publication::findOrFail(4);
+        //$pubs = Publication::all();
 
-            foreach($pubs as $pub) {
+            //foreach($pubs as $pub) {
             
                 echo " Working on ".$pub->name;
 
@@ -68,6 +69,8 @@ class getArticleDataFromUrls extends Command
 
                         
                             $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
+
+                            dd($results);
                         
                             if (count($results['reports'][0]->getData()->getRows()) > 0) {
 
@@ -87,7 +90,7 @@ class getArticleDataFromUrls extends Command
                 }
                 //var_dump( $urlArray );
         // }
-            }
+        //    }
         return 1;
     }
 }
