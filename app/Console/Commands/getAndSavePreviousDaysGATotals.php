@@ -111,9 +111,9 @@ class getAndSavePreviousDaysGATotals extends Command
                             $dailyStat->Dwell = 0; // TODO impliment in parseResults and here
                             $dailyStat->TypeId = $statTypeId;
                             $dailyStat->publication_id = $pub->id;
-                            $dailyStat->save(); */
+                            $dailyStat->save(); 
 
-                            unset($dailyStat);
+                            unset($dailyStat);*/
 
                             foreach($results as $identifier => $story) {
 
