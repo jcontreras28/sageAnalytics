@@ -47,8 +47,8 @@ class getAndSavePreviousDaysGATotals extends Command
     {
         //
         $yesterday = date('Y-m-d', time() - 60 * 60 * 24);  //yesterdays date
-        $start = '1daysAgo';
-        $end = '1daysAgo';
+        $start = '2daysAgo';
+        $end = '2daysAgo';
         
         $pubs = Publication::all();
 
