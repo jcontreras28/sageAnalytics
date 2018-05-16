@@ -48,8 +48,8 @@ class getAndSavePreviousDaysGATotals extends Command
     {
         //
         $yesterday = date('Y-m-d', time() - 60 * 60 * 24);  //yesterdays date
-        $start = '1daysAgo';
-        $end = '1daysAgo';
+        $start = '3daysAgo';
+        $end = '3daysAgo';
         
         $pubs = Publication::all();
 
@@ -84,7 +84,7 @@ class getAndSavePreviousDaysGATotals extends Command
                         
                         $vals = $rowsAllPages[0]['metrics'][0]['values'];
 
-                 /*       $dailyStat = new DailyStatsTotal();
+                        $dailyStat = new DailyStatsTotal();
                         $dailyStat->Date = $yesterday;
                         $dailyStat->Hits = $vals[0];
                         $dailyStat->Uniques = $vals[2];
@@ -92,7 +92,7 @@ class getAndSavePreviousDaysGATotals extends Command
                         $dailyStat->TypeId = $statTypeId;
                         $dailyStat->publication_id = $pub->id;
                         $dailyStat->save();
-                        unset($dailyStat); */
+                        unset($dailyStat); 
 
                         $statTypeId = StatType::where('TypeName', '=', 'story')->first()->id;
 
@@ -104,7 +104,7 @@ class getAndSavePreviousDaysGATotals extends Command
 
                             $results = $this->parseResults($results, $ignoreParams, $pubId);
 
-                           /* $dailyStat = new DailyStatsTotal();
+                            $dailyStat = new DailyStatsTotal();
                             $dailyStat->Date = $yesterday;
                             $dailyStat->Hits = $results['storyTotal'];
                             $dailyStat->Uniques = $results['storyUniqueTotal'];
@@ -113,9 +113,9 @@ class getAndSavePreviousDaysGATotals extends Command
                             $dailyStat->publication_id = $pub->id;
                             $dailyStat->save(); 
 
-                            unset($dailyStat);*/
+                            unset($dailyStat);
 
-                            dd($results);
+                           /* dd($results);
 
                             foreach($results['articles'] as $identifier => $story) {
 
@@ -133,7 +133,7 @@ class getAndSavePreviousDaysGATotals extends Command
 
                                 unset($dailyStoryStat);
 
-                            }
+                            }*/
 
                         }
                     }
