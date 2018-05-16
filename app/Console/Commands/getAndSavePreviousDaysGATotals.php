@@ -5,7 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 use App\Publication;
-use App\StatsType;
+use App\StatType;
+use App\DailyStatsTotal;
 use App\Traits\GoogAnalyticsInterface;
 
 class getAndSavePreviousDaysGATotals extends Command
@@ -18,14 +19,14 @@ class getAndSavePreviousDaysGATotals extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'DailyStats:get';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Command to grab the previous days stats - totals/stories and put in table';
 
     /**
      * Create a new command instance.
@@ -45,25 +46,30 @@ class getAndSavePreviousDaysGATotals extends Command
     public function handle()
     {
         //
-        $pubs = Publication::all();
         $yesterday = date('Y-m-d', time() - 60 * 60 * 24);  //yesterdays date
+        $start = '1daysAgo';
+        $end = '1daysAgo';
+        
+        $pubs = Publication::all();
 
-        foreach($pubs as $pubData) {
+        foreach($pubs as $pub) {
 
-            $pubId = $pubData->id;
-            echo "doing pub: ".$pubData->name;
+            $pubId = $pub->id;
+            echo "doing pub: ".$pub->name;
             //
             //$pubData = Publication::findOrFail($pubId);
 
-            if ($pubData->GAJsonFile == NULL) {
+            if ($pub->GAJsonFile == NULL) {
 
                 echo "No GA JSON for this pub.";
 
             } else {
 
-                $path = __DIR__ . '/CredentialJson/'.$pubData->GAJsonFile;
+                $path = __DIR__ . '/CredentialJson/'.$pub->GAJsonFile;
             
                 if(file_exists($path)){
+
+                    $GAConn = $this->connect($path, $pub->name);
 
                     if ($GAConn) {
                         $profId = strval($pub->GAProfileId);
@@ -76,16 +82,39 @@ class getAndSavePreviousDaysGATotals extends Command
                         $statTypeId = StatType::where('TypeName', '=', 'all')->first()->id;
                         
                         $vals = $rowsAllPages[0]['metrics'][0]['values'];
-                        
-                        $dailyStat = new DailyStat();
+
+                        $dailyStat = new DailyStatsTotal();
                         $dailyStat->Date = $yesterday;
                         $dailyStat->Hits = $vals[0];
                         $dailyStat->Uniques = $vals[2];
                         $dailyStat->Dwell = $vals[1];
                         $dailyStat->TypeId = $statTypeId;
+                        $dailyStat->publication_id = $pub->id;
                         $dailyStat->save();
-                       
-                        
+                        unset($dailyStat);
+
+                        $statTypeId = StatType::where('TypeName', '=', 'story')->first()->id;
+
+                        $results = $this->getResults($GAConn, $profId, $start, $end);
+                      
+                        if (count($results['reports'][0]->getData()->getRows()) > 0) {
+
+                            $ignoreParams = $this->getIgnoreParams($pub);
+
+                            $results = $this->parseResults($results, $ignoreParams, $pubId);
+
+                            $dailyStat = new DailyStatsTotal();
+                            $dailyStat->Date = $yesterday;
+                            $dailyStat->Hits = $results['storyTotal'];
+                            $dailyStat->Uniques = $results['storyUniqueTotal'];
+                            $dailyStat->Dwell = 0; // TODO calculate this in parseResults
+                            $dailyStat->TypeId = $statTypeId;
+                            $dailyStat->publication_id = $pub->id;
+                            $dailyStat->save();
+
+                            unset($dailyStat);
+
+                        }
                     }
                 }
             }
