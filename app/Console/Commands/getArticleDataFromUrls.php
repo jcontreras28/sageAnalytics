@@ -55,8 +55,7 @@ class getArticleDataFromUrls extends Command
                 } else {
 
                     $path = __DIR__ . '/CredentialJson/'.$pub->GAJsonFile;
-                    
-                    //echo $path;
+
                     if(file_exists($path)){
                         
                         $GAConn = $this->connect($path, $pub->name);
@@ -85,9 +84,9 @@ class getArticleDataFromUrls extends Command
                         echo "NO GA JSON file found.";
                     }
                 }
-                //var_dump( $urlArray );
-        // }
+                
             }
+
         return 1;
     }
 }
