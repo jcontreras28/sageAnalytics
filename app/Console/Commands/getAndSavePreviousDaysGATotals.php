@@ -117,6 +117,8 @@ class getAndSavePreviousDaysGATotals extends Command
 
                             foreach($results['articles'] as $identifier => $story) {
 
+                                echo 'working on ';
+                                var_dump($story);
                                 $identifierId = Identifier::where('identifier', '=', $identifier)->first()->id;
                                 $dailyStoryStat = new DailyStoryStatsTotal();
                                 $dailyStoryStat->date = $yesterday;
