@@ -115,6 +115,8 @@ class getAndSavePreviousDaysGATotals extends Command
 
                             unset($dailyStat);*/
 
+                            dd($results);
+
                             foreach($results['articles'] as $identifier => $story) {
 
                                 echo 'working on ';
