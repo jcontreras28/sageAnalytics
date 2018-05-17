@@ -99,7 +99,7 @@ class getAndSavePreviousDaysGATotals extends Command
                         echo "statTypeId: ".$statTypeId;
                        // $results = $this->getResults($GAConn, $profId, '1daysAgo', '1daysAgo');
                         $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
-                        var_dump($results);
+                        //var_dump($results);
 
                         if (count($results['reports'][0]->getData()->getRows()) > 0) {
 
