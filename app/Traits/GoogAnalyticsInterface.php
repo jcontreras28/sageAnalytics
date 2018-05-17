@@ -602,6 +602,59 @@ trait GoogAnalyticsInterface {
         return $returnArray;
     }
 
+    public function parseResultsDailyStory($results, $ignoreParams, $pubId) {
+        
+        $rows = $results['reports'][0]->getData()->getRows();
+        $dataArray = [
+            'articles' => [],
+        ];
+
+        $storyTotal = 0;
+        $storyUniqueTotal = 0;
+
+        foreach($rows as $row) {
+            // get identifier from url table
+
+            $thisUrl = self::cleanUrl($row['dimensions'][0], $ignoreParams);
+            $url = Url::where('url', '=', $thisUrl)->where('publication_id', '=', $pubId)->first();
+
+            if ($url && ($url->publication->id == $pubId)) {
+ 
+                if($url->identifier->urlType->name == 'newsarticle') {
+
+                    // its an article - calcuate day total results
+                    $dayTotal = $dayTotal + $row['metrics'][0]['values'][0];
+                    $storyTotal = $storyTotal + $row['metrics'][0]['values'][0];
+                    $storyUniqueTotal = $storyUniqueTotal + $row['metrics'][0]['values'][2];
+
+                    //      check if identifier is key in array['articles']
+                    if (array_key_exists($url->identifier->identifier, $dataArray['articles'])) {
+
+                        $dataArray['articles'] = self::calculateNewTotal($dataArray['articles'], $row, 'Views', $url, 0);
+                        $dataArray['articles'] = self::calculateNewTotal($dataArray['articles'], $row, 'Uniques', $url, 2);
+                        $dataArray['articles'] = self::calculateNewTotal($dataArray['articles'], $row, 'Dwell', $url, 1);
+
+                    } else {
+
+                        //$secArray[$url->articleSection] = (int)$row['metrics'][0]['values'][0];
+                        $refArray = array();
+                        $tmpArray = ['Views' => (int)$row['metrics'][0]['values'][0], 
+                                    'Uniques' => (int)$row['metrics'][0]['values'][2], 
+                                    'Dwell' => (float)$row['metrics'][0]['values'][1]
+                                ];
+                        $dataArray['articles'][$url->identifier->identifier] = $tmpArray;
+
+                    }
+                    
+                }
+            }
+        }
+        $dataArray['storyTotal'] = $storyTotal;
+        $dataArray['storyUniqueTotal'] = $storyUniqueTotal;
+
+        return $dataArray;
+    }
+
     public function parseResults($results, $ignoreParams, $pubId) {
 
         $rows = $results['reports'][0]->getData()->getRows();

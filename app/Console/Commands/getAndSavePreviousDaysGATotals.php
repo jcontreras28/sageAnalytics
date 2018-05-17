@@ -105,7 +105,7 @@ class getAndSavePreviousDaysGATotals extends Command
 
                             $ignoreParams = $this->getIgnoreParams($pub);
 
-                            $results = $this->parseResults($results, $ignoreParams, $pubId);
+                            $results = $this->parseResultsDailyStory($results, $ignoreParams, $pubId);
 
                             dd($results);
                             $dailyStat = new DailyStatsTotal();
