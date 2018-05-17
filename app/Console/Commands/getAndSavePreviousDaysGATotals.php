@@ -96,10 +96,10 @@ class getAndSavePreviousDaysGATotals extends Command
                         unset($dailyStat); 
 
                         $statTypeId = StatType::where('TypeName', '=', 'story')->first()->id;
-
+                        echo "statTypeId: ".$statTypeId;
                         $results = $this->getResults($GAConn, $profId, $start, $end);
                         dd($results);
-                        
+
                         if (count($results['reports'][0]->getData()->getRows()) > 0) {
 
                             $ignoreParams = $this->getIgnoreParams($pub);
