@@ -97,8 +97,9 @@ class getAndSavePreviousDaysGATotals extends Command
 
                         $statTypeId = StatType::where('TypeName', '=', 'story')->first()->id;
                         echo "statTypeId: ".$statTypeId;
-                        $results = $this->getResults($GAConn, $profId, $start, $end);
-                        dd($results);
+                        $results = $this->getResults($GAConn, $profId, '1daysAgo', '1daysAgo');
+                       // $results = $this->getResults($GAConn, $profId, '0daysAgo', 'today');
+                        var_dump($results);
 
                         if (count($results['reports'][0]->getData()->getRows()) > 0) {
 
@@ -106,6 +107,7 @@ class getAndSavePreviousDaysGATotals extends Command
 
                             $results = $this->parseResults($results, $ignoreParams, $pubId);
 
+                            dd($results);
                             $dailyStat = new DailyStatsTotal();
                             $dailyStat->Date = $yesterday;
                             $dailyStat->Hits = $results['storyTotal'];
