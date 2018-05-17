@@ -623,7 +623,6 @@ trait GoogAnalyticsInterface {
                 if($url->identifier->urlType->name == 'newsarticle') {
 
                     // its an article - calcuate day total results
-                    $dayTotal = $dayTotal + $row['metrics'][0]['values'][0];
                     $storyTotal = $storyTotal + $row['metrics'][0]['values'][0];
                     $storyUniqueTotal = $storyUniqueTotal + $row['metrics'][0]['values'][2];
 
